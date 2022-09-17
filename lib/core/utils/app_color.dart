@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+
+import 'package:travinia/core/utils/hex_color.dart';
 
 class AppColors{
   static final HexColor primaryColor = HexColor('#525866');
