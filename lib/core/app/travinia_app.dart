@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:travinia/core/utils/app_strings.dart';
 import 'package:travinia/core/utils/app_themes.dart';
+import '../utils/app_strings.dart';
+import '../utils/app_themes.dart';
 
 class TraviniaApp extends StatelessWidget {
   const TraviniaApp({Key? key}) : super(key: key);
