@@ -16,6 +16,9 @@ dependencies:
   equatable:
   dio:
   internet_connection_checker:
+  get_it: ^7.2.0
+  dartz: ^0.10.1
+
 dev_dependencies:
   flutter_launcher_icons:
 
