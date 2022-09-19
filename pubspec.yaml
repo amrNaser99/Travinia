@@ -19,6 +19,9 @@ dependencies:
   get_it: ^7.2.0
   dartz: ^0.10.1
   conditional_builder_null_safety: ^0.0.6
+  google_fonts: ^3.0.1
+  email_validator: ^2.1.17
+  password_strength: ^0.2.0
 
 dev_dependencies:
   flutter_launcher_icons:
