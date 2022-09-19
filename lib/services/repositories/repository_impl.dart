@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:travinia/models/booking_model.dart';
 import 'package:travinia/services/repositories/repository.dart';
 
 import '../../core/error/exceptions.dart';
@@ -91,5 +92,17 @@ class RepositoryImplementation extends Repository {
         return e;
       },
     );
+  }
+
+  @override
+  Future<Either<PrimaryServerException, BookingModel>> getBooking() {
+    return handlingRequestResult(onSuccess: ()async {
+      ///TODO: Implement Booking Function
+      final response = await dioHelper.get(endPoint: facilitiesEndPoint);
+
+      return BookingModel.fromJson(response['data']);
+    }, onPrimaryServerException: (e) async {
+      return e;
+    });
   }
 }
