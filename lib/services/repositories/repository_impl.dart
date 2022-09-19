@@ -1,4 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:travinia/models/create_booking_model.dart';
+import 'package:travinia/models/register_model.dart';
 import 'package:travinia/services/repositories/repository.dart';
 
 import '../../core/error/exceptions.dart';
@@ -17,6 +19,34 @@ class RepositoryImplementation extends Repository {
   });
 
   ///Implement All User Functions Here
+
+  @override
+  Future<Either<PrimaryServerException, RegisterModel>> register({
+    required String name,
+    required String email,
+    required String password,
+    required String password_confirmation,
+  }) async {
+    return handlingRequestResult<RegisterModel>(
+      onSuccess: () async {
+        final response = await dioHelper.post(
+          endPoint: registerEndPoint,
+          data: {
+            'name': name,
+            'email': email,
+            'password': password,
+            'password_confirmation': password_confirmation,
+          },
+        );
+
+        return RegisterModel.fromJson(response);
+      },
+      onPrimaryServerException: (e) async {
+        return e;
+      },
+    );
+  }
+
   @override
   Future<Either<PrimaryServerException, ProfileModel>> getProfile({
     required String token,
@@ -86,6 +116,31 @@ class RepositoryImplementation extends Repository {
         final response = await dioHelper.get(endPoint: facilitiesEndPoint);
 
         return FacilitiesModel.fromJson(response['data']);
+      },
+      onPrimaryServerException: (e) async {
+        return e;
+      },
+    );
+  }
+
+  @override
+  Future<Either<PrimaryServerException, Create_BookingModel>> create_Booking({
+    required String token,
+    required int user_id,
+    required int hotel_id,
+  }) async {
+    return handlingRequestResult<Create_BookingModel>(
+      onSuccess: () async {
+        final response = await dioHelper.post(
+          endPoint: create_BookingEndPoint,
+          token: token,
+          data: {
+            'user_id': user_id,
+            'hotel_id': hotel_id,
+          },
+        );
+
+        return Create_BookingModel.fromJson(response);
       },
       onPrimaryServerException: (e) async {
         return e;
