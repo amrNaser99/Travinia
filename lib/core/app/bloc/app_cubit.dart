@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:travinia/core/app/bloc/app_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:travinia/models/booking_model.dart';
+import 'package:travinia/models/create_booking_model.dart';
 import 'package:travinia/models/facility_model.dart';
 import 'package:travinia/models/hotel_model.dart';
-import 'package:travinia/presentation/auth/bloc/auth_cubit.dart';
+import 'package:travinia/models/login_model.dart';
+import 'package:travinia/models/profile_model.dart';
+import 'package:travinia/models/register_model.dart';
 import 'package:travinia/services/repositories/repository.dart';
 
 class AppCubit extends Cubit<AppStates> {
@@ -15,6 +17,73 @@ class AppCubit extends Cubit<AppStates> {
   }) : super(AppInitialState());
 
   static AppCubit get(context) => BlocProvider.of<AppCubit>(context);
+
+  RegisterModel? registerModel;
+
+  void userRegister() async {
+    emit(UserRegisterLoadingState());
+
+    final response = await repository.register(
+      name: 'medo mody',
+      email: 'medo@gmail.com',
+      password: '123456',
+      password_confirmation: '123456',
+    );
+
+    response.fold(
+      (l) {
+        emit(ErrorState(exception: l));
+      },
+      (r) {
+        registerModel = r;
+
+        emit(UserRegisterSuccessState());
+      },
+    );
+  }
+
+  LoginModel? loginModel;
+
+  void userLogin() async {
+    emit(UserLoginLoadingState());
+
+    final response = await repository.login(
+      email: 'abdullah.mansour@gmail.com',
+      password: '123456',
+    );
+
+    response.fold(
+      (l) {
+        emit(ErrorState(exception: l));
+      },
+      (r) {
+        loginModel = r;
+
+        emit(UserLoginSuccessState());
+      },
+    );
+  }
+
+  ProfileModel? profileModel;
+
+  void userProfile() async {
+    emit(UserProfileLoadingState());
+
+    final response = await repository.getProfile(
+      token: loginModel!.data!.token,
+    );
+
+    response.fold(
+      (l) {
+        emit(ErrorState(exception: l));
+      },
+      (r) {
+        profileModel = r;
+
+        emit(UserProfileSuccessState());
+      },
+    );
+  }
 
   List<HotelModel> hotels = [];
 
@@ -57,22 +126,26 @@ class AppCubit extends Cubit<AppStates> {
     );
   }
 
-  BookingModel? bookingModel;
+  Create_BookingModel? create_BookingModel;
 
-  Future<void> getBooking({required BuildContext context}) async {
-    emit(GetBookingLoadingState());
-    final response = await repository.getBooking(
-      token: BlocProvider.of<AuthCubit>(context).loginModel!.data!.token,
-      bookType: 'completed',
-      bookCount: 10,
+  void userCreate_Booking() async {
+    emit(UserProfileLoadingState());
+
+    final response = await repository.create_Booking(
+      token: loginModel!.data!.token,
+      user_id: loginModel!.data!.id,
+      hotel_id: 10,
     );
 
-    response.fold((l) {
-      emit(ErrorState(exception: l));
-    }, (r) {
-      debugPrint('r : $r');
-      // bookingModel = r;
-      emit(GetBookingSuccessState());
-    });
+    response.fold(
+      (l) {
+        emit(ErrorState(exception: l));
+      },
+      (r) {
+        create_BookingModel = r;
+
+        emit(CreatBookingSuccessState());
+      },
+    );
   }
 }
