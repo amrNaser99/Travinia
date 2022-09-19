@@ -5,3 +5,4 @@ const String profileEndPoint = '/auth/profile-info';
 const String hotelsEndPoint = '/hotels';
 const String hotels = "/hotels";
 const String searchHotelsEndPoint = "/search-hotels";
+const String facilitiesEndPoint = "/facilities";

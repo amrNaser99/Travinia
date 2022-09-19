@@ -12,8 +12,3 @@ Future<void> main() async {
   runApp(const TraviniaApp());
   Bloc.observer = MyBlocObserver();
 }
-
-
-
-
-

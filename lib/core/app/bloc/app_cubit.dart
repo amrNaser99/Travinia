@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:travinia/core/app/bloc/app_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travinia/models/facility_model.dart';
 import 'package:travinia/models/hotel_model.dart';
 import 'package:travinia/models/login_model.dart';
 import 'package:travinia/models/profile_model.dart';
-import 'package:travinia/services/repository.dart';
+import 'package:travinia/services/repositories/repository.dart';
 
 class AppCubit extends Cubit<AppStates> {
   final Repository repository;
@@ -25,10 +27,10 @@ class AppCubit extends Cubit<AppStates> {
     );
 
     response.fold(
-          (l) {
+      (l) {
         emit(ErrorState(exception: l));
       },
-          (r) {
+      (r) {
         loginModel = r;
 
         emit(UserLoginSuccessState());
@@ -46,10 +48,10 @@ class AppCubit extends Cubit<AppStates> {
     );
 
     response.fold(
-          (l) {
+      (l) {
         emit(ErrorState(exception: l));
       },
-          (r) {
+      (r) {
         profileModel = r;
 
         emit(UserProfileSuccessState());
@@ -67,13 +69,33 @@ class AppCubit extends Cubit<AppStates> {
     );
 
     response.fold(
-          (l) {
+      (l) {
         emit(ErrorState(exception: l));
       },
-          (r) {
+      (r) {
         hotels = r.data!.data;
 
         emit(HotelsSuccessState());
+      },
+    );
+  }
+
+  List<FacilityModel> facilities = [];
+
+  void getFacilities() async {
+    emit(FacilitiesLoadingState());
+
+    final response = await repository.getFacilities();
+
+    response.fold(
+      (l) {
+        emit(ErrorState(exception: l));
+      },
+      (r) {
+        facilities = r.facilities;
+        debugPrint(facilities.toString());
+        Future.delayed(Duration(seconds: 1));
+        emit(FacilitiesSuccessState());
       },
     );
   }
