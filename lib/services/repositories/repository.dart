@@ -10,11 +10,19 @@ import '../../models/facilities_model.dart';
 
 abstract class Repository {
   ///Implement All User Functions Here
+  Future<Either<PrimaryServerException, LoginModel>> register({
+    required String userName,
+    required String email,
+    required String password,
+    required String rePassword,
+  });
+
   Future<Either<PrimaryServerException, LoginModel>> login({
     required String email,
     required String password,
   });
 
+  ///Implement Profile model Here
   Future<Either<PrimaryServerException, ProfileModel>> getProfile({
     required String token,
   });
@@ -24,9 +32,15 @@ abstract class Repository {
     required int page,
   });
 
+  ///Implement All Facilities Functions Here
   Future<Either<PrimaryServerException, FacilitiesModel>> getFacilities();
 
-  Future<Either<PrimaryServerException, BookingModel>> getBooking();
+  ///Implement All Booking Functions Here
+  Future<Either<PrimaryServerException, BookingModel>> getBooking({
+    String bookType,
+    int bookCount,
+    String? token,
+  });
 }
 
 extension HandlingRequestResultFunction on Repository {

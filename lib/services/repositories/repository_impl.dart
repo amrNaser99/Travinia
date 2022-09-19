@@ -37,29 +37,6 @@ class RepositoryImplementation extends Repository {
     );
   }
 
-  @override
-  Future<Either<PrimaryServerException, LoginModel>> login({
-    required String email,
-    required String password,
-  }) async {
-    return handlingRequestResult<LoginModel>(
-      onSuccess: () async {
-        final response = await dioHelper.post(
-          endPoint: loginEndPoint,
-          data: {
-            'email': email,
-            'password': password,
-          },
-        );
-
-        return LoginModel.fromJson(response);
-      },
-      onPrimaryServerException: (e) async {
-        return e;
-      },
-    );
-  }
-
   ///Implement All Hotel Functions Here
   @override
   Future<Either<PrimaryServerException, HotelsModel>> getHotels({
@@ -84,7 +61,7 @@ class RepositoryImplementation extends Repository {
   Future<Either<PrimaryServerException, FacilitiesModel>> getFacilities() {
     return handlingRequestResult<FacilitiesModel>(
       onSuccess: () async {
-        final response = await dioHelper.get(endPoint: facilitiesEndPoint);
+        final response = await dioHelper.get(endPoint: hotelsEndPoint);
 
         return FacilitiesModel.fromJson(response['data']);
       },
@@ -95,14 +72,71 @@ class RepositoryImplementation extends Repository {
   }
 
   @override
-  Future<Either<PrimaryServerException, BookingModel>> getBooking() {
-    return handlingRequestResult(onSuccess: ()async {
-      ///TODO: Implement Booking Function
-      final response = await dioHelper.get(endPoint: facilitiesEndPoint);
-
+  Future<Either<PrimaryServerException, BookingModel>> getBooking({
+     String? bookType,
+     int? bookCount,
+     String? token,
+  }) {
+    return handlingRequestResult(onSuccess: () async {
+      final response = await dioHelper.get(
+        endPoint: getBookingEndPoint,
+        token: token,
+        data: {
+          'type': bookType,
+          'count': bookCount,
+        },
+      );
+      // ['data']
       return BookingModel.fromJson(response['data']);
     }, onPrimaryServerException: (e) async {
       return e;
     });
+  }
+
+  @override
+  Future<Either<PrimaryServerException, LoginModel>> register({
+    required String userName,
+    required String email,
+    required String password,
+    required String rePassword,
+  }) async {
+    return handlingRequestResult<LoginModel>(
+      onSuccess: () async {
+        final response =
+            await dioHelper.post(endPoint: registerEndPoint, data: {
+          'name': userName,
+          'email': email,
+          'password': password,
+          'password_confirmation': password,
+        });
+        return LoginModel.fromJson(response);
+      },
+      onPrimaryServerException: (e) async {
+        return e;
+      },
+    );
+  }
+
+  @override
+  Future<Either<PrimaryServerException, LoginModel>> login({
+    required String email,
+    required String password,
+  }) async {
+    return handlingRequestResult<LoginModel>(
+      onSuccess: () async {
+        final response = await dioHelper.post(
+          endPoint: loginEndPoint,
+          data: {
+            'email': email,
+            'password': password,
+          },
+        );
+
+        return LoginModel.fromJson(response);
+      },
+      onPrimaryServerException: (e) async {
+        return e;
+      },
+    );
   }
 }
