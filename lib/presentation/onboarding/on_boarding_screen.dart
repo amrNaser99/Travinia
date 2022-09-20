@@ -71,7 +71,8 @@ class OnBoardingScreen extends StatelessWidget {
                     CustomButton(
                       text: "Login",
                       onPressed: () {
-                        AppCubit.get(context).changeAppThemeColor();
+                        Navigator.pushNamed(context, '/login');
+
                       },
                     ),
                     AppSpaces.vSpace20,
@@ -82,7 +83,9 @@ class OnBoardingScreen extends StatelessWidget {
                       fillColor: AppColors.thirdColor.withOpacity(
                         AppCubit.get(context).colorOpacity,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/register');
+                      },
                     ),
                   ],
                 ),
