@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:travinia/models/booking_model.dart';
+import 'package:travinia/models/create_booking_model.dart';
 import 'package:travinia/services/repositories/repository.dart';
 
 import '../../core/error/exceptions.dart';
@@ -139,4 +140,30 @@ class RepositoryImplementation extends Repository {
       },
     );
   }
+
+
+  @override
+  Future<Either<PrimaryServerException, Create_BookingModel>> create_Booking({
+    required String token,
+    required int user_id,
+    required int hotel_id,
+  }) async {
+    return handlingRequestResult<Create_BookingModel>(
+      onSuccess: () async {
+        final response = await dioHelper.post(
+          endPoint: create_BookingEndPoint,
+          token: token,
+          data: {
+            'user_id': user_id,
+            'hotel_id': hotel_id,
+          },
+        );
+        return Create_BookingModel.fromJson(response);
+      },
+      onPrimaryServerException: (e) async {
+        return e;
+      },
+    );
+  }
+
 }

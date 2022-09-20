@@ -8,3 +8,4 @@ const String hotels = "/hotels";
 const String searchHotelsEndPoint = "/search-hotels";
 const String facilitiesEndPoint = "/facilities";
 const String getBookingEndPoint = "/get-bookings";
+const String create_BookingEndPoint = "/create-booking";

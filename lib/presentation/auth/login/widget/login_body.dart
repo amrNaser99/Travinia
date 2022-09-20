@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:travinia/core/utils/app_color.dart';
 import 'package:travinia/core/utils/app_spaces.dart';
 import 'package:travinia/presentation/auth/bloc/auth_cubit.dart';
 import 'package:travinia/presentation/shared_widgets/custom_button.dart';
@@ -28,9 +29,8 @@ class LoginBody extends StatelessWidget {
                 Text(
                   'Login',
                   style: TextStyle(
-                    fontFamily: 'GermaniaOne',
                     fontSize: 30,
-                    color: Colors.white,
+                    color: AppColors.primaryDarkColor,
                   ),
                 ),
               ],
