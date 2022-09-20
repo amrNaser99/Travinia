@@ -4,6 +4,8 @@ abstract class AppStates {}
 
 class AppInitialState extends AppStates {}
 
+class AppThemeColorChangedState extends AppStates {}
+
 class UserLoginLoadingState extends AppStates {}
 
 class UserLoginSuccessState extends AppStates {}

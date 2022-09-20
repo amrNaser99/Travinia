@@ -2,6 +2,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:password_strength/password_strength.dart';
+import 'package:travinia/core/utils/app_color.dart';
 
 import '../../core/utils/app_contstants.dart';
 
@@ -51,7 +52,7 @@ class CustomTextField extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(borderRadius),
         boxShadow: AppConst.shadow,
-        color: backgroundColor ?? Colors.white,
+        color: backgroundColor ?? AppColors.primaryColor,
       ),
       child: TextFormField(
         controller: textController,
@@ -79,24 +80,24 @@ class CustomTextField extends StatelessWidget {
         },
         onChanged: onChange,
         style: GoogleFonts.workSans(
-          color: labelTextColor ?? Colors.black,
+          color: labelTextColor ?? AppColors.secondaryColor,
           fontSize: 13.0,
         ),
         decoration: InputDecoration(
           prefixIcon: prifixIcon != null
               ? Icon(
                   prifixIcon,
-                  color: Colors.black,
+                  color: AppColors.secondaryColor,
                 )
               : null,
           labelText: labelText,
           labelStyle: GoogleFonts.workSans(
-            color: labelTextColor ?? Colors.black,
+            color: labelTextColor ?? AppColors.secondaryColor,
             fontSize: 13.0,
           ),
           hintText: hintText,
           hintStyle: GoogleFonts.workSans(
-            color: hintTextColor ?? Colors.black38,
+            color: hintTextColor ?? AppColors.secondaryColor.withOpacity(0.5),
             fontSize: 13.0,
           ),
           errorStyle: GoogleFonts.workSans(
@@ -106,25 +107,25 @@ class CustomTextField extends StatelessWidget {
               borderRadius:
                   BorderRadius.circular(borderRadius ?? AppConst.radius),
               borderSide: BorderSide(
-                color: borderColor ?? Colors.white,
+                color: borderColor ?? AppColors.primaryColor,
               )),
           errorBorder: OutlineInputBorder(
               borderRadius:
                   BorderRadius.circular(borderRadius ?? AppConst.radius),
               borderSide: BorderSide(
-                color: borderColor ?? Colors.white,
+                color: borderColor ?? AppColors.primaryColor,
               )),
           enabledBorder: OutlineInputBorder(
               borderRadius:
                   BorderRadius.circular(borderRadius ?? AppConst.radius),
               borderSide: BorderSide(
-                color: borderColor ?? Colors.white,
+                color: borderColor ?? AppColors.primaryColor,
               )),
           focusedBorder: OutlineInputBorder(
               borderRadius:
                   BorderRadius.circular(borderRadius ?? AppConst.radius),
               borderSide: BorderSide(
-                color: borderColor ?? Colors.white,
+                color: borderColor ?? AppColors.primaryColor,
               )),
         ),
       ),
