@@ -1,6 +1,8 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:travinia/core/app/bloc/app_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travinia/core/utils/app_color.dart';
+import 'package:travinia/core/utils/app_themes.dart';
 import 'package:travinia/models/create_booking_model.dart';
 import 'package:travinia/models/facility_model.dart';
 import 'package:travinia/models/hotel_model.dart';
@@ -19,6 +21,25 @@ class AppCubit extends Cubit<AppStates> {
   static AppCubit get(context) => BlocProvider.of<AppCubit>(context);
 
   RegisterModel? registerModel;
+  Color primaryColor = AppColors.primaryColor;
+  Color secondaryColor = AppColors.secondaryColor;
+  double colorOpacity = 1.0;
+  ThemeData currentAppTheme = AppThemes.lightTheme;
+
+  void changeAppThemeColor() {
+    if (currentAppTheme == AppThemes.lightTheme) {
+      primaryColor = AppColors.primaryDarkColor;
+      secondaryColor = AppColors.secondaryDarkColor;
+      currentAppTheme = AppThemes.darkTheme;
+      colorOpacity = 0.2;
+    } else {
+      primaryColor = AppColors.primaryColor;
+      secondaryColor = AppColors.secondaryColor;
+      currentAppTheme = AppThemes.lightTheme;
+      colorOpacity = 1.0;
+    }
+    emit(AppThemeColorChangedState());
+  }
 
   void userRegister() async {
     emit(UserRegisterLoadingState());
