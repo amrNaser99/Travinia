@@ -5,6 +5,7 @@ import 'package:travinia/core/app/bloc/app_cubit.dart';
 import 'package:travinia/core/app/bloc/app_state.dart';
 import 'package:travinia/core/utils/app_color.dart';
 import 'package:travinia/core/utils/app_strings.dart';
+import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/presentation/onboarding/page_view_content.dart';
 
 import '../../core/utils/app_spaces.dart';
@@ -55,8 +56,7 @@ class OnBoardingScreen extends StatelessWidget {
                 effect: WormEffect(
                   dotWidth: 10.0,
                   dotHeight: 10.0,
-                  dotColor:
-                      AppCubit.get(context).secondaryColor.withOpacity(0.2),
+                  dotColor: AppColors.grey,
                   activeDotColor: AppColors.appColor,
                 ),
                 count: 3,
@@ -64,8 +64,10 @@ class OnBoardingScreen extends StatelessWidget {
               AppSpaces.vSpace20,
               AppSpaces.vSpace20,
               Padding(
-                padding: const EdgeInsets.only(
-                    right: 50.0, bottom: 30.0, left: 50.0),
+                padding: EdgeInsets.only(
+                    right: AppWidth.w50,
+                    bottom: AppHeight.h30,
+                    left: AppWidth.w50),
                 child: Column(
                   children: [
                     CustomButton(
@@ -74,14 +76,12 @@ class OnBoardingScreen extends StatelessWidget {
                         AppCubit.get(context).changeAppThemeColor();
                       },
                     ),
-                    AppSpaces.vSpace20,
+                    SizedBox(height: AppHeight.h20),
                     CustomButton(
                       text: "Create account",
-                      withShadow: true,
-                      textColor: AppCubit.get(context).secondaryColor,
-                      fillColor: AppColors.thirdColor.withOpacity(
-                        AppCubit.get(context).colorOpacity,
-                      ),
+                      // withShadow: true,
+                      // textColor: AppCubit.get(context).secondaryColor,
+                      fillColor: AppColors.lightGrey,
                       onPressed: () {},
                     ),
                   ],

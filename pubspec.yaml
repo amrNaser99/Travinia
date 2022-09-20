@@ -8,24 +8,25 @@ environment:
   sdk: ">=2.17.1 <3.0.0"
 
 dependencies:
+  bloc: null
+  conditional_builder_null_safety: ^0.0.6
+  cupertino_icons: ^1.0.2
+  dartz: ^0.10.1
+  dio: null
+  email_validator: ^2.1.17
+  equatable: null
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.2
-  flutter_bloc:
-  bloc:
-  equatable:
-  dio:
-  internet_connection_checker:
+  flutter_bloc: null
+  flutter_screenutil: ^5.5.4
   get_it: ^7.2.0
-  dartz: ^0.10.1
-  conditional_builder_null_safety: ^0.0.6
   google_fonts: ^3.0.1
-  email_validator: ^2.1.17
+  internet_connection_checker: null
   password_strength: ^0.2.0
   smooth_page_indicator: ^1.0.0+2
 
 dev_dependencies:
-  flutter_launcher_icons:
+  flutter_launcher_icons: null
 
   flutter_test:
     sdk: flutter
@@ -33,7 +34,6 @@ dev_dependencies:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-
 
   flutter_lints: ^2.0.0
 
@@ -53,6 +53,20 @@ flutter:
     - family: GermaniaOne
       fonts:
         - asset: assets/fonts/GermaniaOne-Regular.ttf
+
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat-Bold.ttf
+        - weight: 700
+        - asset: assets/fonts/Montserrat-SemiBold.ttf
+        - weight: 600
+        - asset: assets/fonts/Montserrat-Medium.ttf
+        - weight: 500
+        - asset: assets/fonts/Montserrat-Regular.ttf
+        - weight: 400
+        - asset: assets/fonts/Montserrat-Light.ttf
+        - weight: 300
+
   #   - images/a_dot_ham.jpeg
   # example:
   # fonts:
