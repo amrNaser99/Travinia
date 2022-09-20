@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:travinia/models/booking_model.dart';
 import 'package:travinia/models/create_booking_model.dart';
+import 'package:travinia/models/user_model.dart';
 import 'package:travinia/services/repositories/repository.dart';
 
 import '../../core/error/exceptions.dart';
@@ -74,9 +75,9 @@ class RepositoryImplementation extends Repository {
 
   @override
   Future<Either<PrimaryServerException, BookingModel>> getBooking({
-     String? bookType,
-     int? bookCount,
-     String? token,
+    String? bookType,
+    int? bookCount,
+    String? token,
   }) {
     return handlingRequestResult(onSuccess: () async {
       final response = await dioHelper.get(
@@ -141,7 +142,6 @@ class RepositoryImplementation extends Repository {
     );
   }
 
-
   @override
   Future<Either<PrimaryServerException, Create_BookingModel>> create_Booking({
     required String token,
@@ -166,4 +166,22 @@ class RepositoryImplementation extends Repository {
     );
   }
 
+  @override
+  Future<Either<PrimaryServerException, ProfileModel>> getProfileInfo(
+      {required String token}) async {
+    return handlingRequestResult(
+      onSuccess: () async {
+        final response = await dioHelper.get(
+          endPoint: profileEndPoint,
+          data: {
+            token: token,
+          },
+        );
+        return ProfileModel.fromJson(response);
+      },
+      onPrimaryServerException: (e) async {
+        return e;
+      },
+    );
+  }
 }
