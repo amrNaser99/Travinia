@@ -13,17 +13,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  @override
-  void initState() {
-    setState(() {});
-    super.initState();
+  // @override
+  // void initState() {
+  //   setState(() {});
+  //   super.initState();
 
-    AppCubit.get(context).getHotels();
-  }
+  //   AppCubit.get(context).getHotels();
+  // }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AppCubit, AppStates>(
+    return BlocConsumer<AppCubit, AppStates>(
+      listener: (context, state) {},
       builder: (context, state) {
         if (state is HotelsLoadingState) {
           return Scaffold(
@@ -35,17 +36,6 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               children: [
-                ConditionalBuilder(
-                  condition: state is FacilitiesLoadingState,
-                  builder: (context) => Text("LOADING"),
-                  fallback: (context) => MaterialButton(
-                    onPressed: () {
-                      AppCubit.get(context).getFacilities();
-                    },
-                    color: Colors.red,
-                    child: Text('GET FACILETIES'),
-                  ),
-                ),
                 HotelslistWidegt(),
               ],
             ),
