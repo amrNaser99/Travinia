@@ -91,7 +91,7 @@ class AuthCubit extends Cubit<AuthState> {
     emit(UserProfileLoadingState());
 
     final response = await repository.getProfile(
-      token: loginModel!.data!.token,
+      token: loginModel!.data!.token!,
     );
 
     response.fold(

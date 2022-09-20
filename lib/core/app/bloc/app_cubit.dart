@@ -6,7 +6,6 @@ import 'package:travinia/core/utils/app_themes.dart';
 import 'package:travinia/models/create_booking_model.dart';
 import 'package:travinia/models/facility_model.dart';
 import 'package:travinia/models/hotel_model.dart';
-import 'package:travinia/models/login_model.dart';
 import 'package:travinia/models/profile_model.dart';
 import 'package:travinia/models/register_model.dart';
 import 'package:travinia/presentation/auth/bloc/auth_cubit.dart';
@@ -92,8 +91,8 @@ class AppCubit extends Cubit<AppStates> {
     emit(UserProfileLoadingState());
 
     final response = await repository.create_Booking(
-      token: AuthCubit.get(context).loginModel!.data!.token,
-      user_id: AuthCubit.get(context).loginModel!.data!.id,
+      token: AuthCubit.get(context).loginModel!.data!.token!,
+      user_id: AuthCubit.get(context).loginModel!.data!.id!,
       hotel_id: 10,
     );
 

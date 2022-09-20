@@ -104,11 +104,11 @@ class RepositoryImplementation extends Repository {
     return handlingRequestResult<LoginModel>(
       onSuccess: () async {
         final response =
-            await dioHelper.post(endPoint: registerEndPoint, data: {
+            await dioHelper.post(endPoint: registerEndPoint, query: {
           'name': userName,
           'email': email,
           'password': password,
-          'password_confirmation': password,
+          'password_confirmation': rePassword,
         });
         return LoginModel.fromJson(response);
       },
@@ -145,7 +145,7 @@ class RepositoryImplementation extends Repository {
   @override
   Future<Either<PrimaryServerException, Create_BookingModel>> create_Booking({
     required String token,
-    required int user_id,
+    required String user_id,
     required int hotel_id,
   }) async {
     return handlingRequestResult<Create_BookingModel>(

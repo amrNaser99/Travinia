@@ -28,9 +28,7 @@ class RegisterBody extends StatelessWidget {
                 Text(
                   'Sign up',
                   style: TextStyle(
-                    fontFamily: 'GermaniaOne',
                     fontSize: 30,
-                    color: Colors.white,
                   ),
                 ),
               ],
@@ -131,10 +129,10 @@ class RegisterBody extends StatelessWidget {
               text: 'Sign up',
               onPressed: () {
                 cubit.userRegister(
-                  userName: cubit.userNameController.text,
-                  email: cubit.emailController.text,
-                  password: cubit.passwordController.text,
-                  rePassword: cubit.verifyPasswordController.text,
+                  userName: cubit.userNameController.text.trim(),
+                  email: cubit.emailController.text.trim(),
+                  password: cubit.passwordController.text.trim(),
+                  rePassword: cubit.verifyPasswordController.text.trim(),
                 );
                 cubit.userNameController.clear();
                 cubit.emailController.clear();
