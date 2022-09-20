@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travinia/core/app/bloc/app_cubit.dart';
+import 'package:travinia/core/app/bloc/app_state.dart';
 import 'package:travinia/core/di/injection.dart';
-import 'package:travinia/core/utils/app_themes.dart';
 import 'package:travinia/core/utils/routes.dart';
 
 class TraviniaApp extends StatelessWidget {
@@ -16,12 +16,16 @@ class TraviniaApp extends StatelessWidget {
           create: (context) => sl<AppCubit>(),
         ),
       ],
-      child: MaterialApp(
-        title: 'Travinia',
-        debugShowCheckedModeBanner: false,
-        theme: AppThemes.lightTheme,
-        routes: Routes.routes,
-        initialRoute: Routes.home,
+      child: BlocBuilder<AppCubit, AppStates>(
+        builder: (context, state) {
+          return MaterialApp(
+            title: 'Travinia',
+            debugShowCheckedModeBanner: false,
+            theme: AppCubit.get(context).currentAppTheme,
+            routes: Routes.routes,
+            initialRoute: Routes.onBoarding,
+          );
+        },
       ),
     );
   }
