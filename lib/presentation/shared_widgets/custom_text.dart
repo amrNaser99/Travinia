@@ -29,7 +29,7 @@ class CustomText extends StatelessWidget {
       textAlign: textAlign,
       maxLines: maxLinesNumber,
       overflow: showEllipsis ? TextOverflow.ellipsis : null,
-      style: GoogleFonts.workSans(
+      style: GoogleFonts.andika(
         fontSize: size ?? AppConst.fontSizeM,
         fontWeight: fontWeight ?? FontWeight.normal,
         color: color ?? Colors.black,

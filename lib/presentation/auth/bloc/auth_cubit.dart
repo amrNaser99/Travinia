@@ -12,16 +12,40 @@ class AuthCubit extends Cubit<AuthState> {
 
   static AuthCubit get(context) => BlocProvider.of<AuthCubit>(context);
 
+  var userNameController = TextEditingController();
+  var emailController = TextEditingController();
+  TextEditingController? phoneController = TextEditingController();
+  var passwordController = TextEditingController();
+  var verifyPasswordController = TextEditingController();
+  var isPassword = true;
+  var isVerifyPassword = true;
+  var formKey = GlobalKey<FormState>();
+
+  void checkPassword() {
+    isPassword = !isPassword;
+    emit(AuthPasswordVisibilityState());
+  }
+
+  void checkPasswordVerification() {
+    isVerifyPassword = !isVerifyPassword;
+    emit(AuthPasswordVisibilityState());
+  }
+
   LoginModel? loginModel;
 
-  void userRegister() async {
+  void userRegister({
+    required String userName,
+    required String email,
+    required String password,
+    required String rePassword,
+  }) async {
     emit(UserRegisterLoadingState());
 
     final response = await repository.register(
-      userName: 'amr_naser',
-      email: 'amrnaserr1@gmail.com',
-      password: '123456',
-      rePassword: '123456',
+      userName: userName,
+      email: email,
+      password: password,
+      rePassword: rePassword,
     );
 
     response.fold(
@@ -37,12 +61,16 @@ class AuthCubit extends Cubit<AuthState> {
     );
   }
 
-  void userLogin() async {
+  void userLogin({
+    required String email,
+    required String password,
+
+  }) async {
     emit(UserLoginLoadingState());
 
     final response = await repository.login(
-      email: 'amrnaserr1@gmail.com',
-      password: '123456',
+      email: email,
+      password: password,
     );
 
     response.fold(

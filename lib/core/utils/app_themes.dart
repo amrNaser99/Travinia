@@ -16,6 +16,7 @@ class AppThemes {
         color: Colors.black,
         fontSize: 20,
         fontWeight: FontWeight.bold,
+        fontFamily: 'GermaniaOne',
       ),
       centerTitle: false,
       systemOverlayStyle: Platform.isIOS

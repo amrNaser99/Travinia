@@ -27,6 +27,8 @@ class ErrorState extends AuthState {
   });
 }
 
+class AuthPasswordVisibilityState extends AuthState {}
+
 
 
 

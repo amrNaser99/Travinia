@@ -6,8 +6,8 @@ import '../../presentation/home/home_screen.dart';
 
 class Routes {
   static const String home = '/home';
-  static const String register = '/Register';
-  static const String login = '/Login';
+  static const String register = '/register';
+  static const String login = '/login';
 
   static Map<String, WidgetBuilder> get routes {
     return {
