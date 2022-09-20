@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:travinia/core/utils/app_color.dart';
 import 'package:travinia/core/utils/app_contstants.dart';
-import 'package:travinia/core/utils/hex_color.dart';
 import 'package:travinia/presentation/shared_widgets/custom_text.dart';
 
 class CustomButton extends StatelessWidget {
@@ -59,7 +59,7 @@ class CustomButton extends StatelessWidget {
             ),
           ],
         ),
-        fillColor: fillColor ?? HexColor('#4FBE9E'),
+        fillColor: fillColor ?? AppColors.appColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(
             borderRadius ?? AppConst.radius,
