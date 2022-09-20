@@ -28,7 +28,7 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: textController,
-      obscureText: obscureText ?? false,
+      obscureText: obscureText ? true : false,
       maxLength: maxlength,
       validator: (value) {
         if (isEmailField) {

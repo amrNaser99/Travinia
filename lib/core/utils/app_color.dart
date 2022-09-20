@@ -25,6 +25,7 @@ class AppColors {
   static final HexColor lightGrey =
       HexColor('#2C2C2C'); // button grey , textfield background
   static final HexColor darkGrey = HexColor('#555555'); // profile icons
+  static final Color darkBlue = Colors.indigo;
   static final HexColor teal = HexColor('#4FBE9E'); // primary
 
   static MaterialColor generateMaterialColor(Color color) {

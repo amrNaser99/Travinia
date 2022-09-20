@@ -21,7 +21,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
       builder: (context, state) {
         AuthCubit cubit = AuthCubit.get(context);
         return Scaffold(
-          backgroundColor: AppColors.primaryColor,
           appBar: AppBar(
           ),
           body: RegisterBody(cubit: cubit),

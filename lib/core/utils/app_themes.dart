@@ -90,32 +90,34 @@ class AppThemes {
       hintStyle: getRegularStyle(
         fontColor: AppColors.secondGrey,
       ),
-      fillColor: AppColors.secondGrey,
+      fillColor: AppColors.lightGrey,
       filled: true,
-      contentPadding:
-          EdgeInsets.symmetric(vertical: AppHeight.h2, horizontal: AppWidth.w5),
+      contentPadding: EdgeInsets.symmetric(
+          vertical: AppHeight.h2, horizontal: AppWidth.w10),
       errorStyle: getRegularStyle(
-          fontColor: AppColors.lightRed, fontSize: FontSize.s12),
+        fontColor: AppColors.lightRed,
+        fontSize: FontSize.s12,
+      ),
       focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppSize.s5),
+          borderRadius: BorderRadius.circular(AppSize.s10),
           borderSide: BorderSide(
             color: AppColors.secondGrey,
           )),
       errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppSize.s5),
-          borderSide: BorderSide(
-            color: AppColors.secondGrey,
-          )),
+        borderRadius: BorderRadius.circular(AppSize.s5),
+        borderSide: BorderSide(
+          color: AppColors.secondGrey,
+        ),
+      ),
       enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppSize.s5),
-          borderSide: BorderSide(
-            color: AppColors.secondGrey,
-          )),
+        borderRadius: BorderRadius.circular(AppSize.s10),
+      ),
       focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppSize.s5),
-          borderSide: BorderSide(
-            color: AppColors.secondGrey,
-          )),
+        borderRadius: BorderRadius.circular(AppSize.s5),
+        borderSide: BorderSide(
+          color: AppColors.secondGrey,
+        ),
+      ),
     ),
   );
 }

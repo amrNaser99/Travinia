@@ -5,9 +5,9 @@ import 'package:travinia/core/utils/font_styles.dart';
 class CustomButton extends StatelessWidget {
   final onPressed;
   final String text;
-  Color? fillColor;
+  final Color? fillColor;
 
-  CustomButton(
+   CustomButton(
       {Key? key, required this.text, this.fillColor, required this.onPressed})
       : super(key: key);
 

@@ -73,16 +73,17 @@ class OnBoardingScreen extends StatelessWidget {
                     CustomButton(
                       text: "Login",
                       onPressed: () {
-                        AppCubit.get(context).changeAppThemeColor();
+                        Navigator.pushNamed(context, '/login');
                       },
                     ),
                     SizedBox(height: AppHeight.h20),
                     CustomButton(
                       text: "Create account",
-                      // withShadow: true,
-                      // textColor: AppCubit.get(context).secondaryColor,
                       fillColor: AppColors.lightGrey,
-                      onPressed: () {},
+                      onPressed: () {
+
+                        Navigator.pushNamed(context, '/register');
+                      },
                     ),
                   ],
                 ),

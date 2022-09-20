@@ -4,8 +4,8 @@ import 'package:travinia/presentation/auth/bloc/auth_cubit.dart';
 import 'package:travinia/presentation/auth/bloc/auth_state.dart';
 import 'package:travinia/presentation/auth/profile_info/widgets/profile_body.dart';
 
-class ProfileInfo extends StatelessWidget {
-  const ProfileInfo({Key? key}) : super(key: key);
+class ProfileInfoScreen extends StatelessWidget {
+  const ProfileInfoScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

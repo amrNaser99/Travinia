@@ -41,33 +41,17 @@ class LoginBody extends StatelessWidget {
               children: [
                 Expanded(
                   child: CustomButton(
-                    fontWeight: FontWeight.normal,
-                    withIcon: true,
-                    withShadow: true,
                     fillColor: Colors.indigo,
-                    textSize: 20,
                     text: 'Facebook',
                     onPressed: () {},
-                    Icon: FaIcon(
-                      FontAwesomeIcons.facebook,
-                      color: Colors.white,
-                    ),
                   ),
                 ),
                 AppSpaces.hSpace10,
                 Expanded(
                   child: CustomButton(
-                    fontWeight: FontWeight.normal,
-                    withShadow: true,
-                    textSize: 20,
-                    withIcon: true,
                     fillColor: Colors.red[800],
                     text: 'Google',
                     onPressed: () {},
-                    Icon: FaIcon(
-                      FontAwesomeIcons.google,
-                      color: Colors.white,
-                    ),
                   ),
                 ),
               ],
@@ -83,31 +67,23 @@ class LoginBody extends StatelessWidget {
             ),
             AppSpaces.vSpace20,
             CustomTextField(
-              controller: cubit.emailController,
-              keyboardType: TextInputType.emailAddress,
-              labelText: 'Email',
-              prefixIcon: FontAwesomeIcons.solidEnvelope,
+              textController: cubit.emailController,
+              hintText: 'Email',
+              isEmailField: true,
+              validatorText: 'Please Enter E-mail Correctly',
             ),
             AppSpaces.vSpace20,
             CustomTextField(
-              controller: cubit.passwordController,
-              keyboardType: TextInputType.visiblePassword,
-              isPassword: cubit.isPassword,
-              suffixIcon: cubit.isPassword
-                  ? FontAwesomeIcons.eye
-                  : FontAwesomeIcons.eyeSlash,
-              suffixPressed: () {
-                cubit.checkPassword();
-              },
-              labelText: 'Password',
-              prefixIcon: FontAwesomeIcons.unlock,
+              textController: cubit.passwordController,
+              isPasswordField: true,
+              hintText: 'Password',
+              validatorText: 'Please Enter E-mail Correctly',
             ),
             AppSpaces.vSpace20,
             AppSpaces.vSpace10,
             AppSpaces.vSpace10,
             CustomButton(
-              fontWeight: FontWeight.normal,
-              textSize: 20,
+              fillColor: AppColors.appColor,
               text: 'Login',
               onPressed: () {
                 cubit.userLogin(
@@ -123,7 +99,7 @@ class LoginBody extends StatelessWidget {
               'By signing up, you agree to our Terms of\n Service and Privacy Policy',
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Colors.grey[600],
+                color: AppColors.lightGrey,
               ),
             ),
             AppSpaces.vSpace10,
@@ -135,10 +111,11 @@ class LoginBody extends StatelessWidget {
                       color: Colors.grey[600],
                     )),
                 TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/register');
-                    },
-                    child: Text('Sign Up'),),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/register');
+                  },
+                  child: Text('Sign Up'),
+                ),
               ],
             )
           ],
