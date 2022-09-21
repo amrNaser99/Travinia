@@ -18,6 +18,7 @@ class AppColors {
 
   ////////////////////////////////////////////////////
   static const Color white = Colors.white;
+  static final HexColor offWhite = HexColor('#F7F7F7'); // light background
   static Color lightRed = Colors.red.withOpacity(0.6);
   static final HexColor black = HexColor('#1A1A1A'); // dark background
   static final HexColor grey = HexColor('#6D6D6D'); // caption
@@ -25,7 +26,6 @@ class AppColors {
   static final HexColor lightGrey =
       HexColor('#2C2C2C'); // button grey , textfield background
   static final HexColor darkGrey = HexColor('#555555'); // profile icons
-  static final Color darkBlue = Colors.indigo;
   static final HexColor teal = HexColor('#4FBE9E'); // primary
 
   static MaterialColor generateMaterialColor(Color color) {

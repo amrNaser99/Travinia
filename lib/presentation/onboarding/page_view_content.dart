@@ -25,7 +25,7 @@ class PageViewContent extends StatelessWidget {
         AppSpaces.expandedSpace,
         Padding(
           padding: EdgeInsets.symmetric(horizontal: AppWidth.w20),
-          child: PrimaryText(
+          child: LargeHeadText(
             text: title,
             size: AppSize.s18,
           ),
