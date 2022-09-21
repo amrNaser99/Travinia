@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travinia/core/app/bloc/app_cubit.dart';
 import 'package:travinia/core/app/bloc/app_state.dart';
+import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/presentation/home/widegts/hotel_data_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,21 +15,26 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
+  void initState() {
+    setState(() {});
+    super.initState();
+    AppCubit.get(context).getHotels();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        List hotelData = BlocProvider.of<AppCubit>(context).hotels;
+        List hotelData = AppCubit.get(context).hotels;
         if (state is HotelsLoadingState) {
-          return Scaffold(
-              backgroundColor: Colors.lightBlueAccent,
-              body: Center(child: CircularProgressIndicator()));
+          return Scaffold(body: Center(child: CircularProgressIndicator()));
         } else {}
         return Scaffold(
           body: ListView(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
+                padding: EdgeInsets.symmetric(horizontal: AppWidth.w25),
                 child: ListView.separated(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),

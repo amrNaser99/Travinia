@@ -23,8 +23,10 @@ class AppWidth {
   static double w20 = 20.w;
   static double w25 = 25.w;
   static double w30 = 30.w;
+  static double w34 = 34.w;
   static double w40 = 40.w;
   static double w50 = 50.w;
+  static double w114 = 114.w;
 }
 
 class AppHeight {
@@ -50,6 +52,7 @@ class AppHeight {
   static double h19 = 19.h;
   static double h20 = 20.h;
   static double h25 = 25.h;
+  static double h28 = 28.h;
   static double h30 = 30.h;
   static double h40 = 40.h;
   static double h45 = 45.h;
@@ -58,6 +61,7 @@ class AppHeight {
   static double h80 = 80.h;
   static double h100 = 100.h;
   static double h180 = 180.h;
+  static double h120 = 120.h;
 }
 
 class AppSize {

@@ -6,6 +6,9 @@ import 'package:travinia/core/app/bloc/app_cubit.dart';
 import 'package:travinia/core/app/bloc/app_state.dart';
 import 'package:travinia/core/utils/app_color.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:travinia/core/utils/app_fonts.dart';
+import 'package:travinia/core/utils/app_values.dart';
+import 'package:travinia/presentation/shared_widgets/custom_text.dart';
 import 'package:travinia/services/api_service/end_points.dart';
 
 class HotelDataWidget extends StatelessWidget {
@@ -34,16 +37,20 @@ class HotelDataWidget extends StatelessWidget {
               clipBehavior: Clip.antiAlias,
               width: double.infinity,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(18),
-                color: Colors.white,
+                // color: Color(0xff2C2C2C),
+                // color: Color.fromARGB(255, 255, 255, 255),
+                color: Theme.of(context).cardTheme.color,
+                borderRadius: BorderRadius.circular(AppSize.s18),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.4),
+                    color: Theme.of(context).cardTheme.shadowColor ??
+                        AppColors.secondGrey.withOpacity(0.1),
                     spreadRadius: 0,
-                    blurRadius: 4,
-                    offset: const Offset(
-                      1,
-                      4.0,
+                    blurRadius:
+                        Theme.of(context).cardTheme.color == null ? 16 : 0,
+                    offset: Offset(
+                      Theme.of(context).cardTheme.shadowColor == null ? 1 : 0,
+                      Theme.of(context).cardTheme.shadowColor == null ? 4 : 0,
                     ),
                   ),
                 ],
@@ -51,37 +58,30 @@ class HotelDataWidget extends StatelessWidget {
               child: Row(
                 children: [
                   SizedBox(
-                    height: 130,
-                    width: 114,
+                    height: AppHeight.h120,
+                    width: AppWidth.w114,
                     child: Image.asset(
                       'assets/images/hotel.jpg',
                       fit: BoxFit.fill,
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(8, 8, 12, 8),
+                    padding: EdgeInsets.fromLTRB(
+                        AppWidth.w8, AppWidth.w1, AppWidth.w12, AppWidth.w1),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          hotelName.toString(), //HOTEL NAME
-                          style: TextStyle(
-                              //fontFamily: ,
-                              color: Colors.black,
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold),
+                        LargeHeadText(
+                          text: hotelName.toString(),
+                          size: FontSize.s15,
                         ),
-                        Text(
-                          hotelAdress.toString(), // HOTEL ADRESS
-                          style: TextStyle(
-                            //fontFamily: ,
-                            color: Colors.grey,
-                            fontSize: 14,
-                          ),
+                        SecondaryText(
+                          text: hotelAdress.toString(),
+                          size: FontSize.s12,
                         ),
                         SizedBox(
-                          height: 28,
+                          height: AppHeight.h30,
                         ),
                         Row(
                           children: [
@@ -93,29 +93,26 @@ class HotelDataWidget extends StatelessWidget {
                                     Icon(
                                       Icons.location_on_sharp,
                                       color: AppColors.appColor,
-                                      size: 17,
+                                      size: AppSize.s17,
                                     ),
-                                    Text(
-                                      ' 2.0 km to city', //ToDo: calculate HOTEL far distance
-                                      style: TextStyle(
-                                        //fontFamily: ,
-                                        color: Colors.grey,
-                                        fontSize: 14,
-                                      ),
-                                    ),
+                                    SecondaryText(
+                                      text: ' 2.0 km to city',
+                                      size: FontSize.s12,
+                                    )
                                   ],
                                 ),
                                 Container(
+                                  padding: EdgeInsets.only(left: AppWidth.w3),
                                   child: RatingBar.builder(
-                                    itemSize: 18,
+                                    itemSize: AppSize.s16,
                                     initialRating: double.parse(
                                         hotelRating), // HOTEL RATING
                                     minRating: 1,
                                     direction: Axis.horizontal,
                                     allowHalfRating: true,
                                     itemCount: 5,
-                                    itemPadding:
-                                        EdgeInsets.symmetric(horizontal: 1.4),
+                                    itemPadding: EdgeInsets.symmetric(
+                                        horizontal: AppWidth.w1),
                                     itemBuilder: (context, _) => Icon(
                                       Icons.star,
                                       color: AppColors.appColor,
@@ -128,28 +125,23 @@ class HotelDataWidget extends StatelessWidget {
                               ],
                             ),
                             SizedBox(
-                              width: 34,
+                              width: AppWidth.w20,
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text(
-                                  '\$${hotelPrice.toString()}', //HOTEL PRICE PER NIGHT
-                                  style: TextStyle(
-                                      //fontFamily: ,
-                                      color: Colors.black,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  '/per night',
-                                  style: TextStyle(
-                                    //fontFamily: ,
-                                    color: Colors.grey,
-                                    fontSize: 14,
+                            Padding(
+                              padding: EdgeInsets.only(bottom: AppWidth.w8),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  LargeHeadText(
+                                    text: '\$${hotelPrice.toString()}',
+                                    size: FontSize.s20,
                                   ),
-                                ),
-                              ],
+                                  SecondaryText(
+                                    text: '/per night',
+                                    size: FontSize.s11,
+                                  )
+                                ],
+                              ),
                             )
                           ],
                         )
