@@ -6,9 +6,9 @@ import 'package:travinia/core/app/bloc/app_state.dart';
 import 'package:travinia/core/utils/app_color.dart';
 import 'package:travinia/core/utils/app_strings.dart';
 import 'package:travinia/core/utils/app_values.dart';
+import 'package:travinia/core/utils/routes.dart';
 import 'package:travinia/presentation/onboarding/page_view_content.dart';
 
-import '../../core/utils/app_spaces.dart';
 import '../shared_widgets/custom_button.dart';
 
 class OnBoardingScreen extends StatelessWidget {
@@ -54,15 +54,14 @@ class OnBoardingScreen extends StatelessWidget {
               SmoothPageIndicator(
                 controller: _pageController,
                 effect: WormEffect(
-                  dotWidth: 10.0,
-                  dotHeight: 10.0,
-                  dotColor: AppColors.grey,
+                  dotWidth: AppSize.s9,
+                  dotHeight: AppSize.s9,
+                  dotColor: Theme.of(context).canvasColor,
                   activeDotColor: AppColors.appColor,
                 ),
                 count: 3,
               ),
-              AppSpaces.vSpace20,
-              AppSpaces.vSpace20,
+              SizedBox(height: AppHeight.h40),
               Padding(
                 padding: EdgeInsets.only(
                     right: AppWidth.w50,
@@ -73,16 +72,18 @@ class OnBoardingScreen extends StatelessWidget {
                     CustomButton(
                       text: "Login",
                       onPressed: () {
-                        AppCubit.get(context).changeAppThemeColor();
+                        Navigator.pushNamed(context, Routes.login);
+                        // AppCubit.get(context).changeAppThemeColor();
                       },
                     ),
                     SizedBox(height: AppHeight.h20),
                     CustomButton(
                       text: "Create account",
-                      // withShadow: true,
-                      // textColor: AppCubit.get(context).secondaryColor,
-                      fillColor: AppColors.lightGrey,
-                      onPressed: () {},
+                      fillColor: Theme.of(context).hintColor,
+                      textColor: Theme.of(context).focusColor,
+                      onPressed: () {
+                        Navigator.pushNamed(context, Routes.register);
+                      },
                     ),
                   ],
                 ),

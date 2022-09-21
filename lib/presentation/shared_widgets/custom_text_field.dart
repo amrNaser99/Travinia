@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:password_strength/password_strength.dart';
+import 'package:travinia/core/utils/font_styles.dart';
 
 class CustomTextField extends StatelessWidget {
   final String hintText;
@@ -10,7 +11,8 @@ class CustomTextField extends StatelessWidget {
   final int? maxlength;
   final String? validatorText;
   final ValueChanged<String>? onChange;
-  final TextEditingController textController;
+  final TextEditingController controller;
+  final TextInputType inputType;
 
   CustomTextField({
     Key? key,
@@ -20,16 +22,20 @@ class CustomTextField extends StatelessWidget {
     this.isPasswordField = false, //default,
     this.obscureText = false,
     required this.validatorText,
-    required this.textController,
+    required this.controller,
     this.onChange,
+    required this.inputType,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: textController,
-      obscureText: obscureText ?? false,
+      controller: controller,
+      obscureText: obscureText,
+      keyboardType: inputType,
       maxLength: maxlength,
+      style: getSemiBoldStyle(
+          fontColor: Theme.of(context).textTheme.bodyLarge!.color!),
       validator: (value) {
         if (isEmailField) {
           if (!EmailValidator.validate(value!.trim()) && value.isNotEmpty) {

@@ -24,6 +24,7 @@ dependencies:
   internet_connection_checker: null
   password_strength: ^0.2.0
   smooth_page_indicator: ^1.0.0+2
+  font_awesome_flutter:
 
 dev_dependencies:
   flutter_launcher_icons: null

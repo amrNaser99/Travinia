@@ -5,6 +5,7 @@ import 'package:travinia/core/utils/hex_color.dart';
 
 class AppColors {
   static Color primaryColor = Colors.white;
+  //#fff7f7f7
   //primaryColor Is the color that will be used as a background
   static Color secondaryColor = Colors.black;
   //secondaryColor Is the color that will be used in a widget like icons,texts,..etc
