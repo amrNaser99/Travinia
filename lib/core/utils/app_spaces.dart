@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 
 class AppSpaces {
+  static SizedBox hSpace5 = SizedBox(
+    width: 5.0,
+  );
+  static SizedBox vSpace5 = SizedBox(
+    height: 5.0,
+  );
   static SizedBox hSpace10 = SizedBox(
     width: 10.0,
   );

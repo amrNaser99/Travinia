@@ -49,7 +49,7 @@ abstract class Repository {
   ///Implement All Booking Functions Here
   Future<Either<PrimaryServerException, Create_BookingModel>> create_Booking({
     required String token,
-    required String user_id,
+    required int user_id,
     required int hotel_id,
   });
 

@@ -4,7 +4,6 @@ import 'package:travinia/presentation/auth/bloc/auth_cubit.dart';
 import 'package:travinia/presentation/auth/bloc/auth_state.dart';
 import 'package:travinia/presentation/auth/register/widget/register_body.dart';
 
-import '../../../core/utils/app_color.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -21,9 +20,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
       builder: (context, state) {
         AuthCubit cubit = AuthCubit.get(context);
         return Scaffold(
-          appBar: AppBar(
+          appBar: AppBar(),
+          body: RegisterBody(
+            cubit: cubit,
           ),
-          body: RegisterBody(cubit: cubit),
         );
       },
     );

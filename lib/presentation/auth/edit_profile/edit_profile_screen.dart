@@ -5,6 +5,13 @@ class EditProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Edit Profile'),
+      ),
+      body: const Center(
+        child: Text('Edit Profile'),
+      ),
+    );
   }
 }

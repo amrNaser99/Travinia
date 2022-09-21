@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travinia/models/login_model.dart';
 import 'package:travinia/models/profile_model.dart';
+import 'package:travinia/models/user_model.dart';
 import 'package:travinia/presentation/auth/bloc/auth_state.dart';
 import 'package:travinia/services/repositories/repository.dart';
 
@@ -19,7 +20,8 @@ class AuthCubit extends Cubit<AuthState> {
   var verifyPasswordController = TextEditingController();
   var isPassword = true;
   var isVerifyPassword = true;
-  var formKey = GlobalKey<FormState>();
+  var registerScaffoldKey = GlobalKey<FormState>();
+  var loginScaffoldKey = GlobalKey<FormState>();
 
   void checkPassword() {
     isPassword = !isPassword;
@@ -41,6 +43,7 @@ class AuthCubit extends Cubit<AuthState> {
   }) async {
     emit(UserRegisterLoadingState());
 
+
     final response = await repository.register(
       userName: userName,
       email: email,
@@ -48,23 +51,31 @@ class AuthCubit extends Cubit<AuthState> {
       rePassword: rePassword,
     );
 
+
+    userNameController.clear();
+    emailController.clear();
+    passwordController.clear();
+    verifyPasswordController.clear();
+
     response.fold(
       (l) {
         emit(ErrorState(exception: l));
       },
       (r) {
-        debugPrint('r: $r');
         loginModel = r;
 
-        emit(UserLoginSuccessState());
+        emit(UserRegisterSuccessState());
       },
     );
   }
 
+  UserModel? userModel;
+  String? token;
+
+
   void userLogin({
     required String email,
     required String password,
-
   }) async {
     emit(UserLoginLoadingState());
 
@@ -73,14 +84,19 @@ class AuthCubit extends Cubit<AuthState> {
       password: password,
     );
 
+    emailController.clear();
+    passwordController.clear();
+
     response.fold(
       (l) {
         emit(ErrorState(exception: l));
       },
-      (r) {
+      (r) async {
         loginModel = r;
-
-        emit(UserLoginSuccessState());
+        userModel = r.data;
+        token = r.data?.token;
+        debugPrint('token: ${token}');
+        emit(UserLoginSuccessState(r.data!));
       },
     );
   }

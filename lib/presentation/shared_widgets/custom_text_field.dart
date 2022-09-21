@@ -37,13 +37,13 @@ class CustomTextField extends StatelessWidget {
           } else if (value.isEmpty) {
             return validatorText;
           }
-        } else if (isPasswordField) {
-          if (estimatePasswordStrength(value!) <= 0.3 && value.isNotEmpty) {
+        } /*else if (isPasswordField) {
+          if (estimatePasswordStrength(value!) <= 0.4 && value.isNotEmpty) {
             return 'Password is too weak!';
           } else if (value.isEmpty) {
             return validatorText;
           }
-        } else {
+        }*/ else {
           if (value == null || value.isEmpty) {
             return validatorText;
           }
@@ -52,6 +52,7 @@ class CustomTextField extends StatelessWidget {
       },
       onChanged: onChange,
       decoration: InputDecoration(
+        labelStyle: TextStyle(color: Colors.white),
         hintText: hintText,
       ),
     );

@@ -145,7 +145,7 @@ class RepositoryImplementation extends Repository {
   @override
   Future<Either<PrimaryServerException, Create_BookingModel>> create_Booking({
     required String token,
-    required String user_id,
+    required int user_id,
     required int hotel_id,
   }) async {
     return handlingRequestResult<Create_BookingModel>(
@@ -167,13 +167,14 @@ class RepositoryImplementation extends Repository {
   }
 
   @override
-  Future<Either<PrimaryServerException, ProfileModel>> getProfileInfo(
-      {required String token}) async {
+  Future<Either<PrimaryServerException, ProfileModel>> getProfileInfo({
+    required String token,
+  }) async {
     return handlingRequestResult(
       onSuccess: () async {
         final response = await dioHelper.get(
           endPoint: profileEndPoint,
-          data: {
+          query: {
             token: token,
           },
         );

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travinia/presentation/auth/bloc/auth_cubit.dart';
 import 'package:travinia/presentation/auth/edit_profile/edit_profile_screen.dart';
 import 'package:travinia/presentation/auth/login/login_screen.dart';
 import 'package:travinia/presentation/auth/profile_info/profile_info_screen.dart';
@@ -21,7 +23,9 @@ class Routes {
       onBoarding: (context) => OnBoardingScreen(),
       login: (context) => const LoginScreen(),
       register: (context) => const RegisterScreen(),
-      profileInfo: (context) => const ProfileInfoScreen(),
+      profileInfo: (context) => ProfileInfoScreen(
+        userModel: BlocProvider.of<AuthCubit>(context).userModel!,
+          ),
       editProfile: (context) => const EditProfile(),
     };
   }

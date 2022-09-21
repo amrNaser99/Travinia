@@ -91,9 +91,14 @@ class AppThemes {
         fontColor: AppColors.secondGrey,
       ),
       fillColor: AppColors.lightGrey,
+      labelStyle: getRegularStyle(
+        fontColor: Colors.white,
+      ),
       filled: true,
       contentPadding: EdgeInsets.symmetric(
-          vertical: AppHeight.h2, horizontal: AppWidth.w10),
+        vertical: AppHeight.h2,
+        horizontal: AppWidth.w10,
+      ),
       errorStyle: getRegularStyle(
         fontColor: AppColors.lightRed,
         fontSize: FontSize.s12,

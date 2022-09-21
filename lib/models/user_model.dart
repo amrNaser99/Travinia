@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
+
 class UserModel {
-  final String? id;
+  final int? id;
   final String? name;
   final String? email;
   final String? emailVerifiedAt;
@@ -28,7 +30,7 @@ class UserModel {
       name: json['name'],
       email: json['email'],
       emailVerifiedAt: json['email_verified_at'],
-      token: json['token'],
+      token: json['api_token'],
       createdAt: json['created_at'],
       updatedAt: json['updated_at'],
       image: json['image'],
