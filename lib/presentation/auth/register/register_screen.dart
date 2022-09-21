@@ -22,21 +22,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       builder: (context, state) {
         AuthCubit cubit = AuthCubit.get(context);
         return Scaffold(
-          backgroundColor: AppColors.primaryDarkColor,
-          // HexColor('#fff7f7f7'),
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back_ios,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                context.pop();
-              },
-            ),
-          ),
+          appBar: AppBar(),
           body: RegisterBody(cubit: cubit),
         );
       },
