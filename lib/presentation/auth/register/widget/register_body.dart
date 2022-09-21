@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:travinia/core/utils/app_fonts.dart';
 import 'package:travinia/core/utils/app_spaces.dart';
+import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/presentation/auth/bloc/auth_cubit.dart';
+import 'package:travinia/presentation/auth/login/widget/google_facebook_sign_in.dart';
+import 'package:travinia/presentation/auth/login/widget/text_field_with_title.dart';
 import 'package:travinia/presentation/shared_widgets/custom_button.dart';
-import 'package:travinia/presentation/shared_widgets/custom_text_field.dart';
+import 'package:travinia/presentation/shared_widgets/custom_text.dart';
 
 class RegisterBody extends StatelessWidget {
   final AuthCubit cubit;
@@ -17,117 +19,51 @@ class RegisterBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
       child: Container(
         padding: EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  'Sign up',
-                  style: TextStyle(
-                    fontFamily: 'GermaniaOne',
-                    fontSize: 30,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
+            Align(
+              alignment: AlignmentDirectional.topStart,
+              child: LargeHeadText(text: "Sign up", size: FontSize.s24),
             ),
-            AppSpaces.vSpace20,
-            AppSpaces.vSpace10,
-            Row(
-              children: [
-                Expanded(
-                  child: CustomButton(
-                    fontWeight: FontWeight.normal,
-                    withIcon: true,
-                    withShadow: true,
-                    fillColor: Colors.indigo,
-                    textSize: 20,
-                    text: 'Facebook',
-                    onPressed: () {},
-                    Icon: FaIcon(
-                      FontAwesomeIcons.facebook,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                AppSpaces.hSpace10,
-                Expanded(
-                  child: CustomButton(
-                    fontWeight: FontWeight.normal,
-                    withShadow: true,
-                    textSize: 20,
-                    withIcon: true,
-                    fillColor: Colors.red[800],
-                    text: 'Google',
-                    onPressed: () {},
-                    Icon: FaIcon(
-                      FontAwesomeIcons.google,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            AppSpaces.vSpace20,
-            Text(
-              'or log with email',
-              style: TextStyle(
-                color: Colors.grey[600],
-                fontSize: 16,
-                fontFamily: GoogleFonts.andika().fontFamily,
-              ),
-            ),
-            AppSpaces.vSpace20,
-            CustomTextField(
+            SizedBox(height: AppHeight.h30),
+            GoogleFacebookSignIn(),
+            SizedBox(height: AppHeight.h20),
+            SecondaryText(text: 'or log with email'),
+            SizedBox(height: AppHeight.h20),
+            TextFieldWithTitle(
               controller: cubit.userNameController,
-              keyboardType: TextInputType.name,
-              labelText: 'UserName',
-              prefixIcon: FontAwesomeIcons.userLarge,
+              title: "First name",
+              hint: "Enter first name",
+              inputType: TextInputType.text,
             ),
-            AppSpaces.vSpace20,
-            CustomTextField(
+            SizedBox(height: AppHeight.h20),
+            TextFieldWithTitle(
+              controller: cubit.userNameController,
+              title: "Last name",
+              hint: "Enter last name",
+              inputType: TextInputType.text,
+            ),
+            SizedBox(height: AppHeight.h20),
+            TextFieldWithTitle(
               controller: cubit.emailController,
-              keyboardType: TextInputType.emailAddress,
-              labelText: 'Email',
-              prefixIcon: FontAwesomeIcons.solidEnvelope,
+              title: "Your email",
+              hint: "Enter your email",
+              inputType: TextInputType.emailAddress,
             ),
-            AppSpaces.vSpace20,
-            CustomTextField(
+            SizedBox(height: AppHeight.h20),
+            TextFieldWithTitle(
               controller: cubit.passwordController,
-              keyboardType: TextInputType.visiblePassword,
-              isPassword: cubit.isPassword,
-              suffixIcon: cubit.isPassword
-                  ? FontAwesomeIcons.eye
-                  : FontAwesomeIcons.eyeSlash,
-              suffixPressed: () {
-                cubit.checkPassword();
-              },
-              labelText: 'Password',
-              prefixIcon: FontAwesomeIcons.unlock,
+              title: "Password",
+              hint: "Enter password",
+              inputType: TextInputType.text,
+              obscure: true,
             ),
-            AppSpaces.vSpace20,
-            CustomTextField(
-              controller: cubit.verifyPasswordController,
-              keyboardType: TextInputType.visiblePassword,
-              isPassword: cubit.isVerifyPassword,
-              suffixIcon: cubit.isVerifyPassword
-                  ? FontAwesomeIcons.eye
-                  : FontAwesomeIcons.eyeSlash,
-              labelText: 'Verify Password',
-              prefixIcon: FontAwesomeIcons.unlockKeyhole,
-              suffixPressed: () {
-                cubit.checkPasswordVerification();
-              },
-            ),
-            AppSpaces.vSpace20,
-            AppSpaces.vSpace10,
+            SizedBox(height: AppHeight.h20),
             CustomButton(
-              fontWeight: FontWeight.normal,
-              textSize: 20,
               text: 'Sign up',
               onPressed: () {
                 cubit.userRegister(
@@ -142,27 +78,32 @@ class RegisterBody extends StatelessWidget {
                 cubit.verifyPasswordController.clear();
               },
             ),
-            AppSpaces.vSpace20,
-            Text(
-              'By signing up, you agree to our Terms of\n Service and Privacy Policy',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.grey[600],
-              ),
+            SizedBox(height: AppHeight.h20),
+            SecondaryText(
+              text:
+                  'By signing up, you agree to our Terms of\n Service and Privacy Policy',
+              isLight: true,
+              center: true,
+              size: FontSize.s13,
             ),
-            AppSpaces.vSpace10,
+            SizedBox(height: AppHeight.h10),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Already have an account?',
-                    style: TextStyle(
-                      color: Colors.grey[600],
-                    )),
+                SecondaryText(
+                  text: 'Already have an account? log in',
+                  center: true,
+                  size: FontSize.s13,
+                ),
                 TextButton(
                   onPressed: () {
                     Navigator.pushNamed(context, '/login');
                   },
-                  child: Text('Login'),
+                  child: TealText(
+                    text: 'Login',
+
+                    // isButton: true,
+                  ),
                 ),
               ],
             )

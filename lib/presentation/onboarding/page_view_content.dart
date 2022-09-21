@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travinia/core/utils/app_contstants.dart';
+import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/presentation/shared_widgets/custom_text.dart';
 
 import '../../core/utils/app_spaces.dart';
@@ -19,35 +20,29 @@ class PageViewContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        AppSpaces.vSpace20,
-        Image.asset(imagePath, height: 180.0),
+        SizedBox(height: AppHeight.h20),
+        Image.asset(imagePath, height: AppHeight.h180),
         AppSpaces.expandedSpace,
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: CustomText(
+          padding: EdgeInsets.symmetric(horizontal: AppWidth.w20),
+          child: LargeHeadText(
             text: title,
-            size: AppConst.fontSizeL + 2,
-            fontWeight: FontWeight.bold,
-            maxLinesNumber: 2,
-            textAlign: TextAlign.center,
-            showEllipsis: true,
+            size: AppSize.s18,
           ),
         ),
-        AppSpaces.vSpace20,
-        AppSpaces.vSpace10,
+        SizedBox(height: AppHeight.h20),
+        SizedBox(height: AppHeight.h10),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: CustomText(
+          padding: EdgeInsets.symmetric(horizontal: AppWidth.w20),
+          child: SecondaryText(
             text: subTitle,
-            size: AppConst.fontSizeM - 2,
-            fontWeight: FontWeight.normal,
-            withOpacity: 0.5,
-            textAlign: TextAlign.center,
+            center: true,
+            // size: AppConst.fontSizeM - 2,
           ),
         ),
-        AppSpaces.vSpace20,
-        AppSpaces.vSpace20,
-        AppSpaces.vSpace20,
+        SizedBox(height: AppHeight.h20),
+        SizedBox(height: AppHeight.h20),
+        SizedBox(height: AppHeight.h20),
       ],
     );
   }
