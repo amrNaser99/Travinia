@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get_it/get_it.dart';
 import 'package:travinia/core/utils/app_color.dart';
 import 'package:travinia/core/utils/app_contstants.dart';
 import 'package:travinia/core/utils/app_spaces.dart';
@@ -24,6 +25,7 @@ class ProfileBody extends StatelessWidget {
       children: [
         InkWell(
           onTap: () {
+
             Navigator.pushNamed(
               context,
               Routes.editProfile,
@@ -67,9 +69,13 @@ class ProfileBody extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 40,
-                        child: Image(
-                          fit: BoxFit.cover,
-                          image: NetworkImage('${userModel.image}'),
+                        child: ClipOval(
+                          child: Image.asset(
+                            'assets/images/user_image.png',
+                            fit: BoxFit.cover,
+                            // width: 80,
+                            // height: 80,
+                          ),
                         ),
                       ),
                     ],
@@ -87,26 +93,43 @@ class ProfileBody extends StatelessWidget {
           ),
           child: Column(
             children: [
-              InkWell(
+              ProfileItem(
+                itemText: 'Permissions',
+                icon: FontAwesomeIcons.personMilitaryPointing,
+                onTap: () {
+                },
+              ),
+              ProfileItem(
+                itemText: 'change Password',
+                icon: FontAwesomeIcons.lock,
                 onTap: () {
                   Navigator.pushNamed(context, Routes.editProfile);
                 },
-                child: ProfileItem(
-                  itemText: 'change Password',
-                  icon: FontAwesomeIcons.lock,
-                ),
               ),
               ProfileItem(
                 itemText: 'Invite Friend',
                 icon: FontAwesomeIcons.userGroup,
+                onTap: () {},
               ),
               ProfileItem(
-                itemText: 'Invite Friend',
-                icon: FontAwesomeIcons.userGroup,
+                itemText: 'Credit & Coupons',
+                icon: FontAwesomeIcons.gift,
+                onTap: () {},
               ),
               ProfileItem(
-                itemText: 'Invite Friend',
-                icon: FontAwesomeIcons.userGroup,
+                itemText: 'Help Center',
+                icon: FontAwesomeIcons.circleInfo,
+                onTap: () {},
+              ),
+              ProfileItem(
+                itemText: 'Payment',
+                icon: FontAwesomeIcons.creditCard,
+                onTap: () {},
+              ),
+              ProfileItem(
+                itemText: 'Setting',
+                icon: FontAwesomeIcons.gear,
+                onTap: () {},
               ),
             ],
           ),
@@ -116,43 +139,50 @@ class ProfileBody extends StatelessWidget {
   }
 }
 
-Widget ProfileItem({required String itemText, required IconData icon}) =>
-    Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          padding: EdgeInsets.symmetric(
-            vertical: AppWidth.w20,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                flex: 6,
-                child: Text(
-                  itemText,
-                  style: getMediumStyle(
-                    fontColor: AppColors.white,
-                    fontSize: 20,
+Widget ProfileItem({
+  required String itemText,
+  required IconData icon,
+  required Function() onTap,
+}) =>
+    InkWell(
+      onTap: onTap,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            padding: EdgeInsets.symmetric(
+              vertical: AppWidth.w20,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  flex: 6,
+                  child: Text(
+                    itemText,
+                    style: getMediumStyle(
+                      fontColor: AppColors.white,
+                      fontSize: 20,
+                    ),
                   ),
                 ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Icon(
-                  icon,
-                  size: 20,
-                  color: AppColors.secondGrey,
+                Expanded(
+                  flex: 1,
+                  child: Icon(
+                    icon,
+                    size: 20,
+                    color: AppColors.secondGrey,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        Container(
-          width: double.infinity,
-          height: 1,
-          color: AppColors.secondGrey,
-        ),
-      ],
+          Container(
+            width: double.infinity,
+            height: 1,
+            color: AppColors.secondGrey,
+          ),
+        ],
+      ),
     );

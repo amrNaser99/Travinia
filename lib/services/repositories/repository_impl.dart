@@ -28,6 +28,7 @@ class RepositoryImplementation extends Repository {
       onSuccess: () async {
         final response = await dioHelper.get(
           endPoint: profileEndPoint,
+          ///TODO bearer Auth
           token: token,
         );
 
@@ -173,7 +174,9 @@ class RepositoryImplementation extends Repository {
     return handlingRequestResult(
       onSuccess: () async {
         final response = await dioHelper.get(
+
           endPoint: profileEndPoint,
+
           query: {
             token: token,
           },

@@ -13,7 +13,8 @@ class AuthCubit extends Cubit<AuthState> {
 
   static AuthCubit get(context) => BlocProvider.of<AuthCubit>(context);
 
-  var userNameController = TextEditingController();
+  var firstNameController = TextEditingController();
+  var lastNameController = TextEditingController();
   var emailController = TextEditingController();
   TextEditingController? phoneController = TextEditingController();
   var passwordController = TextEditingController();
@@ -36,7 +37,8 @@ class AuthCubit extends Cubit<AuthState> {
   LoginModel? loginModel;
 
   void userRegister({
-    required String userName,
+    required String firstName,
+    required String lastName,
     required String email,
     required String password,
     required String rePassword,
@@ -45,14 +47,15 @@ class AuthCubit extends Cubit<AuthState> {
 
 
     final response = await repository.register(
-      userName: userName,
+      userName: firstName +" "+ lastName,
       email: email,
       password: password,
       rePassword: rePassword,
     );
 
 
-    userNameController.clear();
+    firstNameController.clear();
+    lastNameController.clear();
     emailController.clear();
     passwordController.clear();
     verifyPasswordController.clear();

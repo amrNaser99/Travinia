@@ -12,11 +12,9 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
+        if (state is UserLoginLoadingState) {}
         if (state is UserLoginSuccessState) {
           Navigator.pushNamed(context, Routes.profileInfo);
-          // BlocProvider.of<AuthCubit>(context).userProfile();
-          // Navigator.of(context).pushNamedAndRemoveUntil(
-          //     '/home', (Route<dynamic> route) => false);
         }
       },
       builder: (context, state) {
