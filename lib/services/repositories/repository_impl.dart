@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:travinia/models/booking_model.dart';
 import 'package:travinia/models/create_booking_model.dart';
-import 'package:travinia/models/register_model.dart';
 import 'package:travinia/services/repositories/repository.dart';
 
 import '../../core/error/exceptions.dart';
@@ -20,34 +19,6 @@ class RepositoryImplementation extends Repository {
   });
 
   ///Implement All User Functions Here
-
-  @override
-  Future<Either<PrimaryServerException, RegisterModel>> register({
-    required String name,
-    required String email,
-    required String password,
-    required String password_confirmation,
-  }) async {
-    return handlingRequestResult<RegisterModel>(
-      onSuccess: () async {
-        final response = await dioHelper.post(
-          endPoint: registerEndPoint,
-          data: {
-            'name': name,
-            'email': email,
-            'password': password,
-            'password_confirmation': password_confirmation,
-          },
-        );
-
-        return RegisterModel.fromJson(response);
-      },
-      onPrimaryServerException: (e) async {
-        return e;
-      },
-    );
-  }
-
   @override
   Future<Either<PrimaryServerException, ProfileModel>> getProfile({
     required String token,
@@ -60,29 +31,6 @@ class RepositoryImplementation extends Repository {
         );
 
         return ProfileModel.fromJson(response);
-      },
-      onPrimaryServerException: (e) async {
-        return e;
-      },
-    );
-  }
-
-  @override
-  Future<Either<PrimaryServerException, LoginModel>> login({
-    required String email,
-    required String password,
-  }) async {
-    return handlingRequestResult<LoginModel>(
-      onSuccess: () async {
-        final response = await dioHelper.post(
-          endPoint: loginEndPoint,
-          data: {
-            'email': email,
-            'password': password,
-          },
-        );
-
-        return LoginModel.fromJson(response);
       },
       onPrimaryServerException: (e) async {
         return e;
@@ -114,7 +62,7 @@ class RepositoryImplementation extends Repository {
   Future<Either<PrimaryServerException, FacilitiesModel>> getFacilities() {
     return handlingRequestResult<FacilitiesModel>(
       onSuccess: () async {
-        final response = await dioHelper.get(endPoint: facilitiesEndPoint);
+        final response = await dioHelper.get(endPoint: hotelsEndPoint);
 
         return FacilitiesModel.fromJson(response['data']);
       },
@@ -125,16 +73,74 @@ class RepositoryImplementation extends Repository {
   }
 
   @override
-  Future<Either<PrimaryServerException, BookingModel>> getBooking() {
+  Future<Either<PrimaryServerException, BookingModel>> getBooking({
+     String? bookType,
+     int? bookCount,
+     String? token,
+  }) {
     return handlingRequestResult(onSuccess: () async {
-      ///TODO: Implement Booking Function
-      final response = await dioHelper.get(endPoint: facilitiesEndPoint);
-
+      final response = await dioHelper.get(
+        endPoint: getBookingEndPoint,
+        token: token,
+        data: {
+          'type': bookType,
+          'count': bookCount,
+        },
+      );
+      // ['data']
       return BookingModel.fromJson(response['data']);
     }, onPrimaryServerException: (e) async {
       return e;
     });
   }
+
+  @override
+  Future<Either<PrimaryServerException, LoginModel>> register({
+    required String userName,
+    required String email,
+    required String password,
+    required String rePassword,
+  }) async {
+    return handlingRequestResult<LoginModel>(
+      onSuccess: () async {
+        final response =
+            await dioHelper.post(endPoint: registerEndPoint, data: {
+          'name': userName,
+          'email': email,
+          'password': password,
+          'password_confirmation': password,
+        });
+        return LoginModel.fromJson(response);
+      },
+      onPrimaryServerException: (e) async {
+        return e;
+      },
+    );
+  }
+
+  @override
+  Future<Either<PrimaryServerException, LoginModel>> login({
+    required String email,
+    required String password,
+  }) async {
+    return handlingRequestResult<LoginModel>(
+      onSuccess: () async {
+        final response = await dioHelper.post(
+          endPoint: loginEndPoint,
+          data: {
+            'email': email,
+            'password': password,
+          },
+        );
+
+        return LoginModel.fromJson(response);
+      },
+      onPrimaryServerException: (e) async {
+        return e;
+      },
+    );
+  }
+
 
   @override
   Future<Either<PrimaryServerException, Create_BookingModel>> create_Booking({
@@ -152,7 +158,6 @@ class RepositoryImplementation extends Repository {
             'hotel_id': hotel_id,
           },
         );
-
         return Create_BookingModel.fromJson(response);
       },
       onPrimaryServerException: (e) async {
@@ -160,4 +165,5 @@ class RepositoryImplementation extends Repository {
       },
     );
   }
+
 }

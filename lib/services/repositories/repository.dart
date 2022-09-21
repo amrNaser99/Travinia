@@ -6,18 +6,16 @@ import 'package:travinia/models/create_booking_model.dart';
 import 'package:travinia/models/hotels_model.dart';
 import 'package:travinia/models/login_model.dart';
 import 'package:travinia/models/profile_model.dart';
-import 'package:travinia/models/register_model.dart';
 
 import '../../models/facilities_model.dart';
 
 abstract class Repository {
   ///Implement All User Functions Here
-
-  Future<Either<PrimaryServerException, RegisterModel>> register({
-    required String name,
+  Future<Either<PrimaryServerException, LoginModel>> register({
+    required String userName,
     required String email,
     required String password,
-    required String password_confirmation,
+    required String rePassword,
   });
 
   Future<Either<PrimaryServerException, LoginModel>> login({
@@ -25,6 +23,7 @@ abstract class Repository {
     required String password,
   });
 
+  ///Implement Profile model Here
   Future<Either<PrimaryServerException, ProfileModel>> getProfile({
     required String token,
   });
@@ -34,7 +33,16 @@ abstract class Repository {
     required int page,
   });
 
+  ///Implement All Facilities Functions Here
   Future<Either<PrimaryServerException, FacilitiesModel>> getFacilities();
+
+  ///Implement All Booking Functions Here
+  Future<Either<PrimaryServerException, BookingModel>> getBooking({
+    String bookType,
+    int bookCount,
+    String? token,
+  });
+
 
   Future<Either<PrimaryServerException, Create_BookingModel>> create_Booking({
     required String token,
@@ -42,8 +50,8 @@ abstract class Repository {
     required int hotel_id,
   });
 
-  Future<Either<PrimaryServerException, BookingModel>> getBooking();
 }
+
 
 extension HandlingRequestResultFunction on Repository {
   Future<Either<PrimaryServerException, T>> handlingRequestResult<T>({

@@ -9,6 +9,7 @@ import 'package:travinia/models/hotel_model.dart';
 import 'package:travinia/models/login_model.dart';
 import 'package:travinia/models/profile_model.dart';
 import 'package:travinia/models/register_model.dart';
+import 'package:travinia/presentation/auth/bloc/auth_cubit.dart';
 import 'package:travinia/services/repositories/repository.dart';
 
 class AppCubit extends Cubit<AppStates> {
@@ -41,70 +42,8 @@ class AppCubit extends Cubit<AppStates> {
     emit(AppThemeColorChangedState());
   }
 
-  void userRegister() async {
-    emit(UserRegisterLoadingState());
-
-    final response = await repository.register(
-      name: 'medo mody',
-      email: 'medo@gmail.com',
-      password: '123456',
-      password_confirmation: '123456',
-    );
-
-    response.fold(
-      (l) {
-        emit(ErrorState(exception: l));
-      },
-      (r) {
-        registerModel = r;
-
-        emit(UserRegisterSuccessState());
-      },
-    );
-  }
-
-  LoginModel? loginModel;
-
-  void userLogin() async {
-    emit(UserLoginLoadingState());
-
-    final response = await repository.login(
-      email: 'abdullah.mansour@gmail.com',
-      password: '123456',
-    );
-
-    response.fold(
-      (l) {
-        emit(ErrorState(exception: l));
-      },
-      (r) {
-        loginModel = r;
-
-        emit(UserLoginSuccessState());
-      },
-    );
-  }
 
   ProfileModel? profileModel;
-
-  void userProfile() async {
-    emit(UserProfileLoadingState());
-
-    final response = await repository.getProfile(
-      token: loginModel!.data!.token,
-    );
-
-    response.fold(
-      (l) {
-        emit(ErrorState(exception: l));
-      },
-      (r) {
-        profileModel = r;
-
-        emit(UserProfileSuccessState());
-      },
-    );
-  }
 
   List<HotelModel> hotels = [];
 
@@ -149,20 +88,20 @@ class AppCubit extends Cubit<AppStates> {
 
   Create_BookingModel? create_BookingModel;
 
-  void userCreate_Booking() async {
+  void userCreate_Booking({required BuildContext context}) async {
     emit(UserProfileLoadingState());
 
     final response = await repository.create_Booking(
-      token: loginModel!.data!.token,
-      user_id: loginModel!.data!.id,
+      token: AuthCubit.get(context).loginModel!.data!.token,
+      user_id: AuthCubit.get(context).loginModel!.data!.id,
       hotel_id: 10,
     );
 
     response.fold(
-      (l) {
+          (l) {
         emit(ErrorState(exception: l));
       },
-      (r) {
+          (r) {
         create_BookingModel = r;
 
         emit(CreatBookingSuccessState());
