@@ -4,6 +4,8 @@ import 'package:travinia/core/app/bloc/bloc_observer.dart';
 import 'package:travinia/core/app/travinia_app.dart';
 import 'package:travinia/core/di/injection.dart';
 
+import 'core/functions/gelocator_permission.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -11,4 +13,6 @@ Future<void> main() async {
 
   runApp(const TraviniaApp());
   Bloc.observer = MyBlocObserver();
+
+  determinePosition();
 }

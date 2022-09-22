@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:travinia/core/app/bloc/app_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travinia/core/utils/app_color.dart';
@@ -41,7 +42,6 @@ class AppCubit extends Cubit<AppStates> {
     }
     emit(AppThemeColorChangedState());
   }
-
 
   ProfileModel? profileModel;
 
@@ -98,14 +98,46 @@ class AppCubit extends Cubit<AppStates> {
     );
 
     response.fold(
-          (l) {
+      (l) {
         emit(ErrorState(exception: l));
       },
-          (r) {
+      (r) {
         create_BookingModel = r;
 
         emit(CreatBookingSuccessState());
       },
     );
+  }
+
+  double myLat = 0;
+  double myLong = 0;
+
+  Future<Position> getMylocation() async {
+    emit(GetLocationLoadingState());
+
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    myLat = position.latitude;
+    myLong = position.longitude;
+    print(position.latitude);
+    print(position.longitude);
+    print(position);
+    emit(GetLocationSuccessState());
+    return position;
+  }
+
+  double distanceInMeters = 0;
+  double distanceInKiloMeters = 0;
+  double CalcDistanceOfGeocoordinates({
+    required double startLatitude,
+    required double startLongitude,
+    required double endLatitude,
+    required double endLongitude,
+  }) {
+    distanceInMeters = Geolocator.distanceBetween(
+        startLatitude, startLongitude, endLatitude, endLongitude);
+
+    distanceInKiloMeters = distanceInMeters / 1000;
+    return distanceInKiloMeters;
   }
 }

@@ -28,6 +28,10 @@ class FacilitiesSuccessState extends AppStates {}
 
 class CreatBookingSuccessState extends AppStates {}
 
+class GetLocationLoadingState extends AppStates {}
+
+class GetLocationSuccessState extends AppStates {}
+
 class ErrorState extends AppStates {
   final PrimaryServerException exception;
 

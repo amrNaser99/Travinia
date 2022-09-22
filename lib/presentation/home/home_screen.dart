@@ -6,6 +6,8 @@ import 'package:travinia/core/app/bloc/app_state.dart';
 import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/presentation/home/widegts/hotel_data_widget.dart';
 
+import '../../core/functions/gelocator_permission.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -18,6 +20,8 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     setState(() {});
     super.initState();
+    AppCubit.get(context).getMylocation();
+
     AppCubit.get(context).getHotels();
   }
 
@@ -27,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
       listener: (context, state) {},
       builder: (context, state) {
         List hotelData = AppCubit.get(context).hotels;
-        if (state is HotelsLoadingState) {
+        if (state is HotelsLoadingState && state is GetLocationLoadingState) {
           return Scaffold(body: Center(child: CircularProgressIndicator()));
         } else {}
         return Scaffold(
@@ -42,7 +46,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     return HotelDataWidget(
                       hotelName: hotelData[index].name,
                       hotelAdress: hotelData[index].address,
-                      distance: 2.0, //ToDo: calculate HOTEL far distance
+                      distance: (AppCubit.get(context)
+                          .CalcDistanceOfGeocoordinates(
+                            startLatitude: AppCubit.get(context).myLat,
+                            startLongitude: AppCubit.get(context).myLong,
+                            endLatitude:
+                                double.parse(hotelData[index].latitude),
+                            endLongitude:
+                                double.parse(hotelData[index].longitude),
+                          )
+                          .roundToDouble()), //ToDo: calculate HOTEL far distance
                       hotelPrice: hotelData[index].price,
                       hotelRating: hotelData[index].rate,
                     );

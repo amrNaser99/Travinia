@@ -95,9 +95,11 @@ class HotelDataWidget extends StatelessWidget {
                                       color: AppColors.appColor,
                                       size: AppSize.s17,
                                     ),
-                                    SecondaryText(
-                                      text: ' 2.0 km to city',
-                                      size: FontSize.s12,
+                                    Flexible(
+                                      child: SecondaryText(
+                                        text: ' $distance km to city',
+                                        size: FontSize.s12,
+                                      ),
                                     )
                                   ],
                                 ),
@@ -124,9 +126,9 @@ class HotelDataWidget extends StatelessWidget {
                                 )
                               ],
                             ),
-                            SizedBox(
-                              width: AppWidth.w20,
-                            ),
+                            // SizedBox(
+                            //   width: AppWidth.w20,
+                            // ),
                             Padding(
                               padding: EdgeInsets.only(bottom: AppWidth.w8),
                               child: Column(
