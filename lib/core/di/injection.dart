@@ -4,7 +4,7 @@ import 'package:travinia/presentation/auth/bloc/auth_cubit.dart';
 import 'package:travinia/services/api_service/dio_helper.dart';
 import 'package:travinia/services/repositories/repository.dart';
 
-import '../../presentation/hotel_details/bloc/hotel_details_cubit.dart';
+import '../../presentation/hotel_details/hotel_details_cubit/hotel_details_cubit.dart';
 import '../../services/api_service/dio_impl.dart';
 import '../../services/repositories/repository_impl.dart';
 

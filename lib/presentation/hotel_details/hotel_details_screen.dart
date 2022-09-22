@@ -8,12 +8,11 @@ import 'hotel_details_cubit/hotel_details_cubit.dart';
 import 'hotel_details_cubit/hotel_details_states.dart';
 
 class HotelDetailsScreen extends StatelessWidget {
-  final HotelModel hotelModel;
-  const HotelDetailsScreen({Key? key, required this.hotelModel})
-      : super(key: key);
+  const HotelDetailsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final hotelModel = ModalRoute.of(context)!.settings.arguments as HotelModel;
     return BlocProvider(
       create: (context) => sl<HotelDetailsCubit>()..changeOpacityValue(),
       child: Scaffold(

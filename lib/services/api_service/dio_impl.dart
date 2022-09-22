@@ -19,6 +19,7 @@ class DioImpl extends DioHelper {
     required String endPoint,
     dynamic data,
     dynamic query,
+    dynamic options,
     String? token,
     CancelToken? cancelToken,
     int? timeOut,
@@ -32,6 +33,7 @@ class DioImpl extends DioHelper {
       call: () async => await dio.get(
         endPoint,
         queryParameters: query,
+        options: options,
         cancelToken: cancelToken,
       ),
     );

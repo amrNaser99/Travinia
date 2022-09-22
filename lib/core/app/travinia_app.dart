@@ -34,7 +34,7 @@ class TraviniaApp extends StatelessWidget {
                   debugShowCheckedModeBanner: false,
                   theme: AppThemes.lightTheme,
                   routes: Routes.routes,
-                  initialRoute: Routes.hotelDetailsScreen,
+                  initialRoute: Routes.home,
                 );
               },
             ),
