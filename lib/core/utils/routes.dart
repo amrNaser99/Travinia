@@ -26,8 +26,8 @@ class Routes {
       profileInfo: (context) => ProfileInfoScreen(
         userModel: BlocProvider.of<AuthCubit>(context).userModel!,
           ),
-      editProfile: (context) => const EditProfile(
-        // userModel: BlocProvider.of<AuthCubit>(context).userModel!,
+      editProfile: (context) =>  EditProfile(
+        userModel: BlocProvider.of<AuthCubit>(context).userModel!,
 
       ),
     };

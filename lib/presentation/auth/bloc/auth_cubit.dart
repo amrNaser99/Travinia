@@ -35,6 +35,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   LoginModel? loginModel;
+  String userToken = '';
 
   void userRegister({
     required String firstName,
@@ -45,14 +46,12 @@ class AuthCubit extends Cubit<AuthState> {
   }) async {
     emit(UserRegisterLoadingState());
 
-
     final response = await repository.register(
-      userName: firstName +" "+ lastName,
+      userName: firstName + " " + lastName,
       email: email,
       password: password,
       rePassword: rePassword,
     );
-
 
     firstNameController.clear();
     lastNameController.clear();
@@ -66,7 +65,7 @@ class AuthCubit extends Cubit<AuthState> {
       },
       (r) {
         loginModel = r;
-
+        userToken = r.data!.token!;
         emit(UserRegisterSuccessState());
       },
     );
@@ -74,7 +73,6 @@ class AuthCubit extends Cubit<AuthState> {
 
   UserModel? userModel;
   String? token;
-
 
   void userLogin({
     required String email,
@@ -120,7 +118,7 @@ class AuthCubit extends Cubit<AuthState> {
         profileModel = r;
 
         debugPrint('response is : ${r.data?.email}');
-        debugPrint('profileModel is : ${profileModel?.status.messageEn}');
+        debugPrint('profileModel is : ${profileModel?.data?.image}');
         emit(UserProfileSuccessState());
       },
     );

@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get_it/get_it.dart';
+import 'package:travinia/core/app/bloc/app_cubit.dart';
 import 'package:travinia/core/utils/app_color.dart';
-import 'package:travinia/core/utils/app_contstants.dart';
 import 'package:travinia/core/utils/app_spaces.dart';
-import 'package:travinia/core/utils/app_themes.dart';
 import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/core/utils/font_styles.dart';
 import 'package:travinia/core/utils/routes.dart';
-import 'package:travinia/models/profile_model.dart';
 import 'package:travinia/models/user_model.dart';
 
 class ProfileBody extends StatelessWidget {
@@ -25,7 +22,6 @@ class ProfileBody extends StatelessWidget {
       children: [
         InkWell(
           onTap: () {
-
             Navigator.pushNamed(
               context,
               Routes.editProfile,
@@ -96,8 +92,7 @@ class ProfileBody extends StatelessWidget {
               ProfileItem(
                 itemText: 'Permissions',
                 icon: FontAwesomeIcons.personMilitaryPointing,
-                onTap: () {
-                },
+                onTap: () {},
               ),
               ProfileItem(
                 itemText: 'change Password',
@@ -109,12 +104,16 @@ class ProfileBody extends StatelessWidget {
               ProfileItem(
                 itemText: 'Invite Friend',
                 icon: FontAwesomeIcons.userGroup,
-                onTap: () {},
+                onTap: () {
+                  AppCubit.get(context).getHotels();
+                },
               ),
               ProfileItem(
                 itemText: 'Credit & Coupons',
                 icon: FontAwesomeIcons.gift,
-                onTap: () {},
+                onTap: () {
+                  AppCubit.get(context).getHotels();
+                },
               ),
               ProfileItem(
                 itemText: 'Help Center',

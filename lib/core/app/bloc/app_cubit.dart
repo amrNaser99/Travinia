@@ -65,8 +65,8 @@ class AppCubit extends Cubit<AppStates> {
     );
   }
 
+  ///Error in Facility Model >>>>>>
   List<FacilityModel> facilities = [];
-
   void getFacilities() async {
     emit(FacilitiesLoadingState());
 
@@ -87,13 +87,12 @@ class AppCubit extends Cubit<AppStates> {
 
   Create_BookingModel? create_BookingModel;
 
-  void userCreate_Booking({required BuildContext context}) async {
+  void userCreate_Booking({required BuildContext context,required int userId,required int hotelId}) async {
     emit(UserProfileLoadingState());
-
     final response = await repository.create_Booking(
-      token: AuthCubit.get(context).loginModel!.data!.token!,
-      user_id: AuthCubit.get(context).loginModel!.data!.id!,
-      hotel_id: 10,
+      token: AuthCubit.get(context).userToken,
+      user_id: userId,
+      hotel_id: hotelId,
     );
 
     response.fold(
