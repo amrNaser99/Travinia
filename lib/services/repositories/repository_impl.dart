@@ -1,4 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:travinia/models/booking_model.dart';
 import 'package:travinia/models/create_booking_model.dart';
 import 'package:travinia/models/user_model.dart';
@@ -21,17 +23,18 @@ class RepositoryImplementation extends Repository {
 
   ///Implement All User Functions Here
   @override
-  Future<Either<PrimaryServerException, ProfileModel>> getProfile({
+  Future<Either<PrimaryServerException, ProfileModel>> getProfileInfo({
     required String token,
   }) async {
     return handlingRequestResult<ProfileModel>(
       onSuccess: () async {
         final response = await dioHelper.get(
+          options: Options(
+            headers: {"authorization": "Bearer $token"},
+          ),
           endPoint: profileEndPoint,
-          ///TODO bearer Auth
           token: token,
         );
-
         return ProfileModel.fromJson(response);
       },
       onPrimaryServerException: (e) async {
@@ -167,25 +170,4 @@ class RepositoryImplementation extends Repository {
     );
   }
 
-  @override
-  Future<Either<PrimaryServerException, ProfileModel>> getProfileInfo({
-    required String token,
-  }) async {
-    return handlingRequestResult(
-      onSuccess: () async {
-        final response = await dioHelper.get(
-
-          endPoint: profileEndPoint,
-
-          query: {
-            token: token,
-          },
-        );
-        return ProfileModel.fromJson(response);
-      },
-      onPrimaryServerException: (e) async {
-        return e;
-      },
-    );
-  }
 }

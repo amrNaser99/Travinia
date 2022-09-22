@@ -112,7 +112,6 @@ class AuthCubit extends Cubit<AuthState> {
     final response = await repository.getProfileInfo(
       token: loginModel!.data!.token!,
     );
-
     response.fold(
       (l) {
         emit(ErrorState(exception: l));
@@ -120,6 +119,8 @@ class AuthCubit extends Cubit<AuthState> {
       (r) {
         profileModel = r;
 
+        debugPrint('response is : ${r.data?.email}');
+        debugPrint('profileModel is : ${profileModel?.status.messageEn}');
         emit(UserProfileSuccessState());
       },
     );
