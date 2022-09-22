@@ -20,6 +20,7 @@ abstract class DioHelper {
     required String endPoint,
     dynamic data,
     dynamic query,
+    dynamic options,
     String? token,
     CancelToken? cancelToken,
     int? timeOut,

@@ -1,4 +1,5 @@
 import 'package:travinia/core/error/exceptions.dart';
+import 'package:travinia/models/user_model.dart';
 
 abstract class AuthState {}
 
@@ -7,7 +8,11 @@ class AuthInitial extends AuthState {}
 
 class UserLoginLoadingState extends AuthState {}
 
-class UserLoginSuccessState extends AuthState {}
+class UserLoginSuccessState extends AuthState {
+  final UserModel userModel;
+
+  UserLoginSuccessState(this.userModel);
+}
 
 class UserRegisterLoadingState extends AuthState {}
 

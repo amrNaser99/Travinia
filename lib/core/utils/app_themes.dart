@@ -27,22 +27,22 @@ class AppThemes {
         statusBarBrightness: Brightness.light,
       ),
       titleTextStyle:
-          getBoldStyle(fontColor: AppColors.white, fontSize: FontSize.s16),
+      getBoldStyle(fontColor: AppColors.white, fontSize: FontSize.s16),
     ),
 
     /// elevated button
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-      elevation: 0,
-      primary: AppColors.teal,
-      textStyle: getMediumStyle(
-        fontColor: AppColors.white,
-        fontSize: FontSize.s15,
-      ),
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppSize.s20)),
-      minimumSize: Size(double.infinity, AppHeight.h45),
-    )),
+          elevation: 0,
+          primary: AppColors.teal,
+          textStyle: getMediumStyle(
+            fontColor: AppColors.white,
+            fontSize: FontSize.s15,
+          ),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppSize.s20)),
+          minimumSize: Size(double.infinity, AppHeight.h45),
+        )),
 
     ///card
     cardTheme: CardTheme(
@@ -56,7 +56,7 @@ class AppThemes {
     textTheme: TextTheme(
       // big titles
       bodyLarge:
-          getBoldStyle(fontColor: AppColors.black, fontSize: FontSize.s16),
+      getBoldStyle(fontColor: AppColors.black, fontSize: FontSize.s16),
       // small titles
       bodyMedium: getSemiBoldStyle(fontColor: AppColors.black),
       // body content grey
@@ -119,7 +119,7 @@ class AppThemes {
         statusBarBrightness: Brightness.dark,
       ),
       titleTextStyle:
-          getSemiBoldStyle(fontColor: AppColors.white, fontSize: FontSize.s16),
+      getSemiBoldStyle(fontColor: AppColors.white, fontSize: FontSize.s16),
       actionsIconTheme: const IconThemeData(
         color: Colors.white,
       ),
@@ -128,16 +128,16 @@ class AppThemes {
     /// elevated button
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-      elevation: 0,
-      primary: AppColors.teal,
-      textStyle: getMediumStyle(
-        fontColor: AppColors.white,
-        fontSize: FontSize.s15,
-      ),
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppSize.s20)),
-      minimumSize: Size(double.infinity, AppHeight.h45),
-    )),
+          elevation: 0,
+          primary: AppColors.teal,
+          textStyle: getMediumStyle(
+            fontColor: AppColors.white,
+            fontSize: FontSize.s15,
+          ),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppSize.s20)),
+          minimumSize: Size(double.infinity, AppHeight.h45),
+        )),
 
     ///card
     cardTheme: CardTheme(
@@ -152,7 +152,7 @@ class AppThemes {
     textTheme: TextTheme(
       // big titles
       bodyLarge:
-          getBoldStyle(fontColor: AppColors.white, fontSize: FontSize.s16),
+      getBoldStyle(fontColor: AppColors.white, fontSize: FontSize.s16),
       // small titles
       bodyMedium: getSemiBoldStyle(fontColor: AppColors.white),
       // body content grey
