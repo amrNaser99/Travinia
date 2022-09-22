@@ -9,6 +9,7 @@ import 'package:travinia/presentation/auth/bloc/auth_cubit.dart';
 import 'package:travinia/presentation/auth/bloc/auth_state.dart';
 import 'package:travinia/presentation/auth/login/widget/google_facebook_sign_in.dart';
 import 'package:travinia/presentation/auth/login/widget/text_field_with_title.dart';
+import 'package:travinia/presentation/home/home_screen.dart';
 import 'package:travinia/presentation/shared_widgets/custom_button.dart';
 
 class LoginBody extends StatelessWidget {
@@ -22,7 +23,12 @@ class LoginBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit, AuthState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is UserLoginSuccessState) {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const HomeScreen()));
+        }
+      },
       builder: (context, state) {
         return SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
