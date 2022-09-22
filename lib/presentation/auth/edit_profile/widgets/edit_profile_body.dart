@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:travinia/core/utils/app_contstants.dart';
-import 'package:travinia/core/utils/app_themes.dart';
 import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/core/utils/font_styles.dart';
-import 'package:travinia/models/user_model.dart';
 
 import '../../../../core/utils/app_color.dart';
 import '../../../../core/utils/app_spaces.dart';
@@ -49,7 +47,7 @@ class EditProfileBody extends StatelessWidget {
                   child: Stack(
                     children: [
                       CircleAvatar(
-                        radius: AppWidth.w54,
+                        radius: AppWidth.w55,
                         backgroundColor: AppColors.white,
                         child: CircleAvatar(
                           radius: AppWidth.w53,
@@ -84,8 +82,8 @@ class EditProfileBody extends StatelessWidget {
           AppSpaces.vSpace20,
           ProfileInfoItem(itemText: 'Date of Birth', Data: '15, Aug , 1999'),
           AppSpaces.vSpace20,
-          ProfileInfoItem(itemText: 'Address', Data: '23 Royal Street, LiverPool'),
-
+          ProfileInfoItem(
+              itemText: 'Address', Data: '23 Royal Street, LiverPool'),
         ],
       ),
     );
