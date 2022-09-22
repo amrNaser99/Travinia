@@ -24,9 +24,10 @@ class AppColors {
   static final HexColor grey = HexColor('#6D6D6D'); // caption
   static final HexColor secondGrey = HexColor('#7D7D7D'); // textfield hint
   static final HexColor lightGrey =
-      HexColor('#2C2C2C'); // button grey , textfield background
+  HexColor('#2C2C2C'); // button grey , textfield background
   static final HexColor darkGrey = HexColor('#555555'); // profile icons
   static final HexColor teal = HexColor('#4FBE9E'); // primary
+  static final Color darkBlue = Colors.indigo;
 
   static MaterialColor generateMaterialColor(Color color) {
     return MaterialColor(color.value, {

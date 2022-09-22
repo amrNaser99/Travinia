@@ -65,6 +65,31 @@ class PrimaryText extends StatelessWidget {
   }
 }
 
+class PrimaryWithStaticColorText extends StatelessWidget {
+  final String text;
+  final bool center;
+  final double? size;
+  final FontWeight? fontWeight;
+  const PrimaryWithStaticColorText(
+      {super.key,
+      required this.text,
+      this.size,
+      this.center = false,
+      this.fontWeight});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: Theme.of(context).textTheme.displaySmall!.copyWith(
+          fontSize: size ?? FontSize.s14,
+          color: AppColors.white,
+          fontWeight: fontWeight),
+      textAlign: center ? TextAlign.center : null,
+    );
+  }
+}
+
 class SecondaryText extends StatelessWidget {
   final String text;
   final bool center;
