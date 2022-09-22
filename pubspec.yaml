@@ -9,23 +9,25 @@ environment:
 
 dependencies:
   bloc: null
+  carousel_slider: ^4.1.1
   conditional_builder_null_safety: ^0.0.6
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
   dio: null
+  dot_navigation_bar: ^1.0.1+4
   email_validator: ^2.1.17
   equatable: null
   flutter:
     sdk: flutter
   flutter_bloc: null
+  flutter_rating_bar: ^4.0.1
   flutter_screenutil: ^5.5.4
+  font_awesome_flutter: null
   get_it: ^7.2.0
   google_fonts: ^3.0.1
   internet_connection_checker: null
   password_strength: ^0.2.0
   smooth_page_indicator: ^1.0.0+2
-  flutter_rating_bar: ^4.0.1
-  font_awesome_flutter:
 
 dev_dependencies:
   flutter_launcher_icons: null
@@ -68,7 +70,6 @@ flutter:
         - weight: 400
         - asset: assets/fonts/Montserrat-Light.ttf
         - weight: 300
-
   #   - images/a_dot_ham.jpeg
   # example:
   # fonts:

@@ -1,6 +1,7 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppWidth {
+  static double w0_3 = 0.3.w;
   static double w1 = 1.w;
   static double w2 = 2.w;
   static double w3 = 3.w;
@@ -26,7 +27,9 @@ class AppWidth {
   static double w34 = 34.w;
   static double w40 = 40.w;
   static double w50 = 50.w;
+  static double w100 = 100.w;
   static double w114 = 114.w;
+  static double w130 = 130.w;
 }
 
 class AppHeight {
@@ -60,8 +63,13 @@ class AppHeight {
   static double h60 = 60.h;
   static double h80 = 80.h;
   static double h100 = 100.h;
-  static double h180 = 180.h;
   static double h120 = 120.h;
+  static double h130 = 130.h;
+  static double h140 = 140.h;
+  static double h150 = 150.h;
+  static double h180 = 180.h;
+  static double h250 = 250.h;
+  static double h300 = 300.h;
 }
 
 class AppSize {

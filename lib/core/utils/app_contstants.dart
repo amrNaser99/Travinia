@@ -17,4 +17,14 @@ class AppConst {
       blurRadius: 20.0,
     )
   ];
+
+  static String handleLargeNumbers(String text) {
+    double num = double.parse(text);
+    String result = num.toString();
+    if (num >= 1000)
+      result = "${(num / 1000)}K";
+    else
+      result = num.round().toString();
+    return result;
+  }
 }
