@@ -25,8 +25,14 @@ class AppWidth {
   static double w30 = 30.w;
   static double w34 = 34.w;
   static double w40 = 40.w;
+  static double w45 = 45.w;
+  static double w48 = 48.w;
   static double w50 = 50.w;
-  static double w114 = 114.w;
+  static double w53 = 53.w;
+  static double w55 = 55.w;
+  static double w100 = 100.w;
+  static double w150 = 150.w;
+  static double w200 = 200.w;
 }
 
 class AppHeight {
@@ -59,7 +65,9 @@ class AppHeight {
   static double h50 = 50.h;
   static double h60 = 60.h;
   static double h80 = 80.h;
+  static double h90 = 90.h;
   static double h100 = 100.h;
+  static double h160 = 160.h;
   static double h180 = 180.h;
   static double h120 = 120.h;
 }
@@ -97,6 +105,11 @@ class AppSize {
   static double s30 = 30.sp;
   static double s40 = 40.sp;
   static double s50 = 50.sp;
+  static double s51 = 50.sp;
+  static double s52 = 51.sp;
+  static double s53 = 52.sp;
+  static double s54 = 53.sp;
+  static double s55 = 54.sp;
   static double s60 = 60.sp;
   static double s70 = 70.sp;
   static double s150 = 150.sp;

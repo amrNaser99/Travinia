@@ -1,13 +1,15 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:travinia/core/utils/app_fonts.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travinia/core/utils/app_color.dart';
 import 'package:travinia/core/utils/app_spaces.dart';
 import 'package:travinia/core/utils/app_values.dart';
+import 'package:travinia/core/utils/font_styles.dart';
 import 'package:travinia/presentation/auth/bloc/auth_cubit.dart';
+import 'package:travinia/presentation/auth/bloc/auth_state.dart';
 import 'package:travinia/presentation/auth/login/widget/google_facebook_sign_in.dart';
 import 'package:travinia/presentation/auth/login/widget/text_field_with_title.dart';
 import 'package:travinia/presentation/shared_widgets/custom_button.dart';
-import 'package:travinia/presentation/shared_widgets/custom_text.dart';
 
 class LoginBody extends StatelessWidget {
   final AuthCubit cubit;
@@ -19,63 +21,126 @@ class LoginBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
-      child: Container(
-        padding: EdgeInsets.all(AppSize.s20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Align(
-                alignment: AlignmentDirectional.topStart,
-                child: LargeHeadText(text: "Login", size: FontSize.s30)),
-            AppSpaces.vSpace20,
-            AppSpaces.vSpace10,
-            GoogleFacebookSignIn(),
-            AppSpaces.vSpace20,
-            SecondaryText(text: 'or log with email'),
-            AppSpaces.vSpace20,
-            TextFieldWithTitle(
-              controller: cubit.emailController,
-              title: "Your email",
-              hint: "enter your email",
-              inputType: TextInputType.emailAddress,
-            ),
-            AppSpaces.vSpace20,
-            TextFieldWithTitle(
-              controller: cubit.passwordController,
-              title: "Password",
-              hint: "enter your password",
-              inputType: TextInputType.text,
-              obscure: true,
-            ),
-            Align(
-              alignment: AlignmentDirectional.centerEnd,
-              child: TextButton(
-                onPressed: () {},
-                child: SecondaryText(
-                  text: "Forgot your password?",
-                  isButton: true,
-                  size: FontSize.s12,
-                  isLight: true,
-                ),
+    return BlocConsumer<AuthCubit, AuthState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        return SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Container(
+            padding: EdgeInsets.all(20),
+            child: Form(
+              key: cubit.loginScaffoldKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Login',
+                        style: getBoldStyle(
+                          fontColor: AppColors.white,
+                          fontSize: 30,
+                        ),
+                      ),
+                    ],
+                  ),
+                  AppSpaces.vSpace20,
+                  AppSpaces.vSpace10,
+                  GoogleFacebookSignIn(),
+                  AppSpaces.vSpace20,
+                  Text(
+                    'or log with email',
+                    style: getRegularStyle(
+                      fontColor: AppColors.secondGrey,
+                      fontSize: AppSize.s15,
+                    ),
+                  ),
+                  AppSpaces.vSpace20,
+                  AppSpaces.vSpace10,
+                  TextFieldWithTitle(
+                    controller: cubit.emailController,
+                    title: "Email",
+                    hint: "Enter first name",
+                    inputType: TextInputType.emailAddress,
+                  ),
+                  AppSpaces.vSpace20,
+                  TextFieldWithTitle(
+                    controller: cubit.passwordController,
+                    title: "Password",
+                    hint: "Enter first name",
+                    inputType: TextInputType.visiblePassword,
+                  ),
+                  AppSpaces.vSpace20,
+                  Container(
+                    padding:
+                        EdgeInsetsDirectional.only(end: AppSize.s10, start: 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          'Forgot Password?',
+                          style: getLightStyle(
+                            fontColor: AppColors.appColor,
+                            fontSize: AppSize.s12,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  AppSpaces.vSpace10,
+                  ConditionalBuilder(
+                    condition: state is! UserLoginLoadingState,
+                    builder: (context) => CustomButton(
+                      fillColor: AppColors.appColor,
+                      text: 'Login',
+                      onPressed: () {
+                        FocusScope.of(context).requestFocus(FocusNode());
+                        if (cubit.loginScaffoldKey.currentState!.validate()) {
+                          cubit.userLogin(
+                            email: cubit.emailController.text,
+                            password: cubit.passwordController.text,
+                          );
+                        }
+                      },
+                    ),
+                    fallback: (context) => Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
+                  AppSpaces.vSpace20,
+                  Text(
+                    'By signing up, you agree to our Terms of\n Service and Privacy Policy',
+                    textAlign: TextAlign.center,
+                    style: getRegularStyle(
+                      fontColor: AppColors.secondGrey,
+                      fontSize: AppSize.s13,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Already have an account?',
+                        style: getRegularStyle(
+                          fontColor: AppColors.secondGrey,
+                          fontSize: AppSize.s13,
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/register');
+                        },
+                        child: Text('Sign Up'),
+                      ),
+                    ],
+                  )
+                ],
               ),
             ),
-            AppSpaces.vSpace10,
-            CustomButton(
-              text: 'Login',
-              onPressed: () {
-                cubit.userLogin(
-                  email: cubit.emailController.text,
-                  password: cubit.passwordController.text,
-                );
-                cubit.emailController.clear();
-                cubit.passwordController.clear();
-              },
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
