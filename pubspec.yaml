@@ -25,6 +25,8 @@ dependencies:
   password_strength: ^0.2.0
   smooth_page_indicator: ^1.0.0+2
   font_awesome_flutter:
+  blur: ^3.1.0
+  readmore: ^2.2.0
 
 dev_dependencies:
   flutter_launcher_icons: null
