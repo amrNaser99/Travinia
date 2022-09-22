@@ -7,6 +7,7 @@ import 'package:travinia/core/di/injection.dart';
 import 'package:travinia/core/utils/app_themes.dart';
 import 'package:travinia/core/utils/routes.dart';
 import 'package:travinia/presentation/auth/bloc/auth_cubit.dart';
+import 'package:travinia/presentation/explore_on_map/block/map_cubit.dart';
 
 class TraviniaApp extends StatelessWidget {
   const TraviniaApp({Key? key}) : super(key: key);
@@ -26,6 +27,9 @@ class TraviniaApp extends StatelessWidget {
               BlocProvider<AuthCubit>(
                 create: (context) => sl<AuthCubit>(),
               ),
+              BlocProvider<MapCubit>(
+                create: (context) => sl<MapCubit>(),
+              ),
             ],
             child: BlocBuilder<AppCubit, AppStates>(
               builder: (context, state) {
@@ -34,7 +38,7 @@ class TraviniaApp extends StatelessWidget {
                   debugShowCheckedModeBanner: false,
                   theme: AppThemes.lightTheme,
                   routes: Routes.routes,
-                  initialRoute: Routes.onBoarding,
+                  initialRoute: Routes.home,
                 );
               },
             ),

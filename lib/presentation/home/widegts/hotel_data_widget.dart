@@ -8,6 +8,8 @@ import 'package:travinia/core/utils/app_color.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:travinia/core/utils/app_fonts.dart';
 import 'package:travinia/core/utils/app_values.dart';
+import 'package:travinia/presentation/explore_on_map/explore_map_screen.dart';
+import 'package:travinia/presentation/explore_on_map/widgets/google_map_widget.dart';
 import 'package:travinia/presentation/shared_widgets/custom_text.dart';
 import 'package:travinia/services/api_service/end_points.dart';
 
@@ -32,7 +34,12 @@ class HotelDataWidget extends StatelessWidget {
         listener: (context, state) {},
         builder: (BuildContext context, child) {
           return GestureDetector(
-            onTap: (() {}),
+            onTap: (() {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ExploreOnMap()));
+            }),
             child: Container(
               clipBehavior: Clip.antiAlias,
               width: double.infinity,
@@ -95,11 +102,9 @@ class HotelDataWidget extends StatelessWidget {
                                       color: AppColors.appColor,
                                       size: AppSize.s17,
                                     ),
-                                    Flexible(
-                                      child: SecondaryText(
-                                        text: ' $distance km to city',
-                                        size: FontSize.s12,
-                                      ),
+                                    SecondaryText(
+                                      text: ' $distance km to city',
+                                      size: FontSize.s12,
                                     )
                                   ],
                                 ),
