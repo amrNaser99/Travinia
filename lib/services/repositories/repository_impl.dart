@@ -62,7 +62,7 @@ class RepositoryImplementation extends Repository {
   Future<Either<PrimaryServerException, FacilitiesModel>> getFacilities() {
     return handlingRequestResult<FacilitiesModel>(
       onSuccess: () async {
-        final response = await dioHelper.get(endPoint: hotelsEndPoint);
+        final response = await dioHelper.get(endPoint: hotelsEndPoint,);
 
         return FacilitiesModel.fromJson(response['data']);
       },

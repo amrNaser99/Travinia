@@ -31,8 +31,7 @@ class HotelDataWidget extends StatelessWidget {
           return GestureDetector(
             onTap: (() {}),
             child: Container(
-              clipBehavior: Clip.antiAlias,
-              width: double.infinity,
+              clipBehavior: Clip.antiAliasWithSaveLayer,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(18),
                 color: Colors.white,

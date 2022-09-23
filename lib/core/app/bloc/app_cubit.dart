@@ -15,9 +15,7 @@ import 'package:travinia/services/repositories/repository.dart';
 class AppCubit extends Cubit<AppStates> {
   final Repository repository;
 
-  AppCubit({
-    required this.repository,
-  }) : super(AppInitialState());
+  AppCubit({required this.repository}) : super(AppInitialState());
 
   static AppCubit get(context) => BlocProvider.of<AppCubit>(context);
 
@@ -41,7 +39,6 @@ class AppCubit extends Cubit<AppStates> {
     }
     emit(AppThemeColorChangedState());
   }
-
 
   ProfileModel? profileModel;
 
@@ -98,10 +95,10 @@ class AppCubit extends Cubit<AppStates> {
     );
 
     response.fold(
-          (l) {
+      (l) {
         emit(ErrorState(exception: l));
       },
-          (r) {
+      (r) {
         create_BookingModel = r;
 
         emit(CreatBookingSuccessState());
