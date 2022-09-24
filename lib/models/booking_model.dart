@@ -1,5 +1,4 @@
 import 'package:travinia/models/booking_data_model.dart';
-import 'package:travinia/models/booking_details.dart';
 import 'package:travinia/models/status_model.dart';
 
 class BookingModel {

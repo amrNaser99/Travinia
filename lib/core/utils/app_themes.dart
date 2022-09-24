@@ -13,6 +13,10 @@ class AppThemes {
     hintColor: AppColors.white,
     focusColor: AppColors.black,
     canvasColor: AppColors.grey.withOpacity(0.3),
+    highlightColor: AppColors.grey.withOpacity(0.5),
+
+    //Divider Color
+    dividerColor: AppColors.grey.withOpacity(0.3),
 
     /// app bar
     appBarTheme: AppBarTheme(
@@ -28,22 +32,22 @@ class AppThemes {
         statusBarColor: Colors.transparent,
       ),
       titleTextStyle:
-          getBoldStyle(fontColor: AppColors.white, fontSize: FontSize.s16),
+      getBoldStyle(fontColor: AppColors.white, fontSize: FontSize.s16),
     ),
 
     /// elevated button
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-      elevation: 0,
-      primary: AppColors.teal,
-      textStyle: getMediumStyle(
-        fontColor: AppColors.white,
-        fontSize: FontSize.s15,
-      ),
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppSize.s20)),
-      minimumSize: Size(double.infinity, AppHeight.h45),
-    )),
+          elevation: 0,
+          primary: AppColors.teal,
+          textStyle: getMediumStyle(
+            fontColor: AppColors.white,
+            fontSize: FontSize.s15,
+          ),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppSize.s20)),
+          minimumSize: Size(double.infinity, AppHeight.h45),
+        )),
 
     ///card
     cardTheme: CardTheme(
@@ -57,7 +61,7 @@ class AppThemes {
     textTheme: TextTheme(
       // big titles
       bodyLarge:
-          getBoldStyle(fontColor: AppColors.black, fontSize: FontSize.s16),
+      getBoldStyle(fontColor: AppColors.black, fontSize: FontSize.s16),
       // small titles
       bodyMedium: getSemiBoldStyle(fontColor: AppColors.black),
       // body content grey
@@ -107,6 +111,10 @@ class AppThemes {
     hintColor: AppColors.lightGrey,
     focusColor: AppColors.white,
     canvasColor: AppColors.grey,
+    highlightColor: AppColors.grey.withOpacity(0.5),
+
+    //Divider Color
+    dividerColor: AppColors.grey,
 
     ///APP BAR
     appBarTheme: AppBarTheme(
@@ -122,7 +130,7 @@ class AppThemes {
         statusBarColor: Colors.transparent,
       ),
       titleTextStyle:
-          getSemiBoldStyle(fontColor: AppColors.white, fontSize: FontSize.s16),
+      getSemiBoldStyle(fontColor: AppColors.white, fontSize: FontSize.s16),
       actionsIconTheme: const IconThemeData(
         color: Colors.white,
       ),
@@ -131,21 +139,22 @@ class AppThemes {
     /// elevated button
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-      elevation: 0,
-      primary: AppColors.teal,
-      textStyle: getMediumStyle(
-        fontColor: AppColors.white,
-        fontSize: FontSize.s15,
-      ),
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppSize.s20)),
-      minimumSize: Size(double.infinity, AppHeight.h45),
-    )),
+          elevation: 0,
+          primary: AppColors.teal,
+          textStyle: getMediumStyle(
+            fontColor: AppColors.white,
+            fontSize: FontSize.s15,
+          ),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppSize.s20)),
+          minimumSize: Size(double.infinity, AppHeight.h45),
+        )),
 
     ///card
     cardTheme: CardTheme(
       elevation: 0,
       color: AppColors.lightGrey,
+      shadowColor: Colors.transparent,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSize.s16)),
     ),
@@ -154,7 +163,7 @@ class AppThemes {
     textTheme: TextTheme(
       // big titles
       bodyLarge:
-          getBoldStyle(fontColor: AppColors.white, fontSize: FontSize.s16),
+      getBoldStyle(fontColor: AppColors.white, fontSize: FontSize.s16),
       // small titles
       bodyMedium: getSemiBoldStyle(fontColor: AppColors.white),
       // body content grey

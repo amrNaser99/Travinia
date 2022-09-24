@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:travinia/core/utils/app_spaces.dart';
+import 'package:travinia/presentation/auth/bloc/auth_cubit.dart';
 import 'package:travinia/presentation/shared_widgets/custom_button.dart';
 
 class GoogleFacebookSignIn extends StatelessWidget {
@@ -15,7 +17,9 @@ class GoogleFacebookSignIn extends StatelessWidget {
             fillColor: Colors.indigo,
             text: 'Facebook',
             icon: FontAwesomeIcons.facebook,
-            onPressed: () {},
+            onPressed: () {
+              BlocProvider.of<AuthCubit>(context).userProfile();
+            },
           ),
         ),
         AppSpaces.hSpace10,

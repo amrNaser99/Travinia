@@ -1,6 +1,9 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:travinia/models/booking_model.dart';
 import 'package:travinia/models/create_booking_model.dart';
+import 'package:travinia/models/user_model.dart';
 import 'package:travinia/services/repositories/repository.dart';
 
 import '../../core/error/exceptions.dart';
@@ -20,16 +23,18 @@ class RepositoryImplementation extends Repository {
 
   ///Implement All User Functions Here
   @override
-  Future<Either<PrimaryServerException, ProfileModel>> getProfile({
+  Future<Either<PrimaryServerException, ProfileModel>> getProfileInfo({
     required String token,
   }) async {
     return handlingRequestResult<ProfileModel>(
       onSuccess: () async {
         final response = await dioHelper.get(
+          options: Options(
+            headers: {"authorization": "Bearer $token"},
+          ),
           endPoint: profileEndPoint,
           token: token,
         );
-
         return ProfileModel.fromJson(response);
       },
       onPrimaryServerException: (e) async {
@@ -74,9 +79,9 @@ class RepositoryImplementation extends Repository {
 
   @override
   Future<Either<PrimaryServerException, BookingModel>> getBooking({
-     String? bookType,
-     int? bookCount,
-     String? token,
+    String? bookType,
+    int? bookCount,
+    String? token,
   }) {
     return handlingRequestResult(onSuccess: () async {
       final response = await dioHelper.get(
@@ -104,11 +109,11 @@ class RepositoryImplementation extends Repository {
     return handlingRequestResult<LoginModel>(
       onSuccess: () async {
         final response =
-            await dioHelper.post(endPoint: registerEndPoint, data: {
+            await dioHelper.post(endPoint: registerEndPoint, query: {
           'name': userName,
           'email': email,
           'password': password,
-          'password_confirmation': password,
+          'password_confirmation': rePassword,
         });
         return LoginModel.fromJson(response);
       },
@@ -140,7 +145,6 @@ class RepositoryImplementation extends Repository {
       },
     );
   }
-
 
   @override
   Future<Either<PrimaryServerException, Create_BookingModel>> create_Booking({
