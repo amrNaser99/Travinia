@@ -1,6 +1,8 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:password_strength/password_strength.dart';
+import 'package:travinia/core/utils/app_color.dart';
+import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/core/utils/font_styles.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -10,6 +12,7 @@ class CustomTextField extends StatelessWidget {
   final bool obscureText;
   final int? maxlength;
   final String? validatorText;
+  final IconData? prefixIcon;
   final ValueChanged<String>? onChange;
   final TextEditingController controller;
   final TextInputType inputType;
@@ -25,6 +28,7 @@ class CustomTextField extends StatelessWidget {
     required this.controller,
     this.onChange,
     required this.inputType,
+    this.prefixIcon,
   }) : super(key: key);
 
   @override
@@ -58,8 +62,14 @@ class CustomTextField extends StatelessWidget {
       },
       onChanged: onChange,
       decoration: InputDecoration(
-        hintText: hintText,
-      ),
+          hintText: hintText,
+          prefixIcon: prefixIcon != null
+              ? Icon(
+                  prefixIcon,
+                  color: AppColors.appColor,
+                  size: AppSize.s20,
+                )
+              : null),
     );
   }
 }

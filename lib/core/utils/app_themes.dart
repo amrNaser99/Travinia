@@ -13,6 +13,10 @@ class AppThemes {
     hintColor: AppColors.white,
     focusColor: AppColors.black,
     canvasColor: AppColors.grey.withOpacity(0.3),
+    highlightColor: AppColors.grey.withOpacity(0.5),
+
+    //Divider Color
+    dividerColor: AppColors.grey.withOpacity(0.3),
 
     /// app bar
     appBarTheme: AppBarTheme(
@@ -105,6 +109,10 @@ class AppThemes {
     hintColor: AppColors.lightGrey,
     focusColor: AppColors.white,
     canvasColor: AppColors.grey,
+    highlightColor: AppColors.grey.withOpacity(0.5),
+
+    //Divider Color
+    dividerColor: AppColors.grey,
 
     ///APP BAR
     appBarTheme: AppBarTheme(
