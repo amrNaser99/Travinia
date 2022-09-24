@@ -29,8 +29,8 @@ class TraviniaApp extends StatelessWidget {
               BlocProvider<AuthCubit>(
                 create: (context) => sl<AuthCubit>(),
               ),
-              BlocProvider<ExploreHotelCubit>(
-                create: (context) => sl<ExploreHotelCubit>(),
+              BlocProvider<ExploreCubit>(
+                create: (context) => sl<ExploreCubit>(),
               ),
             ],
             child: BlocBuilder<AppCubit, AppStates>(
