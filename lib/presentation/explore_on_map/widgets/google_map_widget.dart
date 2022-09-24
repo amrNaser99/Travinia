@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:travinia/core/app/bloc/app_cubit.dart';
 import 'package:travinia/core/utils/app_themes.dart';
 import 'package:travinia/presentation/explore_on_map/block/map_cubit.dart';
 import 'package:travinia/presentation/explore_on_map/block/map_state.dart';
+import 'package:travinia/services/api_service/end_points.dart';
 
 class GoogleMapWidget extends StatefulWidget {
   const GoogleMapWidget({super.key});
@@ -16,12 +15,26 @@ class GoogleMapWidget extends StatefulWidget {
 }
 
 class _GoogleMapWidgetState extends State<GoogleMapWidget> {
+  final GlobalKey globalKey = GlobalKey();
+
   @override
   void initState() {
     setState(() {});
     super.initState();
+
+    MapCubit.get(context).HotelLocationMarkMap(
+        lat: 30.3,
+        long: 33.33,
+        hotelName: 'test',
+        hotelPrice: '\$200 in',
+        key: globalKey,
+        context: context);
+    MapCubit.get(context).HotelsLocationMarkMap(
+      context: context,
+    );
     MapCubit.get(context).MylocationMarkMap(
         lat: AppCubit.get(context).myLat, long: AppCubit.get(context).myLong);
+    MapCubit.get(context).markers.addAll(MapCubit.get(context).listMarkers);
   }
 
   @override
@@ -33,20 +46,26 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
             return CircularProgressIndicator();
           }
           return Expanded(
-            child: GoogleMap(
-              mapType: MapType.normal,
-              initialCameraPosition: MapCubit.get(context).mylocationMark!,
-              markers: MapCubit.get(context).markers,
-              onMapCreated: (GoogleMapController controller) {
-                MapCubit.get(context).controllerGoogleMap.complete(controller);
-                MapCubit.get(context).newGoogleMapController = controller;
-                // _setMapStyle();
-                if (ThemeData.dark() == true) {
-                  MapCubit.get(context).blackThemeGoogleMap();
-                } else {
-                  MapCubit.get(context).lightThemeGoogleMap();
-                }
-              },
+            child: Stack(
+              children: [
+                GoogleMap(
+                  mapType: MapType.normal,
+                  initialCameraPosition: MapCubit.get(context).mylocationMark!,
+                  markers: MapCubit.get(context).markers.toSet(),
+                  onMapCreated: (GoogleMapController controller) {
+                    MapCubit.get(context)
+                        .controllerGoogleMap
+                        .complete(controller);
+                    MapCubit.get(context).newGoogleMapController = controller;
+
+                    if (AppThemes.darkTheme == false) {
+                      MapCubit.get(context).lightThemeGoogleMap();
+                    } else {
+                      MapCubit.get(context).blackThemeGoogleMap();
+                    }
+                  },
+                ),
+              ],
             ),
           );
         });

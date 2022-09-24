@@ -36,9 +36,9 @@ class TraviniaApp extends StatelessWidget {
                 return MaterialApp(
                   title: 'Travinia',
                   debugShowCheckedModeBanner: false,
-                  theme: AppThemes.lightTheme,
+                  theme: AppThemes.darkTheme,
                   routes: Routes.routes,
-                  initialRoute: Routes.onBoarding,
+                  initialRoute: Routes.home,
                 );
               },
             ),
