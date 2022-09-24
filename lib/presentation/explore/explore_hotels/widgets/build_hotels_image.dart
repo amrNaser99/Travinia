@@ -1,12 +1,9 @@
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travinia/core/app/bloc/app_cubit.dart';
 import 'package:travinia/core/app/bloc/app_state.dart';
 import 'package:travinia/core/utils/app_spaces.dart';
 import 'package:travinia/models/hotel_model.dart';
-import 'package:travinia/presentation/explore/bloc/explore_hotel_cubit.dart';
-import 'package:travinia/presentation/explore/bloc/explore_hotel_state.dart';
 import 'package:travinia/presentation/home/widgets/hotel_data_widget.dart';
 
 class buildHotelsImage extends StatelessWidget {

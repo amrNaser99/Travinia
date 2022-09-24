@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:travinia/core/utils/extensions/height_ext.dart';
-import 'package:travinia/presentation/hotel_details/hotel_details_cubit/hotel_details_cubit.dart';
-import 'package:travinia/presentation/hotel_details/widgets/blured_hotel_data.dart';
+import 'package:travinia/models/hotel_model.dart';
+import 'package:travinia/presentation/explore/hotel_details/widgets/blured_hotel_data.dart';
 
-import '../../../core/utils/app_strings.dart';
-import '../../../core/utils/app_values.dart';
-import '../../../models/hotel_model.dart';
+import '../../../../core/utils/app_strings.dart';
+import '../../../../core/utils/app_values.dart';
+import '../../bloc/explore_cubit.dart';
 
 class FlexableSpaceBarWidget extends StatelessWidget {
-  final HotelDetailsCubit hotelDetailsCubit;
+  final ExploreCubit hotelDetailsCubit;
   const FlexableSpaceBarWidget({Key? key, required this.hotelDetailsCubit})
       : super(key: key);
 

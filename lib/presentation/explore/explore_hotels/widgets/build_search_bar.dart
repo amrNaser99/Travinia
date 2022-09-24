@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travinia/core/utils/app_color.dart';
-import 'package:travinia/presentation/explore/bloc/explore_hotel_cubit.dart';
+import 'package:travinia/presentation/explore/bloc/explore_cubit.dart';
 import 'package:travinia/presentation/shared_widgets/custom_text_field.dart';
 
 class buildSearchBar extends StatelessWidget {
@@ -22,7 +22,7 @@ class buildSearchBar extends StatelessWidget {
               child: CustomTextField(
                 hintText: 'London',
                 validatorText: 'Please fill the Field',
-                controller: BlocProvider.of<ExploreHotelCubit>(context).searchController,
+                controller: BlocProvider.of<ExploreCubit>(context).searchController,
                 inputType: TextInputType.text,
               ),
             ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:travinia/core/utils/app_contstants.dart';
 import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/presentation/shared_widgets/custom_text.dart';
 

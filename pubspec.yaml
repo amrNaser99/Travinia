@@ -23,10 +23,12 @@ dependencies:
   font_awesome_flutter: null
   get_it: ^7.2.0
   google_fonts: ^3.0.1
-  internet_connection_checker:
+  internet_connection_checker: null
   password_strength: ^0.2.0
   smooth_page_indicator: ^1.0.0+2
-  font_awesome_flutter:
+  blur:
+  readmore:
+  dot_navigation_bar:
 
 dev_dependencies:
   flutter_launcher_icons: null
@@ -42,7 +44,6 @@ flutter_icons:
   flutter_lints: ^2.0.0
 
 flutter:
-
   uses-material-design: true
   generate: true
 
@@ -69,4 +70,3 @@ flutter:
         - weight: 400
         - asset: assets/fonts/Montserrat-Light.ttf
         - weight: 300
-

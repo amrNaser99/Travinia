@@ -3,16 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:travinia/core/app/bloc/app_cubit.dart';
 import 'package:travinia/core/utils/app_color.dart';
-import 'package:travinia/core/utils/app_contstants.dart';
 import 'package:travinia/core/utils/app_spaces.dart';
 import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/core/utils/font_styles.dart';
 import 'package:travinia/models/hotel_model.dart';
-import 'package:travinia/presentation/explore/widgets/build_hotels_image.dart';
-import 'package:travinia/presentation/explore/widgets/build_search_bar.dart';
+import 'package:travinia/presentation/explore/explore_hotels/widgets/build_hotels_image.dart';
 import 'package:travinia/presentation/shared_widgets/custom_text_field.dart';
 
-import '../bloc/explore_hotel_cubit.dart';
+import '../../bloc/explore_cubit.dart';
+
 
 class ExploreHotelAppBar extends StatelessWidget {
   final List<HotelModel> hotelData;
@@ -168,7 +167,7 @@ class ExploreHotelAppBar extends StatelessWidget {
                       child: CustomTextField(
                         hintText: 'London',
                         validatorText: 'Please fill the Field',
-                        controller: BlocProvider.of<ExploreHotelCubit>(context)
+                        controller: BlocProvider.of<ExploreCubit>(context)
                             .searchController,
                         inputType: TextInputType.text,
                       ),

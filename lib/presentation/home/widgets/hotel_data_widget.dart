@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,7 +5,6 @@ import 'package:travinia/core/app/bloc/app_cubit.dart';
 import 'package:travinia/core/app/bloc/app_state.dart';
 import 'package:travinia/core/utils/app_color.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:travinia/services/api_service/end_points.dart';
 
 class HotelDataWidget extends StatelessWidget {
   const HotelDataWidget(
