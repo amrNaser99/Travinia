@@ -9,14 +9,16 @@ import 'package:travinia/models/hotel_model.dart';
 import 'package:travinia/models/profile_model.dart';
 import 'package:travinia/models/register_model.dart';
 import 'package:travinia/presentation/auth/bloc/auth_cubit.dart';
+import 'package:travinia/presentation/auth/profile_info/profile_info_screen.dart';
+import 'package:travinia/presentation/test/widgets/homeWidget.dart';
 import 'package:travinia/services/repositories/repository.dart';
+
+import '../../utils/routes.dart';
 
 class AppCubit extends Cubit<AppStates> {
   final Repository repository;
 
-  AppCubit({
-    required this.repository,
-  }) : super(AppInitialState());
+  AppCubit({required this.repository}) : super(AppInitialState());
 
   static AppCubit get(context) => BlocProvider.of<AppCubit>(context);
 
@@ -40,7 +42,6 @@ class AppCubit extends Cubit<AppStates> {
     }
     emit(AppThemeColorChangedState());
   }
-
 
   ProfileModel? profileModel;
 
@@ -67,6 +68,7 @@ class AppCubit extends Cubit<AppStates> {
 
   ///Error in Facility Model >>>>>>
   List<FacilityModel> facilities = [];
+
   void getFacilities() async {
     emit(FacilitiesLoadingState());
 
@@ -87,7 +89,10 @@ class AppCubit extends Cubit<AppStates> {
 
   Create_BookingModel? create_BookingModel;
 
-  void userCreate_Booking({required BuildContext context,required int userId,required int hotelId}) async {
+  void userCreate_Booking(
+      {required BuildContext context,
+      required int userId,
+      required int hotelId}) async {
     emit(UserProfileLoadingState());
     final response = await repository.create_Booking(
       token: AuthCubit.get(context).userToken,
@@ -96,14 +101,38 @@ class AppCubit extends Cubit<AppStates> {
     );
 
     response.fold(
-          (l) {
+      (l) {
         emit(ErrorState(exception: l));
       },
-          (r) {
+      (r) {
         create_BookingModel = r;
 
         emit(CreatBookingSuccessState());
       },
     );
+  }
+
+  int currentIndex = 0;
+
+  changeNavBar({required BuildContext context, required int index}) {
+    if (index == 0) {
+      currentIndex = index;
+    } else if (index == 2) {
+      AuthCubit.get(context).userProfile();
+      // Navigator.pushNamed(context, Routes.profileInfo);
+      currentIndex = index;
+    }
+    emit(changeNavBarState());
+  }
+
+  homeNavWidget() {
+    if (currentIndex == 0) {
+      return HomeWidget();
+    } else if (currentIndex == 1) {
+      ///TODO tripsScreen
+      // return tripsScreen
+    } else if (currentIndex == 2) {
+      return ProfileInfoWidget();
+    }
   }
 }

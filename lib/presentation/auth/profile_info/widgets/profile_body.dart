@@ -18,6 +18,7 @@ class ProfileBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppCubit cubit = AppCubit.get(context);
     return Column(
       children: [
         InkWell(
@@ -128,7 +129,9 @@ class ProfileBody extends StatelessWidget {
               ProfileItem(
                 itemText: 'Setting',
                 icon: FontAwesomeIcons.gear,
-                onTap: () {},
+                onTap: () {
+                  cubit.changeAppThemeColor();
+                },
               ),
             ],
           ),

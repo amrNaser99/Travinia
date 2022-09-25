@@ -13,6 +13,7 @@ class AppThemes {
     hintColor: AppColors.white,
     focusColor: AppColors.black,
     canvasColor: AppColors.grey.withOpacity(0.3),
+    highlightColor: AppColors.grey.withOpacity(0.5),
 
     //Divider Color
     dividerColor: AppColors.grey.withOpacity(0.3),
@@ -104,11 +105,13 @@ class AppThemes {
   );
   static ThemeData darkTheme = ThemeData(
     // COLORS
+
     primarySwatch: AppColors.generateMaterialColor(AppColors.teal),
     scaffoldBackgroundColor: AppColors.black,
     hintColor: AppColors.lightGrey,
     focusColor: AppColors.white,
     canvasColor: AppColors.grey,
+    highlightColor: AppColors.grey.withOpacity(0.5),
 
     //Divider Color
     dividerColor: AppColors.grey,

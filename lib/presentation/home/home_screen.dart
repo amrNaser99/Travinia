@@ -1,4 +1,3 @@
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travinia/core/app/bloc/app_cubit.dart';
@@ -12,6 +11,7 @@ class HomeScreen extends StatefulWidget {
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
+
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
@@ -58,6 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         );
+
       },
     );
   }
