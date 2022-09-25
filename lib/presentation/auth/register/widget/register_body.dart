@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travinia/core/utils/app_contstants.dart';
 import 'package:travinia/core/utils/app_fonts.dart';
-import 'package:travinia/core/utils/app_spaces.dart';
 import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/presentation/auth/bloc/auth_cubit.dart';
 import 'package:travinia/presentation/auth/login/widget/google_facebook_sign_in.dart';
@@ -108,7 +107,7 @@ class RegisterBody extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/login');
+                      Navigator.pushReplacementNamed(context, '/login');
                     },
                     child: TealText(
                       text: 'Login',
