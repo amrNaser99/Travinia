@@ -8,12 +8,21 @@ import 'package:travinia/presentation/shared_widgets/custom_text.dart';
 
 class HotelDistanceAndRating extends StatelessWidget {
   final String rate;
-  final String distance;
+  final String? distance;
   const HotelDistanceAndRating(
       {super.key, required this.rate, required this.distance});
 
   @override
   Widget build(BuildContext context) {
+    String? text;
+    if (distance != null) {
+      bool kmDistance = distance!.endsWith('K');
+      String description = kmDistance ? "km" : "m";
+      text = '$distance $description to city';
+    } else {
+      text = "allow location to determine distance";
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -26,7 +35,7 @@ class HotelDistanceAndRating extends StatelessWidget {
             ),
             Flexible(
               child: SecondaryText(
-                text: ' ${AppConst.handleLargeNumbers(distance)} km to city',
+                text: text,
                 size: FontSize.s12,
                 isLight: true,
                 isEllipsis: false,

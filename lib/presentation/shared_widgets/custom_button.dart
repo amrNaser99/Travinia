@@ -10,7 +10,7 @@ class CustomButton extends StatelessWidget {
   final String text;
   Color? fillColor;
   Color? textColor;
-  bool setShadow;
+  final bool setShadow;
   IconData? icon;
 
   CustomButton(

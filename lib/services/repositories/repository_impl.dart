@@ -169,5 +169,4 @@ class RepositoryImplementation extends Repository {
       },
     );
   }
-
 }

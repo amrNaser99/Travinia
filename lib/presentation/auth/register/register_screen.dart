@@ -17,6 +17,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is UserRegisterLoadingState) {}
+
+        if (state is UserRegisterSuccessState) {}
+
         if (state is UserRegisterSuccessState) {
           //Navigator.pushReplacementNamed(context, Routes.profileInfo);
         }

@@ -10,10 +10,10 @@ import 'package:travinia/models/profile_model.dart';
 import 'package:travinia/models/register_model.dart';
 import 'package:travinia/presentation/auth/bloc/auth_cubit.dart';
 import 'package:travinia/presentation/auth/profile_info/profile_info_screen.dart';
-import 'package:travinia/presentation/test/widgets/homeWidget.dart';
+import 'package:travinia/presentation/booking/booking_screen.dart';
+import 'package:travinia/presentation/home/home_screen.dart';
+import 'package:travinia/presentation/profile/profile_screen.dart';
 import 'package:travinia/services/repositories/repository.dart';
-
-import '../../utils/routes.dart';
 
 class AppCubit extends Cubit<AppStates> {
   final Repository repository;
@@ -41,6 +41,17 @@ class AppCubit extends Cubit<AppStates> {
       colorOpacity = 1.0;
     }
     emit(AppThemeColorChangedState());
+  }
+
+  int currentIndex = 0;
+  List<Widget> mainScreens = [
+    HomeScreen(),
+    BookingScreen(),
+    ProfileScreen(),
+  ];
+  void changeNavBar({required int index}) {
+    currentIndex = index;
+    emit(changeNavBarState());
   }
 
   ProfileModel? profileModel;
@@ -110,29 +121,5 @@ class AppCubit extends Cubit<AppStates> {
         emit(CreatBookingSuccessState());
       },
     );
-  }
-
-  int currentIndex = 0;
-
-  changeNavBar({required BuildContext context, required int index}) {
-    if (index == 0) {
-      currentIndex = index;
-    } else if (index == 2) {
-      AuthCubit.get(context).userProfile();
-      // Navigator.pushNamed(context, Routes.profileInfo);
-      currentIndex = index;
-    }
-    emit(changeNavBarState());
-  }
-
-  homeNavWidget() {
-    if (currentIndex == 0) {
-      return HomeWidget();
-    } else if (currentIndex == 1) {
-      ///TODO tripsScreen
-      // return tripsScreen
-    } else if (currentIndex == 2) {
-      return ProfileInfoWidget();
-    }
   }
 }

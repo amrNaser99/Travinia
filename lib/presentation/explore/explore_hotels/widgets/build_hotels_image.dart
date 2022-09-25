@@ -4,8 +4,7 @@ import 'package:travinia/core/app/bloc/app_cubit.dart';
 import 'package:travinia/core/app/bloc/app_state.dart';
 import 'package:travinia/core/utils/app_spaces.dart';
 import 'package:travinia/models/hotel_model.dart';
-import 'package:travinia/presentation/test/widgets/body/hotel_card_info.dart';
-
+import 'package:travinia/presentation/home/widgets/body/hotel_card_info.dart';
 
 class buildHotelsImage extends StatelessWidget {
   final List<HotelModel> hotelData;
@@ -27,7 +26,8 @@ class buildHotelsImage extends StatelessWidget {
                     shrinkWrap: true,
                     primary: false,
                     physics: NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) => HotelCardInfo(hotel: hotelData[index]),
+                    itemBuilder: (context, index) =>
+                        HotelCardInfo(hotel: hotelData[index]),
                     // itemBuilder: (context, index) => HotelDataWidget(
                     //   hotelName: hotelData[index].name,
                     //   hotelAdress: hotelData[index].address,
