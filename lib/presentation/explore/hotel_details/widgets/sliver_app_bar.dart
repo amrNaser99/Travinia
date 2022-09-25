@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/core/utils/extensions/height_ext.dart';
-import 'package:travinia/presentation/hotel_details/hotel_details_cubit/hotel_details_cubit.dart';
-import 'package:travinia/presentation/hotel_details/widgets/flexable_space_bar.dart';
+import 'package:travinia/presentation/explore/bloc/explore_cubit.dart';
+import 'package:travinia/presentation/explore/hotel_details/widgets/flexable_space_bar.dart';
 
-import '../../../core/utils/app_color.dart';
-import '../../../core/utils/app_values.dart';
+import '../../../../core/utils/app_color.dart';
+import '../../../../core/utils/app_values.dart';
 
 class SliverAppBarWidget extends StatelessWidget {
-  final HotelDetailsCubit hotelDetailsCubit;
+  final ExploreCubit hotelDetailsCubit;
   const SliverAppBarWidget({Key? key, required this.hotelDetailsCubit})
       : super(key: key);
 

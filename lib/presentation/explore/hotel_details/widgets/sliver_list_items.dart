@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
+import 'package:travinia/core/utils/app_strings.dart';
 
-import '../../../core/utils/app_color.dart';
-import '../../../core/utils/app_spaces.dart';
-import '../../../core/utils/app_strings.dart';
-import '../../../core/utils/app_values.dart';
-import '../../../models/hotel_model.dart';
-import '../../shared_widgets/custom_button.dart';
-import '../../shared_widgets/custom_text.dart';
+import '../../../../core/utils/app_color.dart';
+import '../../../../core/utils/app_spaces.dart';
+import '../../../../core/utils/app_values.dart';
+import '../../../../models/hotel_model.dart';
+import '../../../shared_widgets/custom_button.dart';
+import '../../../shared_widgets/custom_text.dart';
 import 'overall_rate_conatainer.dart';
 
 class SliverListItems extends StatelessWidget {

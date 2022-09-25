@@ -5,6 +5,7 @@ import 'package:travinia/core/utils/app_color.dart';
 import 'package:travinia/core/utils/app_fonts.dart';
 import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/core/utils/font_styles.dart';
+import 'package:travinia/core/utils/routes.dart';
 import 'package:travinia/presentation/shared_widgets/custom_button.dart';
 
 class HomeImageSlider extends StatefulWidget {
@@ -113,7 +114,10 @@ outdoor activites.''',
                 width: AppWidth.w130,
                 child: CustomButton(
                   text: "View Hotel",
-                  onPressed: () {},
+                  onPressed: () {
+                    print("View Hotel");
+                    Navigator.pushNamed(context, Routes.exploreHotels);
+                  },
                 ),
               ),
             ],

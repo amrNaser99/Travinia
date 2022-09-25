@@ -6,9 +6,7 @@ import 'package:travinia/models/create_booking_model.dart';
 import 'package:travinia/models/hotels_model.dart';
 import 'package:travinia/models/login_model.dart';
 import 'package:travinia/models/profile_model.dart';
-import 'package:travinia/models/user_model.dart';
-
-import '../../models/facilities_model.dart';
+import 'package:travinia/models/facilities_model.dart';
 
 abstract class Repository {
   ///Implement All User Functions Here

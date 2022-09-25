@@ -73,7 +73,6 @@ class OnBoardingScreen extends StatelessWidget {
                       text: "Login",
                       onPressed: () {
                         Navigator.pushNamed(context, Routes.login);
-                        // AppCubit.get(context).changeAppThemeColor();
                       },
                     ),
                     SizedBox(height: AppHeight.h20),

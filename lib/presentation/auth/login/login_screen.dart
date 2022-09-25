@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:travinia/core/utils/routes.dart';
 import 'package:travinia/presentation/auth/bloc/auth_cubit.dart';
 import 'package:travinia/presentation/auth/bloc/auth_state.dart';
 import 'package:travinia/presentation/auth/login/widget/login_body.dart';
+
+import '../../../core/utils/routes.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -12,9 +13,11 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
-        if (state is UserLoginLoadingState) {}
         if (state is UserLoginSuccessState) {
-          Navigator.pushNamed(context, Routes.profileInfo);
+          Navigator.pushNamed(
+            context,
+            Routes.home,
+          );
         }
       },
       builder: (context, state) {

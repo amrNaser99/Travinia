@@ -29,6 +29,7 @@ class AppThemes {
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarIconBrightness: Brightness.dark,
         statusBarBrightness: Brightness.light,
+        statusBarColor: Colors.transparent,
       ),
       titleTextStyle:
       getBoldStyle(fontColor: AppColors.white, fontSize: FontSize.s16),
@@ -104,6 +105,7 @@ class AppThemes {
   );
   static ThemeData darkTheme = ThemeData(
     // COLORS
+
     primarySwatch: AppColors.generateMaterialColor(AppColors.teal),
     scaffoldBackgroundColor: AppColors.black,
     hintColor: AppColors.lightGrey,
@@ -125,6 +127,7 @@ class AppThemes {
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarIconBrightness: Brightness.light,
         statusBarBrightness: Brightness.dark,
+        statusBarColor: Colors.transparent,
       ),
       titleTextStyle:
       getSemiBoldStyle(fontColor: AppColors.white, fontSize: FontSize.s16),

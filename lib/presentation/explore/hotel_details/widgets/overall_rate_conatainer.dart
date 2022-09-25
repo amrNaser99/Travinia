@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/utils/app_color.dart';
-import '../../../core/utils/app_values.dart';
+import '../../../../core/utils/app_color.dart';
+import '../../../../core/utils/app_values.dart';
+
 
 class OverAllRateContainer extends StatelessWidget {
   final double width;

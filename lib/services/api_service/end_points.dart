@@ -5,7 +5,6 @@ const String registerEndPoint = '/auth/register';
 const String profileEndPoint = '/auth/profile-info';
 const String updateProfileEndPoint = 'auth/update-info';
 const String hotelsEndPoint = '/hotels';
-const String hotels = "/hotels";
 const String searchHotelsEndPoint = "/search-hotels";
 const String facilitiesEndPoint = "/facilities";
 const String getBookingEndPoint = "/get-bookings";
