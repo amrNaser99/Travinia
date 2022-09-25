@@ -40,8 +40,8 @@ class TraviniaApp extends StatelessWidget {
                   // theme: AppThemes.lightTheme,
                   theme: AppThemes.darkTheme,
                   routes: Routes.routes,
-                  // initialRoute: Routes.home,
-                  home: TestScreen(),
+                  initialRoute: Routes.home,
+                  // home: TestScreen(),
                 );
               },
             ),

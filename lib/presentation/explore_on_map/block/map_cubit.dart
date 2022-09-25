@@ -25,6 +25,53 @@ class MapCubit extends Cubit<MapStates> {
   List<Marker> listMarkers = [];
   final Completer<GoogleMapController> controllerGoogleMap = Completer();
 
+  void mapCreated(controller) {
+    newGoogleMapController = controller;
+  }
+
+  int? prevPage = 0;
+
+  late PageController pageController;
+
+  initPagecontroler(BuildContext context) {
+    pageController = PageController(initialPage: 1, viewportFraction: 0.8);
+  }
+
+  onScroll(BuildContext context) {
+    if (pageController.page!.toInt() != prevPage) {
+      prevPage = pageController.page!.toInt();
+      moveCamera(context);
+    }
+    emit(GetLocationLoadingSucess());
+  }
+
+  moveCamera(BuildContext context) {
+    newGoogleMapController!.animateCamera(CameraUpdate.newCameraPosition(
+        CameraPosition(
+            target: LatLng(
+                double.parse(AppCubit.get(context)
+                    .hotels[pageController.page!.toInt()]
+                    .latitude),
+                double.parse(AppCubit.get(context)
+                    .hotels[pageController.page!.toInt()]
+                    .longitude)),
+            zoom: 14.0,
+            bearing: 45.0,
+            tilt: 45.0)));
+    print('-------------------------------------');
+    print('latLong coordinates' +
+        LatLng(
+                double.parse(AppCubit.get(context)
+                    .hotels[pageController.page!.toInt()]
+                    .latitude),
+                double.parse(AppCubit.get(context)
+                    .hotels[pageController.page!.toInt()]
+                    .longitude))
+            .toString());
+    print('index of page' + pageController.page!.toInt().toString());
+    print('-------------------------------------');
+  }
+
   CameraPosition? mylocationMark;
 
   void MylocationMarkMap({

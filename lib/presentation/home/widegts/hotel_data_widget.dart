@@ -20,13 +20,15 @@ class HotelDataWidget extends StatelessWidget {
       required this.hotelAdress,
       required this.distance,
       required this.hotelRating,
-      required this.hotelPrice});
+      required this.hotelPrice,
+      this.width = double.infinity});
 
   final String hotelName;
   final String hotelAdress;
   final double distance;
   final String hotelRating;
   final String hotelPrice;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
@@ -35,14 +37,13 @@ class HotelDataWidget extends StatelessWidget {
         builder: (BuildContext context, child) {
           return GestureDetector(
             onTap: (() {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const ExploreOnMap()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ExploreOnMap()));
             }),
             child: Container(
               clipBehavior: Clip.antiAlias,
-              width: double.infinity,
+              // height: AppHeight.h120,
+              width: width,
               decoration: BoxDecoration(
                 // color: Color(0xff2C2C2C),
                 // color: Color.fromARGB(255, 255, 255, 255),
@@ -66,7 +67,7 @@ class HotelDataWidget extends StatelessWidget {
                 children: [
                   SizedBox(
                     height: AppHeight.h120,
-                    width: AppWidth.w114,
+                    width: AppWidth.w100,
                     child: Image.asset(
                       'assets/images/hotel.jpg',
                       fit: BoxFit.fill,

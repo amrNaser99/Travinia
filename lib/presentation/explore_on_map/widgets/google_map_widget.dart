@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:travinia/core/app/bloc/app_cubit.dart';
@@ -26,7 +27,7 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
         lat: 30.3,
         long: 33.33,
         hotelName: 'test',
-        hotelPrice: '\$200 in',
+        hotelPrice: '\$200-fixed',
         key: globalKey,
         context: context);
     MapCubit.get(context).HotelsLocationMarkMap(
@@ -45,28 +46,36 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
           if (State is LocationLoadingState) {
             return CircularProgressIndicator();
           }
-          return Expanded(
-            child: Stack(
-              children: [
-                GoogleMap(
-                  mapType: MapType.normal,
-                  initialCameraPosition: MapCubit.get(context).mylocationMark!,
-                  markers: MapCubit.get(context).markers.toSet(),
-                  onMapCreated: (GoogleMapController controller) {
-                    MapCubit.get(context)
-                        .controllerGoogleMap
-                        .complete(controller);
-                    MapCubit.get(context).newGoogleMapController = controller;
+          return Column(
+            children: [
+              Expanded(
+                child: Stack(
+                  children: [
+                    GoogleMap(
+                      mapType: MapType.normal,
+                      initialCameraPosition:
+                          MapCubit.get(context).mylocationMark!,
+                      markers: MapCubit.get(context).markers.toSet(),
+                      onMapCreated: (GoogleMapController controller) {
+                        MapCubit.get(context)
+                            .controllerGoogleMap
+                            .complete(controller);
+                        MapCubit.get(context).newGoogleMapController =
+                            controller;
 
-                    if (AppThemes.darkTheme == false) {
-                      MapCubit.get(context).lightThemeGoogleMap();
-                    } else {
-                      MapCubit.get(context).blackThemeGoogleMap();
-                    }
-                  },
+                        if (AppThemes.darkTheme == false) {
+                          MapCubit.get(context).lightThemeGoogleMap();
+                        } else {
+                          MapCubit.get(context).blackThemeGoogleMap();
+                        }
+                      },
+                      padding: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).size.height * 0.70),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           );
         });
   }
