@@ -17,12 +17,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is UserRegisterLoadingState) {}
+
         if (state is UserRegisterSuccessState) {}
+
+        if (state is UserRegisterSuccessState) {
+          //Navigator.pushReplacementNamed(context, Routes.profileInfo);
+        }
       },
       builder: (context, state) {
         AuthCubit cubit = AuthCubit.get(context);
         return Scaffold(
-          appBar: AppBar(),
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+          ),
           body: RegisterBody(
             cubit: cubit,
           ),

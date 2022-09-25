@@ -22,7 +22,9 @@ class LoginScreen extends StatelessWidget {
       builder: (context, state) {
         AuthCubit cubit = AuthCubit.get(context);
         return Scaffold(
-          appBar: AppBar(),
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+          ),
           body: LoginBody(cubit: cubit),
         );
       },
