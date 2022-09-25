@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travinia/core/utils/app_values.dart';
-import 'package:travinia/presentation/shared_widgets/custom_text_field.dart';
 import 'package:travinia/presentation/home/widgets/app_bar/image_slider.dart';
+import 'package:travinia/presentation/shared_widgets/custom_text_field.dart';
 
 class HomeAppBar extends StatelessWidget {
   final bool textAndButtonVisibilty;
@@ -10,19 +10,18 @@ class HomeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      pinned: true,
-      expandedHeight: AppHeight.h320,
-      collapsedHeight: AppHeight.h150,
-      title: CustomTextField(
-        hintText: "where are you going?",
-        validatorText: "asd",
-        controller: TextEditingController(),
-        inputType: TextInputType.emailAddress,
-        prefixIcon: Icons.search_outlined,
-      ),
-      flexibleSpace: HomeImageSlider(
-        textAndButtonVisibilty: textAndButtonVisibilty,
-      ),
-    );
+        pinned: true,
+        expandedHeight: AppHeight.h320,
+        collapsedHeight: AppHeight.h150,
+        title: CustomTextField(
+          hintText: "where are you going?",
+          validatorText: "Error!",
+          controller: TextEditingController(),
+          inputType: TextInputType.emailAddress,
+          prefixIcon: Icons.search_outlined,
+        ),
+        flexibleSpace: HomeImageSlider(
+          textAndButtonVisibilty: textAndButtonVisibilty,
+        ));
   }
 }

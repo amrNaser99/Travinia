@@ -1,17 +1,17 @@
 import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
+import 'package:travinia/presentation/explore/bloc/explore_cubit.dart';
 
-import '../../../core/utils/app_color.dart';
-import '../../../core/utils/app_spaces.dart';
-import '../../../core/utils/app_values.dart';
-import '../../../models/hotel_model.dart';
-import '../../shared_widgets/custom_button.dart';
-import '../../shared_widgets/custom_text.dart';
-import '../hotel_details_cubit/hotel_details_cubit.dart';
+import '../../../../core/utils/app_color.dart';
+import '../../../../core/utils/app_spaces.dart';
+import '../../../../core/utils/app_values.dart';
+import '../../../../models/hotel_model.dart';
+import '../../../shared_widgets/custom_button.dart';
+import '../../../shared_widgets/custom_text.dart';
 import 'more_details_button.dart';
 
 class BluredHotelDataContainer extends StatelessWidget {
-  final HotelDetailsCubit hotelDetailsCubit;
+  final ExploreCubit hotelDetailsCubit;
   final HotelModel hotelModel;
   const BluredHotelDataContainer(
       {Key? key, required this.hotelDetailsCubit, required this.hotelModel})

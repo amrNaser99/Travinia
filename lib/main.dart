@@ -1,7 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:travinia/core/app/bloc/bloc_observer.dart';
 import 'package:travinia/core/app/travinia_app.dart';
 import 'package:travinia/core/di/injection.dart';

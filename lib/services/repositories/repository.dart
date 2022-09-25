@@ -9,6 +9,8 @@ import 'package:travinia/models/profile_model.dart';
 
 import '../../models/facilities_model.dart';
 
+import 'package:travinia/models/facilities_model.dart';
+
 abstract class Repository {
   ///Implement All User Functions Here
   Future<Either<PrimaryServerException, LoginModel>> register({

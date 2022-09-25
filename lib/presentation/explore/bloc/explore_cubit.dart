@@ -1,13 +1,17 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:travinia/presentation/hotel_details/hotel_details_cubit/hotel_details_states.dart';
+import 'package:travinia/presentation/explore/bloc/explore_state.dart';
+import 'package:travinia/services/repositories/repository.dart';
 
-class HotelDetailsCubit extends Cubit<HotelDetailsStates> {
-  HotelDetailsCubit() : super(HotelDetailsInitState());
+class ExploreCubit extends Cubit<ExploreState> {
+  final Repository repository;
 
-  static HotelDetailsCubit get(context) =>
-      BlocProvider.of<HotelDetailsCubit>(context);
+  ExploreCubit({required this.repository}) : super(ExploreInitial());
+
+  static ExploreCubit get(context) => BlocProvider.of<ExploreCubit>(context);
+  TextEditingController searchController = TextEditingController();
+
 
   ScrollController scrollController = ScrollController();
   double opacityValue = 1.0;

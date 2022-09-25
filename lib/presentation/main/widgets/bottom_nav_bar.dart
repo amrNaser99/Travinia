@@ -1,5 +1,6 @@
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:travinia/core/app/bloc/app_cubit.dart';
 import 'package:travinia/core/utils/app_color.dart';
 import 'package:travinia/core/utils/app_values.dart';
 
@@ -8,12 +9,14 @@ class AppBottomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppCubit cubit = AppCubit.get(context);
     return Padding(
       padding: EdgeInsets.only(bottom: AppHeight.h1),
       child: DotNavigationBar(
-        currentIndex: 0,
+        curve: Curves.bounceInOut,
+        currentIndex: cubit.currentIndex,
         onTap: (index) {
-          // cubit.changeNavBar(index);
+          cubit.changeNavBar(index: index);
         },
         marginR: EdgeInsets.symmetric(horizontal: AppWidth.w20)
             .add(EdgeInsets.only(bottom: AppHeight.h2)),
@@ -22,8 +25,8 @@ class AppBottomNavigationBar extends StatelessWidget {
         unselectedItemColor: AppColors.grey.withOpacity(0.7),
         backgroundColor: Theme.of(context).inputDecorationTheme.fillColor,
         itemPadding: EdgeInsets.only(
-          left: AppWidth.w12,
-          right: AppWidth.w12,
+          left: AppWidth.w20,
+          right: AppWidth.w20,
           top: AppHeight.h5,
         ),
         borderRadius: AppSize.s50,

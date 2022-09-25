@@ -24,10 +24,10 @@ class UserModel {
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
       id: json['id'],
+      token: json['api_token'],
       name: json['name'],
       email: json['email'],
       emailVerifiedAt: json['email_verified_at'],
-      token: json['api_token'],
       createdAt: json['created_at'],
       updatedAt: json['updated_at'],
       image: json['image'],

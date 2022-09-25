@@ -1,14 +1,15 @@
 import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
+import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/core/utils/extensions/height_ext.dart';
+import 'package:travinia/presentation/explore/bloc/explore_cubit.dart';
+import 'package:travinia/presentation/shared_widgets/custom_text.dart';
 
-import '../../../core/utils/app_color.dart';
-import '../../../core/utils/app_values.dart';
-import '../../shared_widgets/custom_text.dart';
-import '../hotel_details_cubit/hotel_details_cubit.dart';
+import '../../../../core/utils/app_color.dart';
+
 
 class MoreDetailsButton extends StatelessWidget {
-  final HotelDetailsCubit hotelScreenCubit;
+  final ExploreCubit hotelScreenCubit;
   const MoreDetailsButton({Key? key, required this.hotelScreenCubit})
       : super(key: key);
 

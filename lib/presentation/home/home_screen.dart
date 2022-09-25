@@ -6,7 +6,7 @@ import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/presentation/home/widgets/app_bar/app_bar.dart';
 import 'package:travinia/presentation/home/widgets/body/best_deals_head.dart';
 import 'package:travinia/presentation/home/widgets/body/hotel_card_info.dart';
-import 'package:travinia/presentation/home/widgets/bottom_nav_bar.dart';
+import 'package:travinia/presentation/main/widgets/bottom_nav_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -31,13 +31,8 @@ class _HomeScreenState extends State<HomeScreen> {
       } else {
         _textVisibilty.value = true;
       }
+      print(_textVisibilty.value);
     }
-  }
-
-  @override
-  void initState() {
-    AppCubit.get(context).getHotels();
-    super.initState();
   }
 
   @override
@@ -46,58 +41,53 @@ class _HomeScreenState extends State<HomeScreen> {
       listener: (context, state) {},
       builder: (context, state) {
         AppCubit cubit = AppCubit.get(context);
-        return Scaffold(
-          extendBody: true,
-          body: state is HotelsLoadingState
-              ? Center(child: CircularProgressIndicator())
-              : state is ErrorState
-                  ? Center(child: Text("ERROR"))
-                  : ValueListenableBuilder(
-                      valueListenable: _textVisibilty,
-                      builder: (BuildContext context, value, Widget? child) {
-                        return NotificationListener(
-                          onNotification: (notification) {
-                            _checkTextVisibilty(notification);
-                            return true;
-                          },
-                          child: CustomScrollView(
-                            controller: _scrollController,
-                            physics: const BouncingScrollPhysics(),
-                            slivers: [
-                              HomeAppBar(
-                                textAndButtonVisibilty: _textVisibilty.value,
-                              ),
-                              SliverToBoxAdapter(
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: AppWidth.w10),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      SizedBox(height: AppHeight.h20),
-                                      BestDealsHead(),
-                                      ListView.separated(
-                                        shrinkWrap: true,
-                                        physics: NeverScrollableScrollPhysics(),
-                                        itemCount: cubit.hotels.length,
-                                        separatorBuilder: (context, index) =>
-                                            SizedBox(height: AppHeight.h20),
-                                        itemBuilder: (context, index) =>
-                                            HotelCardInfo(
-                                                hotel: cubit.hotels[index]),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        );
-                      },
+        if (state is HotelsLoadingState) {
+          return Center(child: CircularProgressIndicator());
+        } else if (state is ErrorState) {
+          return Center(child: Text("ERROR"));
+        } else {
+          return ValueListenableBuilder(
+            valueListenable: _textVisibilty,
+            builder: (BuildContext context, value, Widget? child) {
+              return NotificationListener(
+                onNotification: (notification) {
+                  _checkTextVisibilty(notification);
+                  return true;
+                },
+                child: CustomScrollView(
+                  controller: _scrollController,
+                  physics: const BouncingScrollPhysics(),
+                  slivers: [
+                    HomeAppBar(
+                      textAndButtonVisibilty: _textVisibilty.value,
                     ),
-          bottomNavigationBar: AppBottomNavigationBar(),
-        );
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: AppWidth.w10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(height: AppHeight.h20),
+                            BestDealsHead(),
+                            ListView.separated(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemCount: cubit.hotels.length,
+                              separatorBuilder: (context, index) =>
+                                  SizedBox(height: AppHeight.h20),
+                              itemBuilder: (context, index) =>
+                                  HotelCardInfo(hotel: cubit.hotels[index]),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              );
+            },
+          );
+        }
       },
     );
   }

@@ -9,14 +9,16 @@ import 'package:travinia/models/hotel_model.dart';
 import 'package:travinia/models/profile_model.dart';
 import 'package:travinia/models/register_model.dart';
 import 'package:travinia/presentation/auth/bloc/auth_cubit.dart';
+import 'package:travinia/presentation/auth/profile_info/profile_info_screen.dart';
+import 'package:travinia/presentation/booking/booking_screen.dart';
+import 'package:travinia/presentation/home/home_screen.dart';
+import 'package:travinia/presentation/profile/profile_screen.dart';
 import 'package:travinia/services/repositories/repository.dart';
 
 class AppCubit extends Cubit<AppStates> {
   final Repository repository;
 
-  AppCubit({
-    required this.repository,
-  }) : super(AppInitialState());
+  AppCubit({required this.repository}) : super(AppInitialState());
 
   static AppCubit get(context) => BlocProvider.of<AppCubit>(context);
 
@@ -41,6 +43,16 @@ class AppCubit extends Cubit<AppStates> {
     emit(AppThemeColorChangedState());
   }
 
+  int currentIndex = 0;
+  List<Widget> mainScreens = [
+    HomeScreen(),
+    BookingScreen(),
+    ProfileScreen(),
+  ];
+  void changeNavBar({required int index}) {
+    currentIndex = index;
+    emit(changeNavBarState());
+  }
 
   ProfileModel? profileModel;
 
@@ -67,6 +79,7 @@ class AppCubit extends Cubit<AppStates> {
 
   ///Error in Facility Model >>>>>>
   List<FacilityModel> facilities = [];
+
   void getFacilities() async {
     emit(FacilitiesLoadingState());
 
@@ -87,7 +100,10 @@ class AppCubit extends Cubit<AppStates> {
 
   Create_BookingModel? create_BookingModel;
 
-  void userCreate_Booking({required BuildContext context,required int userId,required int hotelId}) async {
+  void userCreate_Booking(
+      {required BuildContext context,
+      required int userId,
+      required int hotelId}) async {
     emit(UserProfileLoadingState());
     final response = await repository.create_Booking(
       token: AuthCubit.get(context).userToken,
@@ -96,10 +112,10 @@ class AppCubit extends Cubit<AppStates> {
     );
 
     response.fold(
-          (l) {
+      (l) {
         emit(ErrorState(exception: l));
       },
-          (r) {
+      (r) {
         create_BookingModel = r;
 
         emit(CreatBookingSuccessState());
