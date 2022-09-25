@@ -13,10 +13,10 @@ class AppBottomNavigationBar extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(bottom: AppHeight.h1),
       child: DotNavigationBar(
-        //curve: Curves.ease,
+        curve: Curves.bounceInOut,
         currentIndex: cubit.currentIndex,
         onTap: (index) {
-          cubit.changeNavBar(context: context, index: index);
+          cubit.changeNavBar(index: index);
         },
         marginR: EdgeInsets.symmetric(horizontal: AppWidth.w20)
             .add(EdgeInsets.only(bottom: AppHeight.h2)),
@@ -25,8 +25,8 @@ class AppBottomNavigationBar extends StatelessWidget {
         unselectedItemColor: AppColors.grey.withOpacity(0.7),
         backgroundColor: Theme.of(context).inputDecorationTheme.fillColor,
         itemPadding: EdgeInsets.only(
-          left: AppWidth.w12,
-          right: AppWidth.w12,
+          left: AppWidth.w20,
+          right: AppWidth.w20,
           top: AppHeight.h5,
         ),
         borderRadius: AppSize.s50,

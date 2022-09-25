@@ -4,7 +4,6 @@ import 'package:travinia/presentation/auth/bloc/auth_cubit.dart';
 import 'package:travinia/presentation/auth/bloc/auth_state.dart';
 import 'package:travinia/presentation/auth/register/widget/register_body.dart';
 
-
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
 
@@ -18,13 +17,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is UserRegisterLoadingState) {}
+
+        if (state is UserRegisterSuccessState) {}
+
         if (state is UserRegisterSuccessState) {
+          //Navigator.pushReplacementNamed(context, Routes.profileInfo);
         }
       },
       builder: (context, state) {
         AuthCubit cubit = AuthCubit.get(context);
         return Scaffold(
-          appBar: AppBar(),
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+          ),
           body: RegisterBody(
             cubit: cubit,
           ),

@@ -6,6 +6,9 @@ import 'package:travinia/models/create_booking_model.dart';
 import 'package:travinia/models/hotels_model.dart';
 import 'package:travinia/models/login_model.dart';
 import 'package:travinia/models/profile_model.dart';
+
+import '../../models/facilities_model.dart';
+
 import 'package:travinia/models/facilities_model.dart';
 
 abstract class Repository {
@@ -22,12 +25,10 @@ abstract class Repository {
     required String password,
   });
 
-
   ///Implement All profile Information
   Future<Either<PrimaryServerException, ProfileModel>> getProfileInfo({
     required String token,
   });
-
 
   ///Implement All Hotel Functions Here
   Future<Either<PrimaryServerException, HotelsModel>> getHotels({
@@ -50,8 +51,6 @@ abstract class Repository {
     required int user_id,
     required int hotel_id,
   });
-
-
 }
 
 extension HandlingRequestResultFunction on Repository {

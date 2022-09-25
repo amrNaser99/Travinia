@@ -36,7 +36,7 @@ class PageViewContent extends StatelessWidget {
           child: SecondaryText(
             text: subTitle,
             center: true,
-            // size: AppConst.fontSizeM - 2,
+            isEllipsis: false,
           ),
         ),
         SizedBox(height: AppHeight.h20),

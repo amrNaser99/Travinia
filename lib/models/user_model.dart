@@ -9,7 +9,6 @@ class UserModel {
   final String? image;
   final String? googleId;
 
-
   UserModel({
     this.id,
     this.name,
