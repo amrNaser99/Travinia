@@ -3,21 +3,41 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travinia/core/app/bloc/app_cubit.dart';
 import 'package:travinia/core/app/bloc/app_state.dart';
 import 'package:travinia/core/utils/app_values.dart';
-import 'package:travinia/presentation/home/widegts/hotel_data_widget.dart';
+import 'package:travinia/presentation/home/widgets/app_bar/app_bar.dart';
+import 'package:travinia/presentation/home/widgets/body/best_deals_head.dart';
+import 'package:travinia/presentation/home/widgets/body/hotel_card_info.dart';
+import 'package:travinia/presentation/home/widgets/bottom_nav_bar.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final ScrollController _scrollController = ScrollController();
+  ValueNotifier<bool> _textVisibilty = ValueNotifier<bool>(true);
+
+  void _checkTextVisibilty(notification) {
+    if (notification is ScrollUpdateNotification) {
+      /* 
+        490 refers to total pixels 320 expandedHeight +
+        150 collapsedHeight + 20 sizedbox
+      */
+      if (_scrollController.position.pixels >=
+          MediaQuery.of(context).size.height - AppHeight.h490) {
+        _textVisibilty.value = false;
+      } else {
+        _textVisibilty.value = true;
+      }
+    }
+  }
+
   @override
   void initState() {
-    setState(() {});
-    super.initState();
     AppCubit.get(context).getHotels();
+    super.initState();
   }
 
   @override
@@ -25,37 +45,58 @@ class _HomeScreenState extends State<HomeScreen> {
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        List hotelData = AppCubit.get(context).hotels;
-        if (state is HotelsLoadingState) {
-          return Scaffold(body: Center(child: CircularProgressIndicator()));
-        } else {}
+        AppCubit cubit = AppCubit.get(context);
         return Scaffold(
-          body: ListView(
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: AppWidth.w25),
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemBuilder: (BuildContext context, int index) {
-                    return HotelDataWidget(
-                      hotelName: hotelData[index].name,
-                      hotelAdress: hotelData[index].address,
-                      distance: 2.0, //ToDo: calculate HOTEL far distance
-                      hotelPrice: hotelData[index].price,
-                      hotelRating: hotelData[index].rate,
-                    );
-                  },
-                  itemCount: hotelData.length,
-                  separatorBuilder: (BuildContext context, int index) {
-                    return SizedBox(
-                      height: 20,
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
+          extendBody: true,
+          body: state is HotelsLoadingState
+              ? Center(child: CircularProgressIndicator())
+              : state is ErrorState
+                  ? Center(child: Text("ERROR"))
+                  : ValueListenableBuilder(
+                      valueListenable: _textVisibilty,
+                      builder: (BuildContext context, value, Widget? child) {
+                        return NotificationListener(
+                          onNotification: (notification) {
+                            _checkTextVisibilty(notification);
+                            return true;
+                          },
+                          child: CustomScrollView(
+                            controller: _scrollController,
+                            physics: const BouncingScrollPhysics(),
+                            slivers: [
+                              HomeAppBar(
+                                textAndButtonVisibilty: _textVisibilty.value,
+                              ),
+                              SliverToBoxAdapter(
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: AppWidth.w10),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(height: AppHeight.h20),
+                                      BestDealsHead(),
+                                      ListView.separated(
+                                        shrinkWrap: true,
+                                        physics: NeverScrollableScrollPhysics(),
+                                        itemCount: cubit.hotels.length,
+                                        separatorBuilder: (context, index) =>
+                                            SizedBox(height: AppHeight.h20),
+                                        itemBuilder: (context, index) =>
+                                            HotelCardInfo(
+                                                hotel: cubit.hotels[index]),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+          bottomNavigationBar: AppBottomNavigationBar(),
         );
       },
     );

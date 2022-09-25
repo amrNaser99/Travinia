@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/presentation/shared_widgets/custom_text_field.dart';
-import 'package:travinia/presentation/test/widgets/app_bar/image_slider.dart';
+import 'package:travinia/presentation/home/widgets/app_bar/image_slider.dart';
 
 class HomeAppBar extends StatelessWidget {
   final bool textAndButtonVisibilty;

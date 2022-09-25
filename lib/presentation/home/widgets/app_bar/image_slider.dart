@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:travinia/presentation/test/widgets/app_bar/page_indicator.dart';
-import 'package:travinia/presentation/test/widgets/app_bar/texts_and_button.dart';
+import 'package:travinia/presentation/home/widgets/app_bar/page_indicator.dart';
+import 'package:travinia/presentation/home/widgets/app_bar/texts_and_button.dart';
 
 class HomeImageSlider extends StatefulWidget {
   final bool textAndButtonVisibilty;

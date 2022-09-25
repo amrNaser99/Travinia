@@ -3,10 +3,10 @@ import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/core/utils/routes.dart';
 import 'package:travinia/models/coords.dart';
 import 'package:travinia/models/hotel_model.dart';
-import 'package:travinia/presentation/test/widgets/body/hotel_image.dart';
-import 'package:travinia/presentation/test/widgets/body/hotel_name_and_location.dart';
-import 'package:travinia/presentation/test/widgets/body/hotel_price_per_night.dart';
-import 'package:travinia/presentation/test/widgets/body/hotel_rating_and_distance.dart';
+import 'package:travinia/presentation/home/widgets/body/hotel_image.dart';
+import 'package:travinia/presentation/home/widgets/body/hotel_name_and_location.dart';
+import 'package:travinia/presentation/home/widgets/body/hotel_price_per_night.dart';
+import 'package:travinia/presentation/home/widgets/body/hotel_rating_and_distance.dart';
 import 'package:travinia/services/geo_locator/geo_locator_helper.dart';
 
 class HotelCardInfo extends StatefulWidget {
