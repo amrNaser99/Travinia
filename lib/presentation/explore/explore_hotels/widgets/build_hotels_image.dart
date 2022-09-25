@@ -6,11 +6,13 @@ import 'package:travinia/core/utils/app_spaces.dart';
 import 'package:travinia/models/hotel_model.dart';
 import 'package:travinia/presentation/test/widgets/body/hotel_card_info.dart';
 
-
 class buildHotelsImage extends StatelessWidget {
   final List<HotelModel> hotelData;
 
-  const buildHotelsImage({Key? key, required this.hotelData}) : super(key: key);
+  const buildHotelsImage({
+    Key? key,
+    required this.hotelData,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,8 @@ class buildHotelsImage extends StatelessWidget {
                     shrinkWrap: true,
                     primary: false,
                     physics: NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) => HotelCardInfo(hotel: hotelData[index]),
+                    itemBuilder: (context, index) =>
+                        HotelCardInfo(hotel: hotelData[index]),
                     // itemBuilder: (context, index) => HotelDataWidget(
                     //   hotelName: hotelData[index].name,
                     //   hotelAdress: hotelData[index].address,
