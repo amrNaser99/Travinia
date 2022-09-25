@@ -8,8 +8,7 @@ import 'package:travinia/core/utils/app_color.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:travinia/core/utils/app_fonts.dart';
 import 'package:travinia/core/utils/app_values.dart';
-import 'package:travinia/presentation/explore_on_map/explore_map_screen.dart';
-import 'package:travinia/presentation/explore_on_map/widgets/google_map_widget.dart';
+import 'package:travinia/presentation/explore/explore_on_map/explore_map_screen.dart';
 import 'package:travinia/presentation/shared_widgets/custom_text.dart';
 import 'package:travinia/services/api_service/end_points.dart';
 

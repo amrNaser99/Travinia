@@ -1,4 +1,3 @@
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travinia/core/app/bloc/app_cubit.dart';
@@ -7,9 +6,7 @@ import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/presentation/home/widgets/app_bar/app_bar.dart';
 import 'package:travinia/presentation/home/widgets/body/best_deals_head.dart';
 import 'package:travinia/presentation/home/widgets/body/hotel_card_info.dart';
-import 'package:travinia/presentation/main/widgets/bottom_nav_bar.dart';
 
-import '../../core/functions/gelocator_permission.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -29,18 +26,21 @@ class _HomeScreenState extends State<HomeScreen> {
         150 collapsedHeight + 20 sizedbox
       */
       if (_scrollController.position.pixels >=
-          MediaQuery.of(context).size.height - AppHeight.h490) {
+          MediaQuery
+              .of(context)
+              .size
+              .height - AppHeight.h490) {
         _textVisibilty.value = false;
       } else {
         _textVisibilty.value = true;
       }
       print(_textVisibilty.value);
-    }
+    }    }
   @override
   void initState() {
     setState(() {});
     super.initState();
-    AppCubit.get(context).getMylocation();
+    AppCubit.get(context).getMyLocation();
 
     AppCubit.get(context).getHotels();
   }
@@ -102,3 +102,4 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+

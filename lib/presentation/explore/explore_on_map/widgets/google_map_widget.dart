@@ -4,9 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:travinia/core/app/bloc/app_cubit.dart';
 import 'package:travinia/core/utils/app_themes.dart';
-import 'package:travinia/presentation/explore_on_map/block/map_cubit.dart';
-import 'package:travinia/presentation/explore_on_map/block/map_state.dart';
-import 'package:travinia/services/api_service/end_points.dart';
+import 'package:travinia/presentation/explore/explore_on_map/bloc/map_cubit.dart';
+import 'package:travinia/presentation/explore/explore_on_map/bloc/map_state.dart';
 
 class GoogleMapWidget extends StatefulWidget {
   const GoogleMapWidget({super.key});

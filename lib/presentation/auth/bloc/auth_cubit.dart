@@ -47,17 +47,11 @@ class AuthCubit extends Cubit<AuthState> {
     emit(UserRegisterLoadingState());
 
     final response = await repository.register(
-      userName: firstName + " " + lastName,
+      userName: '${firstName} ${lastName}',
       email: email,
       password: password,
       rePassword: rePassword,
     );
-
-    firstNameController.clear();
-    lastNameController.clear();
-    emailController.clear();
-    passwordController.clear();
-    verifyPasswordController.clear();
 
     response.fold(
       (l) {
