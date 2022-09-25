@@ -4,7 +4,8 @@ import 'package:travinia/core/app/bloc/app_cubit.dart';
 import 'package:travinia/core/app/bloc/app_state.dart';
 import 'package:travinia/core/utils/app_spaces.dart';
 import 'package:travinia/models/hotel_model.dart';
-import 'package:travinia/presentation/home/widgets/hotel_data_widget.dart';
+import 'package:travinia/presentation/test/widgets/body/hotel_card_info.dart';
+
 
 class buildHotelsImage extends StatelessWidget {
   final List<HotelModel> hotelData;
@@ -16,22 +17,30 @@ class buildHotelsImage extends StatelessWidget {
     return BlocBuilder<AppCubit, AppStates>(
       builder: (context, state) {
         return SliverToBoxAdapter(
-          child: Container(
-            height: MediaQuery.of(context).size.height,
-            child: ListView.separated(
-              shrinkWrap: true,
-              primary: false,
-              physics: NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) => HotelDataWidget(
-                hotelName: hotelData[index].name,
-                hotelAdress: hotelData[index].address,
-                distance: 2.0,
-                hotelRating: hotelData[index].rate,
-                hotelPrice: hotelData[index].price,
+          child: Column(
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    primary: false,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) => HotelCardInfo(hotel: hotelData[index]),
+                    // itemBuilder: (context, index) => HotelDataWidget(
+                    //   hotelName: hotelData[index].name,
+                    //   hotelAdress: hotelData[index].address,
+                    //   distance: 2.0,
+                    //   hotelRating: hotelData[index].rate,
+                    //   hotelPrice: hotelData[index].price,
+                    // ),
+                    separatorBuilder: (context, index) => AppSpaces.vSpace10,
+                    itemCount: hotelData.length,
+                  ),
+                ),
               ),
-              separatorBuilder: (context, index) => AppSpaces.vSpace10,
-              itemCount: hotelData.length,
-            ),
+            ],
           ),
         );
       },
