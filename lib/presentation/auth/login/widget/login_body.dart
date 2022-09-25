@@ -11,6 +11,9 @@ import 'package:travinia/presentation/auth/login/widget/google_facebook_sign_in.
 import 'package:travinia/presentation/auth/login/widget/text_field_with_title.dart';
 import 'package:travinia/presentation/shared_widgets/custom_button.dart';
 
+import '../../../../core/utils/app_fonts.dart';
+import '../../../shared_widgets/custom_text.dart';
+
 class LoginBody extends StatelessWidget {
   final AuthCubit cubit;
 
@@ -36,13 +39,7 @@ class LoginBody extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
-                        'Login',
-                        style: getBoldStyle(
-                          fontColor: AppColors.white,
-                          fontSize: 30,
-                        ),
-                      ),
+                      LargeHeadText(text: "Login", size: FontSize.s24),
                     ],
                   ),
                   AppSpaces.vSpace20,
@@ -129,7 +126,7 @@ class LoginBody extends StatelessWidget {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/register');
+                          Navigator.pushReplacementNamed(context, '/register');
                         },
                         child: Text('Sign Up'),
                       ),

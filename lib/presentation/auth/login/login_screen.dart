@@ -14,16 +14,15 @@ class LoginScreen extends StatelessWidget {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is UserLoginSuccessState) {
-          Navigator.pushNamed(
-            context,
-            Routes.home,
-          );
+          Navigator.pushReplacementNamed(context, Routes.home);
         }
       },
       builder: (context, state) {
         AuthCubit cubit = AuthCubit.get(context);
         return Scaffold(
-          appBar: AppBar(),
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+          ),
           body: LoginBody(cubit: cubit),
         );
       },
