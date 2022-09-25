@@ -1,14 +1,12 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:travinia/core/utils/app_color.dart';
-import 'package:travinia/core/utils/app_fonts.dart';
-import 'package:travinia/core/utils/app_values.dart';
-import 'package:travinia/core/utils/font_styles.dart';
-import 'package:travinia/presentation/shared_widgets/custom_button.dart';
+import 'package:travinia/presentation/test/widgets/app_bar/page_indicator.dart';
+import 'package:travinia/presentation/test/widgets/app_bar/texts_and_button.dart';
 
 class HomeImageSlider extends StatefulWidget {
-  const HomeImageSlider({super.key});
+  final bool textAndButtonVisibilty;
+  const HomeImageSlider({super.key, required this.textAndButtonVisibilty});
 
   @override
   State<HomeImageSlider> createState() => _HomeImageSliderState();
@@ -57,16 +55,22 @@ outdoor activites.''',
         );
       }
     });
-    print(_currentIndex);
+    // print(_currentIndex);
+  }
+
+  late Timer timer;
+  @override
+  void initState() {
+    timer = Timer.periodic(Duration(seconds: 3), (timer) {
+      _goRight();
+    });
+    super.initState();
   }
 
   @override
-  void initState() {
-    Timer.periodic(Duration(seconds: 3), (timer) {
-      _goRight();
-    });
-
-    super.initState();
+  void dispose() {
+    timer.cancel();
+    super.dispose();
   }
 
   @override
@@ -90,52 +94,12 @@ outdoor activites.''',
             );
           },
         ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppWidth.w16)
-              .add(EdgeInsets.only(bottom: AppHeight.h10)),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                _onBoardingData[_currentIndex].title,
-                style: getBoldStyle(
-                    fontColor: AppColors.white, fontSize: FontSize.s22),
-              ),
-              SizedBox(height: AppHeight.h5),
-              Text(
-                _onBoardingData[_currentIndex].description,
-                style: getMediumStyle(
-                    fontColor: AppColors.offWhite, fontSize: FontSize.s13),
-              ),
-              SizedBox(height: AppHeight.h10),
-              SizedBox(
-                width: AppWidth.w130,
-                child: CustomButton(
-                  text: "View Hotel",
-                  onPressed: () {},
-                ),
-              ),
-            ],
+        if (widget.textAndButtonVisibilty)
+          HomeAppBarTextsAndButton(
+            title: _onBoardingData[_currentIndex].title,
+            description: _onBoardingData[_currentIndex].description,
           ),
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppWidth.w16)
-              .add(EdgeInsets.only(bottom: AppHeight.h10)),
-          child: Align(
-            alignment: AlignmentDirectional.bottomEnd,
-            child: SmoothPageIndicator(
-              controller: _pageController,
-              effect: WormEffect(
-                dotWidth: AppSize.s9,
-                dotHeight: AppSize.s9,
-                dotColor: AppColors.grey,
-                activeDotColor: AppColors.appColor,
-              ),
-              count: 3,
-            ),
-          ),
-        )
+        HomeAppBarPageIndicator(pageController: _pageController)
       ],
     );
   }

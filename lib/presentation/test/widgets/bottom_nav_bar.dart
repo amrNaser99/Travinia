@@ -1,6 +1,5 @@
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:travinia/core/utils/app_color.dart';
 import 'package:travinia/core/utils/app_values.dart';
 
@@ -12,7 +11,6 @@ class AppBottomNavigationBar extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(bottom: AppHeight.h1),
       child: DotNavigationBar(
-        //curve: Curves.ease,
         currentIndex: 0,
         onTap: (index) {
           // cubit.changeNavBar(index);

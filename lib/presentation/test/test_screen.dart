@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travinia/core/app/bloc/app_cubit.dart';
 import 'package:travinia/core/app/bloc/app_state.dart';
 import 'package:travinia/core/utils/app_values.dart';
-import 'package:travinia/presentation/test/widgets/app_bar/home_app_bar.dart';
+import 'package:travinia/presentation/test/widgets/app_bar/app_bar.dart';
 import 'package:travinia/presentation/test/widgets/body/best_deals_head.dart';
 import 'package:travinia/presentation/test/widgets/body/hotel_card_info.dart';
 import 'package:travinia/presentation/test/widgets/bottom_nav_bar.dart';
@@ -16,6 +16,24 @@ class TestScreen extends StatefulWidget {
 }
 
 class _TestScreenState extends State<TestScreen> {
+  final ScrollController _scrollController = ScrollController();
+  ValueNotifier<bool> _textVisibilty = ValueNotifier<bool>(true);
+
+  void _checkTextVisibilty(notification) {
+    if (notification is ScrollUpdateNotification) {
+      /* 
+        490 refers to total pixels 320 expandedHeight +
+        150 collapsedHeight + 20 sizedbox
+      */
+      if (_scrollController.position.pixels >=
+          MediaQuery.of(context).size.height - AppHeight.h490) {
+        _textVisibilty.value = false;
+      } else {
+        _textVisibilty.value = true;
+      }
+    }
+  }
+
   @override
   void initState() {
     AppCubit.get(context).getHotels();
@@ -34,44 +52,50 @@ class _TestScreenState extends State<TestScreen> {
               ? Center(child: CircularProgressIndicator())
               : state is ErrorState
                   ? Center(child: Text("ERROR"))
-                  : state is HotelsLoadingState
-                      ? CircularProgressIndicator()
-                      : state is ErrorState
-                          ? Text("ERROR")
-                          : CustomScrollView(
-                              physics: const BouncingScrollPhysics(),
-                              slivers: [
-                                HomeAppBar(),
-                                SliverToBoxAdapter(
-                                  child: SingleChildScrollView(
-                                    child: Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: AppWidth.w10),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          SizedBox(height: AppHeight.h20),
-                                          BestDealsHead(),
-                                          ListView.separated(
-                                            shrinkWrap: true,
-                                            physics:
-                                                NeverScrollableScrollPhysics(),
-                                            itemCount: cubit.hotels.length,
-                                            separatorBuilder: (context,
-                                                    index) =>
-                                                SizedBox(height: AppHeight.h20),
-                                            itemBuilder: (context, index) =>
-                                                HotelCardInfo(
-                                                    hotel: cubit.hotels[index]),
-                                          ),
-                                        ],
+                  : ValueListenableBuilder(
+                      valueListenable: _textVisibilty,
+                      builder: (BuildContext context, value, Widget? child) {
+                        return NotificationListener(
+                          onNotification: (notification) {
+                            _checkTextVisibilty(notification);
+                            return true;
+                          },
+                          child: CustomScrollView(
+                            controller: _scrollController,
+                            physics: const BouncingScrollPhysics(),
+                            slivers: [
+                              HomeAppBar(
+                                textAndButtonVisibilty: _textVisibilty.value,
+                              ),
+                              SliverToBoxAdapter(
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: AppWidth.w10),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(height: AppHeight.h20),
+                                      BestDealsHead(),
+                                      ListView.separated(
+                                        shrinkWrap: true,
+                                        physics: NeverScrollableScrollPhysics(),
+                                        itemCount: cubit.hotels.length,
+                                        separatorBuilder: (context, index) =>
+                                            SizedBox(height: AppHeight.h20),
+                                        itemBuilder: (context, index) =>
+                                            HotelCardInfo(
+                                                hotel: cubit.hotels[index]),
                                       ),
-                                    ),
+                                    ],
                                   ),
-                                )
-                              ],
-                            ),
+                                ),
+                              )
+                            ],
+                          ),
+                        );
+                      },
+                    ),
           bottomNavigationBar: AppBottomNavigationBar(),
         );
       },

@@ -1,18 +1,18 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/presentation/shared_widgets/custom_text_field.dart';
-import 'package:travinia/presentation/test/widgets/app_bar/home_image_slider.dart';
+import 'package:travinia/presentation/test/widgets/app_bar/image_slider.dart';
 
 class HomeAppBar extends StatelessWidget {
-  const HomeAppBar({super.key});
+  final bool textAndButtonVisibilty;
+  const HomeAppBar({super.key, required this.textAndButtonVisibilty});
 
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
       pinned: true,
-      expandedHeight: AppHeight.h300,
-      toolbarHeight: AppHeight.h100,
+      expandedHeight: AppHeight.h320,
+      collapsedHeight: AppHeight.h150,
       title: CustomTextField(
         hintText: "where are you going?",
         validatorText: "asd",
@@ -20,9 +20,8 @@ class HomeAppBar extends StatelessWidget {
         inputType: TextInputType.emailAddress,
         prefixIcon: Icons.search_outlined,
       ),
-      flexibleSpace: FlexibleSpaceBar(
-        collapseMode: CollapseMode.none,
-        background: HomeImageSlider(),
+      flexibleSpace: HomeImageSlider(
+        textAndButtonVisibilty: textAndButtonVisibilty,
       ),
     );
   }

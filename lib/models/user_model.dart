@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class UserModel {
   final int? id;
   final String? name;
@@ -10,7 +8,6 @@ class UserModel {
   final String? updatedAt;
   final String? image;
   final String? googleId;
-
 
   UserModel({
     this.id,

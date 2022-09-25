@@ -1,9 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:travinia/models/booking_model.dart';
 import 'package:travinia/models/create_booking_model.dart';
-import 'package:travinia/models/user_model.dart';
 import 'package:travinia/services/repositories/repository.dart';
 
 import '../../core/error/exceptions.dart';
@@ -169,5 +167,4 @@ class RepositoryImplementation extends Repository {
       },
     );
   }
-
 }
