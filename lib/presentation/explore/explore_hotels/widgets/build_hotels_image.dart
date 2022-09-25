@@ -4,12 +4,16 @@ import 'package:travinia/core/app/bloc/app_cubit.dart';
 import 'package:travinia/core/app/bloc/app_state.dart';
 import 'package:travinia/core/utils/app_spaces.dart';
 import 'package:travinia/models/hotel_model.dart';
-import 'package:travinia/presentation/home/widgets/body/hotel_card_info.dart';
+
+import '../../../home/body/hotel_card_info.dart';
 
 class buildHotelsImage extends StatelessWidget {
   final List<HotelModel> hotelData;
 
-  const buildHotelsImage({Key? key, required this.hotelData}) : super(key: key);
+  const buildHotelsImage({
+    Key? key,
+    required this.hotelData,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

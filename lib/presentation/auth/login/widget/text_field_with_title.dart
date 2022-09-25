@@ -9,11 +9,13 @@ class TextFieldWithTitle extends StatelessWidget {
   final String hint;
   final TextInputType inputType;
   final bool obscure;
+  final String validateText;
   const TextFieldWithTitle({
     super.key,
     required this.controller,
     required this.title,
     required this.hint,
+    this.validateText = "ERROR",
     required this.inputType,
     this.obscure = false,
   });
@@ -30,7 +32,7 @@ class TextFieldWithTitle extends StatelessWidget {
         SizedBox(height: AppHeight.h3),
         CustomTextField(
           hintText: hint,
-          validatorText: "ERROR",
+          validatorText: validateText,
           controller: controller,
           inputType: inputType,
           obscureText: obscure,

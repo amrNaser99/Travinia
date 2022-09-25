@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:travinia/core/app/bloc/app_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travinia/core/utils/app_color.dart';
@@ -9,10 +10,9 @@ import 'package:travinia/models/hotel_model.dart';
 import 'package:travinia/models/profile_model.dart';
 import 'package:travinia/models/register_model.dart';
 import 'package:travinia/presentation/auth/bloc/auth_cubit.dart';
-import 'package:travinia/presentation/auth/profile_info/profile_info_screen.dart';
+import 'package:travinia/presentation/profile/profile_info_screen.dart';
 import 'package:travinia/presentation/booking/booking_screen.dart';
 import 'package:travinia/presentation/home/home_screen.dart';
-import 'package:travinia/presentation/profile/profile_screen.dart';
 import 'package:travinia/services/repositories/repository.dart';
 
 class AppCubit extends Cubit<AppStates> {
@@ -47,7 +47,7 @@ class AppCubit extends Cubit<AppStates> {
   List<Widget> mainScreens = [
     HomeScreen(),
     BookingScreen(),
-    ProfileScreen(),
+    ProfileInfoScreen(),
   ];
   void changeNavBar({required int index}) {
     currentIndex = index;
@@ -121,5 +121,37 @@ class AppCubit extends Cubit<AppStates> {
         emit(CreatBookingSuccessState());
       },
     );
+  }
+
+  double myLat = 0;
+  double myLong = 0;
+
+  Future<Position> getMyLocation() async {
+    emit(GetLocationLoadingState());
+
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    myLat = position.latitude;
+    myLong = position.longitude;
+    print(position.latitude);
+    print(position.longitude);
+    print(position);
+    emit(GetLocationSuccessState());
+    return position;
+  }
+
+  double distanceInMeters = 0;
+  double distanceInKiloMeters = 0;
+  double CalcDistanceOfGeocoordinates({
+    required double startLatitude,
+    required double startLongitude,
+    required double endLatitude,
+    required double endLongitude,
+  }) {
+    distanceInMeters = Geolocator.distanceBetween(
+        startLatitude, startLongitude, endLatitude, endLongitude);
+
+    distanceInKiloMeters = distanceInMeters / 1000;
+    return distanceInKiloMeters;
   }
 }

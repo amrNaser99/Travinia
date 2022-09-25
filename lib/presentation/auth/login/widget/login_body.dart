@@ -5,12 +5,12 @@ import 'package:travinia/core/utils/app_color.dart';
 import 'package:travinia/core/utils/app_spaces.dart';
 import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/core/utils/font_styles.dart';
+import 'package:travinia/core/utils/routes.dart';
 import 'package:travinia/presentation/auth/bloc/auth_cubit.dart';
 import 'package:travinia/presentation/auth/bloc/auth_state.dart';
 import 'package:travinia/presentation/auth/login/widget/google_facebook_sign_in.dart';
 import 'package:travinia/presentation/auth/login/widget/text_field_with_title.dart';
 import 'package:travinia/presentation/shared_widgets/custom_button.dart';
-
 import '../../../../core/utils/app_fonts.dart';
 import '../../../shared_widgets/custom_text.dart';
 
@@ -24,8 +24,7 @@ class LoginBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthCubit, AuthState>(
-      listener: (context, state) {},
+    return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, state) {
         return SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
@@ -98,6 +97,8 @@ class LoginBody extends StatelessWidget {
                             email: cubit.emailController.text,
                             password: cubit.passwordController.text,
                           );
+                          cubit.emailController.clear();
+                          cubit.passwordController.clear();
                         }
                       },
                     ),
@@ -126,9 +127,13 @@ class LoginBody extends StatelessWidget {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.pushReplacementNamed(context, '/register');
+                          Navigator.pushReplacementNamed(
+                              context, Routes.register);
                         },
-                        child: Text('Sign Up'),
+                        child: TealText(
+                          text: 'Sign Up',                          // isButton: true,
+
+                        ),
                       ),
                     ],
                   )

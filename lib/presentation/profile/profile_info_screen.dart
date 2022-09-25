@@ -4,18 +4,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travinia/models/user_model.dart';
 import 'package:travinia/presentation/auth/bloc/auth_cubit.dart';
 import 'package:travinia/presentation/auth/bloc/auth_state.dart';
-import 'package:travinia/presentation/auth/profile_info/widgets/profile_body.dart';
+import 'package:travinia/presentation/profile/widgets/profile_body.dart';
 
-class ProfileInfoWidget extends StatefulWidget {
-  const ProfileInfoWidget({
+class ProfileInfoScreen extends StatefulWidget {
+  const ProfileInfoScreen({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<ProfileInfoWidget> createState() => _ProfileInfoWidgetState();
+  State<ProfileInfoScreen> createState() => _ProfileInfoScreenState();
 }
 
-class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
+class _ProfileInfoScreenState extends State<ProfileInfoScreen> {
 
   @override
   Widget build(BuildContext context) {

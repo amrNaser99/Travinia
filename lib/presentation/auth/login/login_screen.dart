@@ -4,6 +4,7 @@ import 'package:travinia/core/utils/routes.dart';
 import 'package:travinia/presentation/auth/bloc/auth_cubit.dart';
 import 'package:travinia/presentation/auth/bloc/auth_state.dart';
 import 'package:travinia/presentation/auth/login/widget/login_body.dart';
+import 'package:travinia/presentation/shared_widgets/show_toast.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -13,10 +14,9 @@ class LoginScreen extends StatelessWidget {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is UserLoginSuccessState) {
-          Navigator.pushNamed(
-            context,
-            Routes.main,
-          );
+          Navigator.pushReplacementNamed(context, Routes.main);
+        } else if (state is UserLoginErrorState) {
+          showToast(message: state.error);
         }
       },
       builder: (context, state) {

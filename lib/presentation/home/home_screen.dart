@@ -6,7 +6,7 @@ import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/presentation/home/widgets/app_bar/app_bar.dart';
 import 'package:travinia/presentation/home/widgets/body/best_deals_head.dart';
 import 'package:travinia/presentation/home/widgets/body/hotel_card_info.dart';
-import 'package:travinia/presentation/main/widgets/bottom_nav_bar.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -21,18 +21,28 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _checkTextVisibilty(notification) {
     if (notification is ScrollUpdateNotification) {
-      /* 
+      /*
         490 refers to total pixels 320 expandedHeight +
         150 collapsedHeight + 20 sizedbox
       */
       if (_scrollController.position.pixels >=
-          MediaQuery.of(context).size.height - AppHeight.h490) {
+          MediaQuery
+              .of(context)
+              .size
+              .height - AppHeight.h490) {
         _textVisibilty.value = false;
       } else {
         _textVisibilty.value = true;
       }
       print(_textVisibilty.value);
-    }
+    }    }
+  @override
+  void initState() {
+    setState(() {});
+    super.initState();
+    AppCubit.get(context).getMyLocation();
+
+    AppCubit.get(context).getHotels();
   }
 
   @override
@@ -92,3 +102,4 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+

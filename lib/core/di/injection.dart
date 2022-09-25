@@ -4,6 +4,7 @@ import 'package:travinia/presentation/auth/bloc/auth_cubit.dart';
 import 'package:travinia/presentation/explore/bloc/explore_cubit.dart';
 import 'package:travinia/services/api_service/dio_helper.dart';
 import 'package:travinia/services/repositories/repository.dart';
+import '../../presentation/explore/explore_on_map/bloc/map_cubit.dart';
 import '../../services/api_service/dio_impl.dart';
 import '../../services/repositories/repository_impl.dart';
 
@@ -15,6 +16,9 @@ Future<void> init() async {
         repository: sl(),
       ));
   sl.registerFactory(() => AuthCubit(
+        repository: sl(),
+      ));
+  sl.registerFactory(() => MapCubit(
         repository: sl(),
       ));
 

@@ -13,10 +13,20 @@ class UserLoginSuccessState extends AuthState {
 
   UserLoginSuccessState(this.userModel);
 }
+class UserLoginErrorState extends AuthState {
+  final String error;
+
+  UserLoginErrorState(this.error);
+}
 
 class UserRegisterLoadingState extends AuthState {}
 
 class UserRegisterSuccessState extends AuthState {}
+class UserRegisterErrorState extends AuthState {
+  final String error;
+
+  UserRegisterErrorState(this.error);
+}
 
 
 class UserProfileLoadingState extends AuthState {}
