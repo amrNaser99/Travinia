@@ -10,6 +10,8 @@ import 'package:travinia/presentation/auth/bloc/auth_cubit.dart';
 import 'package:travinia/presentation/explore/bloc/explore_cubit.dart';
 import 'package:travinia/presentation/home/home_screen.dart';
 import 'package:travinia/presentation/main/main_screen.dart';
+import 'package:travinia/presentation/test/test_screen.dart';
+import 'package:travinia/presentation/explore_on_map/block/map_cubit.dart';
 
 class TraviniaApp extends StatelessWidget {
   const TraviniaApp({Key? key}) : super(key: key);
@@ -32,6 +34,9 @@ class TraviniaApp extends StatelessWidget {
               BlocProvider<ExploreCubit>(
                 create: (context) => sl<ExploreCubit>(),
               ),
+              BlocProvider<MapCubit>(
+                create: (context) => sl<MapCubit>(),
+              ),
             ],
             child: BlocBuilder<AppCubit, AppStates>(
               builder: (context, state) {
@@ -46,6 +51,8 @@ class TraviniaApp extends StatelessWidget {
                   home: MainScreen(),
 
                   // initialRoute: Routes.onBoarding,
+                  initialRoute: Routes.home,
+                  // home: TestScreen(),
                 );
               },
             ),

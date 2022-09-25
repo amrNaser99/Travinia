@@ -20,6 +20,8 @@ Future<bool?> askPermission() async {
   }
 }
 
+import 'core/functions/gelocator_permission.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   init();
@@ -35,4 +37,6 @@ Future<void> main() async {
 
   runApp(const TraviniaApp());
   Bloc.observer = MyBlocObserver();
+
+  determinePosition();
 }
