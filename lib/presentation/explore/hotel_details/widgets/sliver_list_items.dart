@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
 import 'package:travinia/core/utils/app_strings.dart';
+import 'package:travinia/presentation/explore/hotel_details/widgets/confirm_booking_modal_sheet.dart';
 
 import '../../../../core/utils/app_color.dart';
 import '../../../../core/utils/app_spaces.dart';
@@ -204,7 +205,12 @@ class SliverListItems extends StatelessWidget {
               AppSpaces.vSpace20,
               CustomButton(
                 text: 'Book now',
-                onPressed: () {},
+                onPressed: () {
+                  ConfirmBookingModalSheet(
+                    hotelDetailsScreenContext: context,
+                    hotelModel: hotelModel,
+                  );
+                },
                 fillColor: AppColors.appColor,
               )
             ],

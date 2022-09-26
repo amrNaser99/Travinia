@@ -13,10 +13,12 @@ import '../../../../models/hotel_model.dart';
 class SliverAppBarWidget extends StatelessWidget {
   final ExploreCubit hotelDetailsCubit;
   final HotelModel hotelModel;
+  final BuildContext hotelDetailsScreenContext;
   const SliverAppBarWidget({
     Key? key,
     required this.hotelDetailsCubit,
     required this.hotelModel,
+    required this.hotelDetailsScreenContext,
   }) : super(key: key);
 
   @override
@@ -62,7 +64,10 @@ class SliverAppBarWidget extends StatelessWidget {
         ),
       ],
       flexibleSpace: FlexableSpaceBarWidget(
-          hotelDetailsCubit: hotelDetailsCubit, hotelModel: hotelModel),
+        hotelDetailsCubit: hotelDetailsCubit,
+        hotelModel: hotelModel,
+        hotelDetailsScreenContext: hotelDetailsScreenContext,
+      ),
     );
   }
 }

@@ -6,6 +6,7 @@ import 'package:travinia/presentation/explore/bloc/explore_state.dart';
 import 'package:travinia/services/repositories/repository.dart';
 
 import '../../../models/hotel_model.dart';
+import '../../auth/bloc/auth_cubit.dart';
 
 class ExploreCubit extends Cubit<ExploreState> {
   final Repository repository;
@@ -73,8 +74,19 @@ class ExploreCubit extends Cubit<ExploreState> {
     CrCalendar(
       controller: calendarController,
       initialDate: DateTime.now(),
-
     );
+  }
+
+  void createBooking(HotelModel hotel) async {
+    emit(CreateBookingLoadingState());
+    final response = await repository.create_Booking(
+      token: loginModel!.data!.token!,
+      user_id: loginModel!.data!.id!,
+      hotel_id: hotel.id,
+    );
+
+    response.fold((l) => emit(CreateBookingErrorState()),
+        (r) => emit(BookingCreatedSuccessState()));
   }
 
   //create dialog
