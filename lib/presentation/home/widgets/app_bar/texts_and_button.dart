@@ -7,6 +7,8 @@ import 'package:travinia/core/utils/font_styles.dart';
 import 'package:travinia/presentation/shared_widgets/custom_button.dart';
 import 'package:travinia/services/geo_locator/geo_locator_helper.dart';
 
+import '../../../../core/utils/routes.dart';
+
 class HomeAppBarTextsAndButton extends StatelessWidget {
   final String title;
   final String description;
@@ -47,7 +49,6 @@ class HomeAppBarTextsAndButton extends StatelessWidget {
                   Permission.location.request();
                 }
                 Navigator.pushNamed(context, Routes.exploreHotels);
-
               },
             ),
           ),
