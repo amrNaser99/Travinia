@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:travinia/core/utils/app_strings.dart';
+import 'package:travinia/core/utils/extensions/height_ext.dart';
 import 'package:travinia/presentation/home/widgets/app_bar/page_indicator.dart';
 import 'package:travinia/presentation/home/widgets/app_bar/texts_and_button.dart';
 
@@ -15,8 +17,20 @@ class _HomeImageSliderState extends State<HomeImageSlider> {
   final List<OnBoardingModel> _onBoardingData = [
     const OnBoardingModel(
       title: "Cape Town",
+      description: '''Extraordinary five-star 
+outdoor activites.''',
+      image: AppStrings.hotelImgPath,
+    ),
+    const OnBoardingModel(
+      title: "Cairo",
+      description: '''Discover the secrets of the pharos 
+totaly new vibes.''',
+      image: AppStrings.hotel2ImgPath,
+    ),
+    const OnBoardingModel(
+      title: "New York",
       description: 'Extraordinary five-star outdoor activities.',
-      image: "assets/images/hotel.jpg",
+      image: AppStrings.hotel3ImgPath,
     ),
     const OnBoardingModel(
       title: "Cairo",
@@ -39,15 +53,15 @@ class _HomeImageSliderState extends State<HomeImageSlider> {
         _currentIndex++;
         _pageController.animateToPage(
           _currentIndex,
-          duration: Duration(milliseconds: 400),
-          curve: Curves.bounceIn,
+          duration: Duration(seconds: 2),
+          curve: Curves.fastOutSlowIn,
         );
       } else {
         _currentIndex = 0;
         _pageController.animateToPage(
           _currentIndex,
-          duration: Duration(milliseconds: 100),
-          curve: Curves.bounceIn,
+          duration: Duration(seconds: 2),
+          curve: Curves.fastOutSlowIn,
         );
       }
     });
@@ -84,9 +98,25 @@ class _HomeImageSliderState extends State<HomeImageSlider> {
           },
           itemCount: _onBoardingData.length,
           itemBuilder: (context, index) {
-            return Image.asset(
-              "assets/images/hotel.jpg",
-              fit: BoxFit.fill,
+            return Stack(
+              children: [
+                Image.asset(
+                  _onBoardingData[index].image,
+                  height: context.height,
+                  width: context.width,
+                  fit: BoxFit.cover,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Colors.black87, Colors.transparent],
+                      stops: [0.1, 0.9],
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                    ),
+                  ),
+                )
+              ],
             );
           },
         ),

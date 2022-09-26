@@ -1,7 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
-import 'core/functions/gelocator_permission.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travinia/core/app/bloc/bloc_observer.dart';
@@ -18,14 +16,12 @@ Future<bool?> askPermission() async {
   }
 }
 
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   init();
-  GeoLocatorHelper.determinePosition();
 
+  GeoLocatorHelper.determinePosition();
 
   runApp(const TraviniaApp());
   Bloc.observer = MyBlocObserver();
-
 }

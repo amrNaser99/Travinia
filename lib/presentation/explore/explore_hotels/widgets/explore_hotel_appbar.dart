@@ -52,18 +52,12 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                 },
                 icon: Icon(FontAwesomeIcons.arrowLeftLong),
               ),
-              title: Text(
-                'Explore',
-                style: getBoldStyle(
-                  fontColor: AppColors.white,
-                  fontSize: AppSize.s20,
-                ),
-              ),
               actions: [
                 IconButton(
                   icon: Icon(
                     FontAwesomeIcons.mapLocation,
                   ),
+
                   ///TODO: Add Map
                   onPressed: () {
                     cubit.changeBMapClicked();
@@ -142,7 +136,6 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-
                         Padding(
                           padding:
                               EdgeInsets.symmetric(horizontal: AppSize.s16),
