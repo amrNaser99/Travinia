@@ -10,6 +10,8 @@ import 'package:travinia/presentation/shared_widgets/custom_button.dart';
 import '../../../../core/utils/routes.dart';
 import '../../../../services/geo_locator/geo_locator_helper.dart';
 
+import '../../../../core/utils/routes.dart';
+
 class HomeAppBarTextsAndButton extends StatelessWidget {
   final String title;
   final String description;
