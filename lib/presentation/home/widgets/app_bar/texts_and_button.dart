@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter/widgets.dart';
 import 'package:travinia/core/utils/app_color.dart';
 import 'package:travinia/core/utils/app_fonts.dart';
 import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/core/utils/font_styles.dart';
 import 'package:travinia/presentation/shared_widgets/custom_button.dart';
-import 'package:travinia/services/geo_locator/geo_locator_helper.dart';
+
+import '../../../../core/utils/routes.dart';
 
 class HomeAppBarTextsAndButton extends StatelessWidget {
   final String title;
@@ -39,8 +40,7 @@ class HomeAppBarTextsAndButton extends StatelessWidget {
             child: CustomButton(
               text: "View Hotel",
               onPressed: () async {
-                final position = await GeoLocatorHelper.determinePosition();
-                // await Permission.location.request();
+                Navigator.pushNamed(context, Routes.exploreHotels);
               },
             ),
           ),

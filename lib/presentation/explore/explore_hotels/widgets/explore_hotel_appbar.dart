@@ -10,6 +10,7 @@ import 'package:travinia/models/hotel_model.dart';
 import 'package:travinia/presentation/explore/explore_hotels/widgets/build_hotels_image.dart';
 import 'package:travinia/presentation/shared_widgets/custom_text_field.dart';
 
+import '../../../../core/utils/routes.dart';
 import '../../bloc/explore_cubit.dart';
 
 class ExploreHotelAppBar extends StatelessWidget {
@@ -50,7 +51,9 @@ class ExploreHotelAppBar extends StatelessWidget {
               icon: Icon(
                 FontAwesomeIcons.mapLocation,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, Routes.exploreOnMap);
+              },
             ),
             AppSpaces.hSpace10,
           ],
@@ -78,7 +81,7 @@ class ExploreHotelAppBar extends StatelessWidget {
                           Expanded(
                             flex: 1,
                             child: Text(
-                              '530 Hotel Found',
+                              '${hotelData.length} Hotels Found',
                               style:
                                   getSemiBoldStyle(fontColor: AppColors.white),
                             ),
