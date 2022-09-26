@@ -53,6 +53,12 @@ class AuthCubit extends Cubit<AuthState> {
       rePassword: rePassword,
     );
 
+    firstNameController.clear();
+    lastNameController.clear();
+    emailController.clear();
+    passwordController.clear();
+    verifyPasswordController.clear();
+
     response.fold(
       (l) {
         emit(ErrorState(exception: l));

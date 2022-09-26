@@ -15,20 +15,17 @@ class _HomeImageSliderState extends State<HomeImageSlider> {
   final List<OnBoardingModel> _onBoardingData = [
     const OnBoardingModel(
       title: "Cape Town",
-      description: '''Extraordinary five-star 
-outdoor activites.''',
+      description: 'Extraordinary five-star outdoor activities.',
       image: "assets/images/hotel.jpg",
     ),
     const OnBoardingModel(
       title: "Cairo",
-      description: '''Discover the secrets of the pharos 
-totaly new vibes.''',
+      description: '''Discover the secrets of the pharo's totally new vibes.''',
       image: "assets/images/hotel.jpg",
     ),
     const OnBoardingModel(
       title: "New York",
-      description: '''Extraordinary five-star 
-outdoor activites.''',
+      description: 'Extraordinary five-star outdoor activities.',
       image: "assets/images/hotel.jpg",
     ),
   ];

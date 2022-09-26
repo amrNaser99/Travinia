@@ -51,6 +51,16 @@ abstract class Repository {
     required int user_id,
     required int hotel_id,
   });
+  Future<Either<PrimaryServerException, HotelsModel>> searchHotels({
+    String? name,
+    String? address,
+    int? min_price,
+    int? max_price,
+    int? count,
+    int? page,
+  });
+
+
 }
 
 extension HandlingRequestResultFunction on Repository {

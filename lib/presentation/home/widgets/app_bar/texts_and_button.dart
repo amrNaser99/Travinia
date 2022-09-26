@@ -4,12 +4,14 @@ import 'package:travinia/core/utils/app_color.dart';
 import 'package:travinia/core/utils/app_fonts.dart';
 import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/core/utils/font_styles.dart';
+import 'package:travinia/core/utils/routes.dart';
 import 'package:travinia/presentation/shared_widgets/custom_button.dart';
 import 'package:travinia/services/geo_locator/geo_locator_helper.dart';
 
 class HomeAppBarTextsAndButton extends StatelessWidget {
   final String title;
   final String description;
+
   const HomeAppBarTextsAndButton(
       {super.key, required this.title, required this.description});
 
@@ -39,8 +41,13 @@ class HomeAppBarTextsAndButton extends StatelessWidget {
             child: CustomButton(
               text: "View Hotel",
               onPressed: () async {
-                final position = await GeoLocatorHelper.determinePosition();
                 // await Permission.location.request();
+                if (await Permission.location.isGranted) {
+                  GeoLocatorHelper.determinePosition();
+                } else {
+                  Permission.location.request();
+                }
+                Navigator.pushNamed(context, Routes.exploreHotels);
               },
             ),
           ),

@@ -96,11 +96,6 @@ class RegisterBody extends StatelessWidget {
                               password: cubit.passwordController.text,
                               rePassword: cubit.verifyPasswordController.text,
                             );
-                            cubit.firstNameController.clear();
-                            cubit.lastNameController.clear();
-                            cubit.emailController.clear();
-                            cubit.passwordController.clear();
-                            cubit.verifyPasswordController.clear();
                           }
                         },
                       ),
