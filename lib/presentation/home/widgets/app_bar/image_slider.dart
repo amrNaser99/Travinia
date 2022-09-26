@@ -29,9 +29,18 @@ totaly new vibes.''',
     ),
     const OnBoardingModel(
       title: "New York",
-      description: '''Extraordinary five-star 
-outdoor activites.''',
+      description: 'Extraordinary five-star outdoor activities.',
       image: AppStrings.hotel3ImgPath,
+    ),
+    const OnBoardingModel(
+      title: "Cairo",
+      description: '''Discover the secrets of the pharo's totally new vibes.''',
+      image: "assets/images/hotel.jpg",
+    ),
+    const OnBoardingModel(
+      title: "New York",
+      description: 'Extraordinary five-star outdoor activities.',
+      image: "assets/images/hotel.jpg",
     ),
   ];
 

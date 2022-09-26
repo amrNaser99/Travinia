@@ -24,11 +24,8 @@ class _ExploreOnMapState extends State<ExploreOnMap> {
   @override
   Widget build(BuildContext context) {
     List hotelData = AppCubit.get(context).hotels;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Explore'),
-      ),
-      body: Stack(
+    return SliverToBoxAdapter(
+      child: Stack(
         children: [
           // Con(
           //   color: Colors.teal,
@@ -84,7 +81,8 @@ class _ExploreOnMapState extends State<ExploreOnMap> {
                               endLongitude:
                                   double.parse(hotelData[index].longitude),
                             )
-                            .roundToDouble()), //ToDo: calculate HOTEL far distance
+                            .roundToDouble()),
+                        //ToDo: calculate HOTEL far distance
                         hotelPrice: hotelData[index].price,
                         hotelRating: hotelData[index].rate,
                       ),
