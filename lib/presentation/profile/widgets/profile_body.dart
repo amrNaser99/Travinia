@@ -93,7 +93,9 @@ class ProfileBody extends StatelessWidget {
               ProfileItem(
                 itemText: 'Permissions',
                 icon: FontAwesomeIcons.personMilitaryPointing,
-                onTap: () {},
+                onTap: () {
+                  cubit.changeAppThemeColor();
+                },
               ),
               ProfileItem(
                 itemText: 'change Password',
@@ -164,7 +166,7 @@ Widget ProfileItem({
                   child: Text(
                     itemText,
                     style: getMediumStyle(
-                      fontColor: AppColors.white,
+                      fontColor: AppColors.offWhite,
                       fontSize: 20,
                     ),
                   ),

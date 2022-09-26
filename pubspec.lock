@@ -92,6 +92,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.0.6"
+  cr_calendar:
+    dependency: "direct main"
+    description:
+      name: cr_calendar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   crypto:
     dependency: transitive
     description:
@@ -345,6 +352,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.0.1+4"
+  intl:
+    dependency: "direct main"
+    description:
+      name: intl
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.17.0"
+  jiffy:
+    dependency: transitive
+    description:
+      name: jiffy
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.0.0"
   js:
     dependency: transitive
     description:
@@ -541,6 +562,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.0"
+  scrollable_positioned_list:
+    dependency: transitive
+    description:
+      name: scrollable_positioned_list
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.4"
   sky_engine:
     dependency: transitive
     description: flutter
