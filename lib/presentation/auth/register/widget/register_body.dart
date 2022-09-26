@@ -52,8 +52,6 @@ class RegisterBody extends StatelessWidget {
                     hint: "Enter first name",
                     inputType: TextInputType.text,
                     validateText: 'First Name Error! ..Please Try Again',
-
-
                   ),
                   SizedBox(height: AppHeight.h20),
                   TextFieldWithTitle(
@@ -81,33 +79,32 @@ class RegisterBody extends StatelessWidget {
                   ),
                   SizedBox(height: AppHeight.h20),
                   ConditionalBuilder(
-                      condition: state is! UserRegisterLoadingState,
-                      builder: (context) => CustomButton(
-                        fillColor: AppColors.appColor,
-                        text: 'Sign up',
-                        onPressed: () {
-                          FocusScope.of(context).requestFocus(FocusNode());
-                          if (cubit.registerScaffoldKey.currentState!
-                              .validate()) {
-                            cubit.userRegister(
-                              firstName: cubit.firstNameController.text,
-                              lastName: cubit.lastNameController.text,
-                              email: cubit.emailController.text,
-                              password: cubit.passwordController.text,
-                              rePassword: cubit.verifyPasswordController.text,
-                            );
-                          }
-                        },
-                      ),
-                      fallback:(context) => Center(
-                        child: CircularProgressIndicator(),
-                      ),
-
+                    condition: state is! UserRegisterLoadingState,
+                    builder: (context) => CustomButton(
+                      fillColor: AppColors.appColor,
+                      text: 'Sign up',
+                      onPressed: () {
+                        FocusScope.of(context).requestFocus(FocusNode());
+                        if (cubit.registerScaffoldKey.currentState!
+                            .validate()) {
+                          cubit.userRegister(
+                            firstName: cubit.firstNameController.text,
+                            lastName: cubit.lastNameController.text,
+                            email: cubit.emailController.text,
+                            password: cubit.passwordController.text,
+                            rePassword: cubit.verifyPasswordController.text,
+                          );
+                        }
+                      },
+                    ),
+                    fallback: (context) => Center(
+                      child: CircularProgressIndicator(),
+                    ),
                   ),
                   SizedBox(height: AppHeight.h20),
                   SecondaryText(
                     text:
-                    'By signing up, you agree to our Terms of\n Service and Privacy Policy',
+                        'By signing up, you agree to our Terms of\n Service and Privacy Policy',
                     isLight: true,
                     center: true,
                     size: FontSize.s13,

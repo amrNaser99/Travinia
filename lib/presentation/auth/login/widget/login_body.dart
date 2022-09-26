@@ -64,6 +64,7 @@ class LoginBody extends StatelessWidget {
                   TextFieldWithTitle(
                     controller: cubit.passwordController,
                     title: "Password",
+                    obscure: true,
                     hint: "Enter Password",
                     inputType: TextInputType.visiblePassword,
                   ),
