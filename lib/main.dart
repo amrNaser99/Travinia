@@ -18,22 +18,11 @@ Future<bool?> askPermission() async {
   }
 }
 
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   init();
-
-  Position position = await GeoLocatorHelper.determinePosition();
-  // if (GeoLocatorHelper.myLocation != null) {
-  //   print(GeoLocatorHelper.myLocation!.lat);
-  // } else {
-  //   await Permission.location.request();
-  //   // Permi
-  //   print("nuuuuuuuuuuuuul");
-  // }
-
   runApp(const TraviniaApp());
   Bloc.observer = MyBlocObserver();
-
+  Position position = await GeoLocatorHelper.determinePosition();
   determinePosition();
 }
