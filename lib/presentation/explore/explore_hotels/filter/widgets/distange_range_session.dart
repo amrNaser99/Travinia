@@ -13,7 +13,7 @@ class DistanceRangeSession extends StatefulWidget {
 }
 
 class _DistanceRangeSessionState extends State<DistanceRangeSession> {
-  RangeValues _currentRangeValues = const RangeValues(50, 5000);
+  double _value = 6;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -32,26 +32,21 @@ class _DistanceRangeSessionState extends State<DistanceRangeSession> {
         SizedBox(
           height: AppHeight.h20,
         ),
-        SliderTheme(
-          data: SliderTheme.of(context).copyWith(
-            inactiveTickMarkColor: Colors.transparent,
-            activeTickMarkColor: Colors.transparent,
-          ),
-          child: RangeSlider(
-            inactiveColor: Theme.of(context).dividerColor,
-            max: 5000,
-            min: 40,
-            divisions: 10,
-            values: _currentRangeValues,
-            labels: RangeLabels(_currentRangeValues.start.toStringAsFixed(1),
-                _currentRangeValues.end.toStringAsFixed(0)),
-            onChanged: (RangeValues values) {
-              setState(() {
-                _currentRangeValues = values;
-                print(_currentRangeValues);
-              });
-            },
-          ),
+        Slider(
+          inactiveColor: Theme.of(context).dividerColor,
+          max: 10,
+          min: 0,
+          divisions: 5,
+          value: _value,
+          label: _value.toString(),
+          //  RangeLabels(_currentRangeValues.start.toStringAsFixed(1),
+          //     _currentRangeValues.end.toStringAsFixed(0)),
+          onChanged: (newValue) {
+            setState(() {
+              _value = newValue;
+              print(newValue);
+            });
+          },
         ),
       ],
     );

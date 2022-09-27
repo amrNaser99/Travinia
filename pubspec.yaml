@@ -38,6 +38,7 @@ dependencies:
   fluttertoast:
   intl:
   cr_calendar:
+  syncfusion_flutter_sliders: ^20.2.50
 
 dev_dependencies:
   flutter_launcher_icons:
