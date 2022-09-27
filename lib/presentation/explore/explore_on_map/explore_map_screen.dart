@@ -70,7 +70,7 @@ class _ExploreOnMapState extends State<ExploreOnMap> {
                       );
                     },
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 25, bottom: 30),
+                      padding: const EdgeInsets.only(left: 20, bottom: 30),
                       child: HotelDataWidget(
                         width: 300,
                         hotelName: hotelData[index].name,
@@ -85,7 +85,7 @@ class _ExploreOnMapState extends State<ExploreOnMap> {
                                   double.parse(hotelData[index].longitude),
                             )
                             .roundToDouble()), //ToDo: calculate HOTEL far distance
-                        hotelPrice: hotelData[index].price,
+                        // hotelPrice: hotelData[index].price,
                         hotelRating: hotelData[index].rate,
                       ),
                     ),

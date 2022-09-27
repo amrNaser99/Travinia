@@ -9,6 +9,7 @@ import 'package:travinia/core/utils/app_themes.dart';
 import 'package:travinia/core/utils/routes.dart';
 import 'package:travinia/presentation/auth/bloc/auth_cubit.dart';
 import 'package:travinia/presentation/explore/bloc/explore_cubit.dart';
+import 'package:travinia/presentation/explore/explore_hotels/explore_hotel_screen.dart';
 import '../../presentation/explore/explore_on_map/bloc/map_cubit.dart';
 
 class TraviniaApp extends StatelessWidget {
@@ -43,7 +44,8 @@ class TraviniaApp extends StatelessWidget {
                   debugShowCheckedModeBanner: false,
                   theme: AppThemes.darkTheme,
                   routes: Routes.routes,
-                  initialRoute: Routes.onBoarding,
+                  // initialRoute: Routes.onBoarding,
+                  home: ExploreHotelScreen(),
                 );
               },
             ),
