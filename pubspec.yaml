@@ -8,34 +8,34 @@ environment:
   sdk: ">=2.17.1 <3.0.0"
 
 dependencies:
-  flutter:
-    sdk: flutter
-
+  animated_text_kit: ^4.2.2
+  bloc: null
   blur: ^3.1.0
   carousel_slider: ^4.1.1
-  bloc:
   conditional_builder_null_safety: ^0.0.6
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
-  dio:
+  dio: null
+  dot_navigation_bar: null
   email_validator: ^2.1.17
-  equatable:
-  flutter_bloc:
+  equatable: null
+  flutter:
+    sdk: flutter
+  flutter_bloc: null
   flutter_rating_bar: ^4.0.1
   flutter_screenutil: ^5.5.4
+  flutter_svg: ^1.1.5
+  fluttertoast: null
   font_awesome_flutter: null
   geolocator: ^9.0.2
   get_it: ^7.2.0
   google_fonts: ^3.0.1
+  google_maps_flutter: ^2.2.0
   internet_connection_checker: null
   password_strength: ^0.2.0
   permission_handler: ^10.0.1
   readmore: ^2.2.0
   smooth_page_indicator: ^1.0.0+2
-  dot_navigation_bar:
-  google_maps_flutter: ^2.2.0
-  flutter_svg: ^1.1.5
-  fluttertoast:
   intl:
   cr_calendar:
 
@@ -51,8 +51,6 @@ flutter_icons:
 
   image_path: "assets/images/app_logo_dark.png"
   # image_path: "assets/images/logo.png"
-
-
   flutter_lints: ^2.0.0
 
 flutter:
