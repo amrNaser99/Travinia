@@ -19,7 +19,7 @@ class HotelDataWidget extends StatelessWidget {
       required this.hotelAdress,
       required this.distance,
       required this.hotelRating,
-      required this.hotelPrice,
+      this.hotelPrice = '',
       this.width = double.infinity});
 
   final String hotelName;
@@ -134,22 +134,22 @@ class HotelDataWidget extends StatelessWidget {
                             // SizedBox(
                             //   width: AppWidth.w20,
                             // ),
-                            Padding(
-                              padding: EdgeInsets.only(bottom: AppWidth.w8),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  LargeHeadText(
-                                    text: '\$${hotelPrice.toString()}',
-                                    size: FontSize.s20,
-                                  ),
-                                  SecondaryText(
-                                    text: '/per night',
-                                    size: FontSize.s11,
-                                  )
-                                ],
-                              ),
-                            )
+                            // Padding(
+                            //   padding: EdgeInsets.only(bottom: AppWidth.w8),
+                            //   child: Column(
+                            //     crossAxisAlignment: CrossAxisAlignment.end,
+                            //     children: [
+                            //       LargeHeadText(
+                            //         text: '\$${hotelPrice.toString()}',
+                            //         size: FontSize.s20,
+                            //       ),
+                            //       SecondaryText(
+                            //         text: '/per night',
+                            //         size: FontSize.s11,
+                            //       )
+                            //     ],
+                            //   ),
+                            // )
                           ],
                         )
                       ],
