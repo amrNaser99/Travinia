@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travinia/core/app/bloc/app_cubit.dart';
 import 'package:travinia/core/app/bloc/app_state.dart';
 import 'package:travinia/core/utils/app_spaces.dart';
+import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/models/hotel_model.dart';
 
 import '../../../home/body/hotel_card_info.dart';
@@ -22,26 +23,16 @@ class buildHotelsImage extends StatelessWidget {
         return SliverToBoxAdapter(
           child: Column(
             children: [
-              Container(
-                height: MediaQuery.of(context).size.height,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: ListView.separated(
-                    shrinkWrap: true,
-                    primary: false,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) =>
-                        HotelCardInfo(hotel: hotelData[index]),
-                    // itemBuilder: (context, index) => HotelDataWidget(
-                    //   hotelName: hotelData[index].name,
-                    //   hotelAdress: hotelData[index].address,
-                    //   distance: 2.0,
-                    //   hotelRating: hotelData[index].rate,
-                    //   hotelPrice: hotelData[index].price,
-                    // ),
-                    separatorBuilder: (context, index) => AppSpaces.vSpace10,
-                    itemCount: hotelData.length,
-                  ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: AppSize.s10),
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  primary: false,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) =>
+                      HotelCardInfo(hotel: hotelData[index]),
+                  separatorBuilder: (context, index) => AppSpaces.vSpace10,
+                  itemCount: hotelData.length,
                 ),
               ),
             ],

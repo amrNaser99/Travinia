@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
 import 'package:travinia/core/utils/app_strings.dart';
+import 'package:travinia/presentation/explore/hotel_details/widgets/confirm_booking_modal_sheet.dart';
 
 import '../../../../core/utils/app_color.dart';
 import '../../../../core/utils/app_spaces.dart';
@@ -34,7 +35,7 @@ class SliverListItems extends StatelessWidget {
                       Row(
                         children: [
                           SecondaryText(
-                            text: 'Wembley, London',
+                            text: hotelModel.address,
                             size: AppSize.s10,
                           ),
                           Icon(
@@ -52,7 +53,7 @@ class SliverListItems extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      LargeHeadText(text: '\$180'),
+                      LargeHeadText(text: '\$${hotelModel.price}'),
                       Padding(
                         padding: EdgeInsets.only(top: AppHeight.h5),
                         child: SecondaryText(
@@ -72,7 +73,8 @@ class SliverListItems extends StatelessWidget {
               Opacity(
                 opacity: 0.7,
                 child: ReadMoreText(
-                  'Featuring a fitness center, Grand Royal Park Hotle is Located in sweden, 4.7 Km from National museum Featuring a fitness center, Grand Royal Park Hotle is Located in sweden, 4.7 Km from National museum ',
+                  'Featuring a fitness center, Grand Royal Park Hotle is Located in sweden, 4.7 Km from National museum Featuring a fitness center, Grand Royal Park Hotle is Located in sweden, 4.7 Km from National museum ' +
+                      hotelModel.description,
                   trimLines: 3,
                   colorClickableText: AppColors.teal,
                   trimMode: TrimMode.Line,
@@ -161,7 +163,7 @@ class SliverListItems extends StatelessWidget {
           height: AppHeight.h100,
           child: ListView.builder(
             shrinkWrap: true,
-            itemCount: 5,
+            itemCount: hotelModel.hotel_images.length,
             physics: BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
@@ -174,9 +176,10 @@ class SliverListItems extends StatelessWidget {
                   elevation: 3.0,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10.0),
-                    child: Image.asset(
+                    child: Image.network(
                       width: 110,
-                      AppStrings.hotelImgPath,
+                      AppStrings.networkImgPath +
+                          hotelModel.hotel_images[index].image,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -202,7 +205,12 @@ class SliverListItems extends StatelessWidget {
               AppSpaces.vSpace20,
               CustomButton(
                 text: 'Book now',
-                onPressed: () {},
+                onPressed: () {
+                  ConfirmBookingModalSheet(
+                    hotelDetailsScreenContext: context,
+                    hotelModel: hotelModel,
+                  );
+                },
                 fillColor: AppColors.appColor,
               )
             ],

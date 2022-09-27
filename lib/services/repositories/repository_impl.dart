@@ -171,4 +171,26 @@ class RepositoryImplementation extends Repository {
       },
     );
   }
+
+  @override
+  Future<Either<PrimaryServerException, HotelsModel>> searchHotels(
+      { String? name,
+       String? address,
+       int? min_price,
+       int? max_price,
+       int? count,
+       int? page,}) {
+    return handlingRequestResult(onSuccess: () async {
+      return await dioHelper.get(endPoint: searchHotelsEndPoint, query: {
+        'name': name,
+        'address': address,
+        'min_price': min_price,
+        'max_price': max_price,
+        'count': count,
+        'page': page,
+      });
+    }, onPrimaryServerException: (e) async {
+      return e;
+    });
+  }
 }

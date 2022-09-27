@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
         if (state is HotelsLoadingState) {
           return Center(child: CircularProgressIndicator());
         } else if (state is ErrorState) {
-          return Center(child: Text("ERROR"));
+          return Center(child: Text("Check Internet Connection !"));
         } else {
           return ValueListenableBuilder(
             valueListenable: _textVisibilty,

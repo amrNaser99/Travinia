@@ -26,10 +26,8 @@ class _MainScreenState extends State<MainScreen> {
         final AppCubit cubit = AppCubit.get(context);
         return Scaffold(
           extendBody: true,
-          body:
-              // Center(child: Text("ANIMATED TEXT")),
-              cubit.mainScreens[cubit.currentIndex],
-          bottomNavigationBar: AppBottomNavigationBar(),
+          body: cubit.mainScreens[cubit.currentIndex],
+          bottomNavigationBar: const AppBottomNavigationBar(),
         );
       },
     );

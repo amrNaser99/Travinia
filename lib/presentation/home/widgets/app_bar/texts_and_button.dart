@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:travinia/core/utils/app_color.dart';
 import 'package:travinia/core/utils/app_fonts.dart';
 import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/core/utils/font_styles.dart';
-import 'package:travinia/presentation/explore/explore_on_map/explore_map_screen.dart';
 import 'package:travinia/presentation/shared_widgets/custom_button.dart';
-import 'package:travinia/services/geo_locator/geo_locator_helper.dart';
+
+import '../../../../core/utils/routes.dart';
+import '../../../../services/geo_locator/geo_locator_helper.dart';
 
 class HomeAppBarTextsAndButton extends StatelessWidget {
   final String title;
   final String description;
+
   const HomeAppBarTextsAndButton(
       {super.key, required this.title, required this.description});
 
@@ -40,12 +43,14 @@ class HomeAppBarTextsAndButton extends StatelessWidget {
             child: CustomButton(
               text: "View Hotel",
               onPressed: () async {
-                // final position = await GeoLocatorHelper.determinePosition();
+                Navigator.pushNamed(context, Routes.exploreHotels);
                 // await Permission.location.request();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ExploreOnMap()),
-                );
+                if (await Permission.location.isGranted) {
+                  GeoLocatorHelper.determinePosition();
+                } else {
+                  Permission.location.request();
+                }
+                Navigator.pushNamed(context, Routes.exploreHotels);
               },
             ),
           ),
