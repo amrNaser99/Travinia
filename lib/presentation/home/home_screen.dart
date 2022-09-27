@@ -30,7 +30,6 @@ class _HomeScreenState extends State<HomeScreen> {
       } else {
         _textVisibilty.value = true;
       }
-      print(_textVisibilty.value);
     }
   }
 
@@ -39,8 +38,6 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {});
     super.initState();
     AppCubit.get(context).getMyLocation();
-
-    AppCubit.get(context).getHotels();
   }
 
   @override

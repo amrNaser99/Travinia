@@ -8,6 +8,7 @@ import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/core/utils/extensions/navigation_ext.dart';
 import 'package:travinia/core/utils/font_styles.dart';
 import 'package:travinia/models/hotel_model.dart';
+import 'package:travinia/presentation/explore/explore_hotels/filter/filter_screen.dart';
 import 'package:travinia/presentation/explore/bloc/explore_state.dart';
 import 'package:travinia/presentation/explore/explore_hotels/widgets/build_hotels_image.dart';
 import 'package:travinia/presentation/explore/explore_on_map/explore_map_screen.dart';
@@ -94,7 +95,13 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                               Spacer(),
                               Expanded(
                                 child: IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Filter()),
+                                      );
+                                    },
                                     icon: Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       mainAxisSize: MainAxisSize.min,

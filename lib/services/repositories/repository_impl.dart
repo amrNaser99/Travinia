@@ -97,12 +97,11 @@ class RepositoryImplementation extends Repository {
           'token': '$token',
         },
       );
-      return BookingModel.fromJson(response['data']);
-    },
-      onPrimaryServerException: (e) async {
-        return e;
-      },
-    );
+      return BookingModel.fromJson(response);
+    }, onPrimaryServerException: (e) async {
+      print("ERROR=======>${e.toString()}");
+      return e;
+    });
   }
 
   @override
