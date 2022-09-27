@@ -9,6 +9,8 @@ import 'package:travinia/presentation/explore/hotel_details/hotel_details_screen
 import 'package:travinia/presentation/main/main_screen.dart';
 import 'package:travinia/presentation/onboarding/on_boarding_screen.dart';
 
+import '../../presentation/explore/explore_on_map/explore_map_screen.dart';
+
 class Routes {
   static const String main = '/main';
   static const String onBoarding = '/onBoarding';
@@ -16,6 +18,7 @@ class Routes {
   static const String register = '/register';
   static const String login = '/login';
   static const String exploreHotels = '/exploreHotels';
+  static const String exploreOnMap = '/exploreOnMap';
   static const String editProfile = '/edit_profile';
 
   static Map<String, WidgetBuilder> get routes {
@@ -25,6 +28,7 @@ class Routes {
       register: (context) => const RegisterScreen(),
       main: (context) => const MainScreen(),
       exploreHotels: (context) => const ExploreHotelScreen(),
+      exploreOnMap: (context) => ExploreOnMap(),
       hotelDetailsScreen: (context) => const HotelDetailsScreen(),
       editProfile: (context) => EditProfile(
             userModel: BlocProvider.of<AuthCubit>(context).userModel!,

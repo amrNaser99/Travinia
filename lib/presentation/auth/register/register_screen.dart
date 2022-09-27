@@ -21,10 +21,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
       listener: (context, state) {
         if (state is UserRegisterSuccessState) {
           Navigator.pushReplacementNamed(context, Routes.main);
-        }else if (state is UserRegisterErrorState) {
-          showToast(message: state.error);
+        } else if (state is ErrorState) {
+          showToast(message: "An error occurred please try again !");
         }
-
       },
       builder: (context, state) {
         AuthCubit cubit = AuthCubit.get(context);

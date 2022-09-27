@@ -15,8 +15,8 @@ class LoginScreen extends StatelessWidget {
       listener: (context, state) {
         if (state is UserLoginSuccessState) {
           Navigator.pushReplacementNamed(context, Routes.main);
-        } else if (state is UserLoginErrorState) {
-          showToast(message: state.error);
+        } else if (state is ErrorState) {
+          showToast(message: 'Password or Email is Incorrect !');
         }
       },
       builder: (context, state) {

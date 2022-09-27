@@ -6,6 +6,8 @@ import 'package:travinia/models/user_model.dart';
 import 'package:travinia/presentation/auth/bloc/auth_state.dart';
 import 'package:travinia/services/repositories/repository.dart';
 
+LoginModel? loginModel;
+
 class AuthCubit extends Cubit<AuthState> {
   final Repository repository;
 
@@ -34,7 +36,6 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthPasswordVisibilityState());
   }
 
-  LoginModel? loginModel;
   String userToken = '';
 
   void userRegister({
@@ -52,6 +53,12 @@ class AuthCubit extends Cubit<AuthState> {
       password: password,
       rePassword: rePassword,
     );
+
+    firstNameController.clear();
+    lastNameController.clear();
+    emailController.clear();
+    passwordController.clear();
+    verifyPasswordController.clear();
 
     response.fold(
       (l) {

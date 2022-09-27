@@ -24,11 +24,8 @@ class _ExploreOnMapState extends State<ExploreOnMap> {
   @override
   Widget build(BuildContext context) {
     List hotelData = AppCubit.get(context).hotels;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Explore'),
-      ),
-      body: Stack(
+    return SliverToBoxAdapter(
+      child: Stack(
         children: [
           // Con(
           //   color: Colors.teal,

@@ -42,7 +42,7 @@ class TraviniaApp extends StatelessWidget {
                 return MaterialApp(
                   title: AppStrings.appName,
                   debugShowCheckedModeBanner: false,
-                  theme: AppThemes.darkTheme,
+                  theme: AppThemes.lightTheme,
                   routes: Routes.routes,
                   // initialRoute: Routes.onBoarding,
                   home: ExploreHotelScreen(),

@@ -66,7 +66,9 @@ class RepositoryImplementation extends Repository {
   Future<Either<PrimaryServerException, FacilitiesModel>> getFacilities() {
     return handlingRequestResult<FacilitiesModel>(
       onSuccess: () async {
-        final response = await dioHelper.get(endPoint: hotelsEndPoint,);
+        final response = await dioHelper.get(
+          endPoint: hotelsEndPoint,
+        );
 
         return FacilitiesModel.fromJson(response['data']);
       },
@@ -78,9 +80,9 @@ class RepositoryImplementation extends Repository {
 
   @override
   Future<Either<PrimaryServerException, BookingModel>> getBooking({
-     String? bookType,
-     int? bookCount,
-     String? token,
+    String? bookType,
+    int? bookCount,
+    String? token,
   }) {
     return handlingRequestResult(onSuccess: () async {
       final response = await dioHelper.get(
@@ -145,7 +147,6 @@ class RepositoryImplementation extends Repository {
     );
   }
 
-
   @override
   Future<Either<PrimaryServerException, Create_BookingModel>> create_Booking({
     required String token,
@@ -168,5 +169,27 @@ class RepositoryImplementation extends Repository {
         return e;
       },
     );
+  }
+
+  @override
+  Future<Either<PrimaryServerException, HotelsModel>> searchHotels(
+      { String? name,
+       String? address,
+       int? min_price,
+       int? max_price,
+       int? count,
+       int? page,}) {
+    return handlingRequestResult(onSuccess: () async {
+      return await dioHelper.get(endPoint: searchHotelsEndPoint, query: {
+        'name': name,
+        'address': address,
+        'min_price': min_price,
+        'max_price': max_price,
+        'count': count,
+        'page': page,
+      });
+    }, onPrimaryServerException: (e) async {
+      return e;
+    });
   }
 }
