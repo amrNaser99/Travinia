@@ -88,6 +88,9 @@ class RepositoryImplementation extends Repository {
       final response = await dioHelper.get(
         endPoint: getBookingEndPoint,
         token: token,
+        options: Options(
+          headers: {"token": "$token"},
+        ),
         data: {
           'type': bookType,
           'count': bookCount,

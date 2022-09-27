@@ -17,7 +17,7 @@ class LargeHeadText extends StatelessWidget {
             fontSize: size ?? FontSize.s16,
           ),
       ///TODO Need To Fix
-      // overflow: isEllipsis ? TextOverflow.ellipsis : null,
+      overflow: isEllipsis ? TextOverflow.ellipsis : null,
 
     );
   }

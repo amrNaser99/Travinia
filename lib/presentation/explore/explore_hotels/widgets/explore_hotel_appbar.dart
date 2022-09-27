@@ -11,6 +11,7 @@ import 'package:travinia/models/hotel_model.dart';
 import 'package:travinia/presentation/explore/bloc/explore_state.dart';
 import 'package:travinia/presentation/explore/explore_hotels/widgets/build_hotels_image.dart';
 import 'package:travinia/presentation/explore/explore_on_map/explore_map_screen.dart';
+import 'package:travinia/presentation/shared_widgets/custom_text.dart';
 import 'package:travinia/presentation/shared_widgets/custom_text_field.dart';
 
 import '../../bloc/explore_cubit.dart';
@@ -233,20 +234,8 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        'Number of Room',
-                                        style: getSemiBoldStyle(
-                                          fontColor: AppColors.secondGrey,
-                                          fontSize: AppSize.s16,
-                                        ),
-                                      ),
-                                      Text(
-                                        '2 Room, 1 People',
-                                        style: getRegularStyle(
-                                          fontColor: AppColors.white,
-                                          fontSize: AppSize.s15,
-                                        ),
-                                      ),
+                                      LargeHeadText(text: 'Number of Room',size: AppSize.s16,),
+                                      SmallHeadText(text: '2 Room, 1 People'),
                                     ],
                                   ),
                                 ),

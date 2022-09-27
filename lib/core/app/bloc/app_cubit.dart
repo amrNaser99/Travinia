@@ -4,6 +4,7 @@ import 'package:travinia/core/app/bloc/app_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travinia/core/utils/app_color.dart';
 import 'package:travinia/core/utils/app_themes.dart';
+import 'package:travinia/models/booking_model.dart';
 import 'package:travinia/models/create_booking_model.dart';
 import 'package:travinia/models/facility_model.dart';
 import 'package:travinia/models/hotel_model.dart';
@@ -49,6 +50,7 @@ class AppCubit extends Cubit<AppStates> {
     BookingScreen(),
     ProfileInfoScreen(),
   ];
+
   void changeNavBar({required int index}) {
     currentIndex = index;
     emit(changeNavBarState());
@@ -104,7 +106,7 @@ class AppCubit extends Cubit<AppStates> {
       {required BuildContext context,
       required int userId,
       required int hotelId}) async {
-    emit(UserProfileLoadingState());
+    emit(CreateBookingLoadingState());
     final response = await repository.create_Booking(
       token: AuthCubit.get(context).userToken,
       user_id: userId,
@@ -118,7 +120,35 @@ class AppCubit extends Cubit<AppStates> {
       (r) {
         create_BookingModel = r;
 
-        emit(CreatBookingSuccessState());
+        emit(CreateBookingSuccessState());
+      },
+    );
+  }
+
+  BookingModel? bookingModel;
+
+
+  void getBooking({
+    required BuildContext context,
+    String? Token,
+    required String bookType,
+    required int bookCount,
+  }) async {
+    emit(GetBookingLoadingState());
+    final response = await repository.getBooking(
+      token: AuthCubit.get(context).userToken,
+      bookType: bookType,
+      bookCount: bookCount,
+    );
+
+    response.fold(
+      (l) {
+        emit(ErrorState(exception: l));
+      },
+      (r) {
+        bookingModel = r;
+
+        emit(GetBookingSuccessState());
       },
     );
   }
@@ -142,6 +172,7 @@ class AppCubit extends Cubit<AppStates> {
 
   double distanceInMeters = 0;
   double distanceInKiloMeters = 0;
+
   double CalcDistanceOfGeocoordinates({
     required double startLatitude,
     required double startLongitude,
@@ -154,4 +185,12 @@ class AppCubit extends Cubit<AppStates> {
     distanceInKiloMeters = distanceInMeters / 1000;
     return distanceInKiloMeters;
   }
+}
+class BookingType {
+  static const String completed = 'completed';
+  static const String upcomming = 'upcomming';
+  static const String cancelled = 'completed';
+
+  // upcomming - cancelled - completed
+
 }
