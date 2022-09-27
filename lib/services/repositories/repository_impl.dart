@@ -66,7 +66,9 @@ class RepositoryImplementation extends Repository {
   Future<Either<PrimaryServerException, FacilitiesModel>> getFacilities() {
     return handlingRequestResult<FacilitiesModel>(
       onSuccess: () async {
-        final response = await dioHelper.get(endPoint: hotelsEndPoint,);
+        final response = await dioHelper.get(
+          endPoint: hotelsEndPoint,
+        );
 
         return FacilitiesModel.fromJson(response['data']);
       },
@@ -78,9 +80,9 @@ class RepositoryImplementation extends Repository {
 
   @override
   Future<Either<PrimaryServerException, BookingModel>> getBooking({
-     String? bookType,
-     int? bookCount,
-     String? token,
+    String? bookType,
+    int? bookCount,
+    String? token,
   }) {
     return handlingRequestResult(onSuccess: () async {
       final response = await dioHelper.get(
@@ -92,8 +94,9 @@ class RepositoryImplementation extends Repository {
         },
       );
       // ['data']
-      return BookingModel.fromJson(response['data']);
+      return BookingModel.fromJson(response);
     }, onPrimaryServerException: (e) async {
+      print("ERROR=======>${e.toString()}");
       return e;
     });
   }
@@ -144,7 +147,6 @@ class RepositoryImplementation extends Repository {
       },
     );
   }
-
 
   @override
   Future<Either<PrimaryServerException, Create_BookingModel>> create_Booking({

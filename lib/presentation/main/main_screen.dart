@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travinia/core/app/bloc/app_cubit.dart';
 import 'package:travinia/core/app/bloc/app_state.dart';
 import 'package:travinia/presentation/main/widgets/bottom_nav_bar.dart';
-import 'package:travinia/presentation/shared_widgets/custom_text.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -27,7 +26,9 @@ class _MainScreenState extends State<MainScreen> {
         final AppCubit cubit = AppCubit.get(context);
         return Scaffold(
           extendBody: true,
-          body: cubit.mainScreens[cubit.currentIndex],
+          body:
+              // Center(child: Text("ANIMATED TEXT")),
+              cubit.mainScreens[cubit.currentIndex],
           bottomNavigationBar: AppBottomNavigationBar(),
         );
       },
