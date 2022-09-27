@@ -127,7 +127,6 @@ class AppCubit extends Cubit<AppStates> {
 
   BookingModel? bookingModel;
 
-
   void getBooking({
     required BuildContext context,
     String? Token,
@@ -137,6 +136,8 @@ class AppCubit extends Cubit<AppStates> {
     emit(GetBookingLoadingState());
     final response = await repository.getBooking(
       token: AuthCubit.get(context).userToken,
+      // 'DnkaEA2eU1DNZmKIpx5I7u6ptaKeEGAA1nq4bFkClgBsYsWLyTMNsJD7O06u',
+
       bookType: bookType,
       bookCount: bookCount,
     );
@@ -189,11 +190,12 @@ class AppCubit extends Cubit<AppStates> {
     return distanceInKiloMeters;
   }
 }
+
 class BookingType {
   static const String completed = 'completed';
   static const String upcomming = 'upcomming';
   static const String cancelled = 'completed';
 
-  // upcomming - cancelled - completed
+// upcomming - cancelled - completed
 
 }

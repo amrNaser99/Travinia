@@ -89,8 +89,9 @@ class ProfileBody extends StatelessWidget {
                 itemText: 'Permissions',
                 icon: FontAwesomeIcons.personMilitaryPointing,
                 onTap: () {
-                  AppCubit.get(context).getBooking(context: context,
-                    bookType: BookingType.completed,
+                  AppCubit.get(context).getBooking(
+                    context: context,
+                    bookType: BookingType.upcomming,
                     bookCount: 10,);
                 },
               ),
