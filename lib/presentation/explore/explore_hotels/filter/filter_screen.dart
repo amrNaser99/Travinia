@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travinia/core/utils/app_fonts.dart';
 import 'package:travinia/core/utils/app_values.dart';
-import 'package:travinia/presentation/explore/explore_hotels/filter/Accommodation.dart';
+import 'package:travinia/presentation/explore/explore_hotels/filter/widgets/Accommodation.dart';
 import 'package:travinia/presentation/explore/explore_hotels/filter/widgets/checkboxlabel.dart';
 import 'package:travinia/presentation/explore/explore_hotels/filter/widgets/custom_didvider.dart';
 import 'package:travinia/presentation/explore/explore_hotels/filter/widgets/distange_range_session.dart';

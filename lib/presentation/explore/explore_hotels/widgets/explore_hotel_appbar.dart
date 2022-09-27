@@ -98,7 +98,13 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                               Spacer(),
                               Expanded(
                                 child: IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Filter()),
+                                      );
+                                    },
                                     icon: Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       mainAxisSize: MainAxisSize.min,
