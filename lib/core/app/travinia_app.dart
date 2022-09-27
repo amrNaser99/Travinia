@@ -8,8 +8,13 @@ import 'package:travinia/core/utils/app_strings.dart';
 import 'package:travinia/core/utils/app_themes.dart';
 import 'package:travinia/core/utils/routes.dart';
 import 'package:travinia/presentation/auth/bloc/auth_cubit.dart';
+import 'package:travinia/presentation/booking/bloc/booking_cubit.dart';
 import 'package:travinia/presentation/explore/bloc/explore_cubit.dart';
+
 import 'package:travinia/presentation/explore/explore_hotels/explore_hotel_screen.dart';
+
+import 'package:travinia/presentation/main/main_screen.dart';
+
 import '../../presentation/explore/explore_on_map/bloc/map_cubit.dart';
 
 class TraviniaApp extends StatelessWidget {
@@ -28,7 +33,7 @@ class TraviniaApp extends StatelessWidget {
                 create: (context) => sl<AppCubit>(),
               ),
               BlocProvider<AuthCubit>(
-                create: (context) => sl<AuthCubit>(),
+                create: (context) => sl<AuthCubit>()..userProfile(),
               ),
               BlocProvider<ExploreCubit>(
                 create: (context) => sl<ExploreCubit>(),
@@ -36,16 +41,23 @@ class TraviniaApp extends StatelessWidget {
               BlocProvider<MapCubit>(
                 create: (context) => sl<MapCubit>(),
               ),
+              BlocProvider<BookingCubit>(
+                create: (context) => sl<BookingCubit>(),
+              ),
             ],
             child: BlocBuilder<AppCubit, AppStates>(
               builder: (context, state) {
                 return MaterialApp(
                   title: AppStrings.appName,
                   debugShowCheckedModeBanner: false,
-                  theme: AppThemes.lightTheme,
+                  // theme: AppThemes.lightTheme,
+                  theme: AppThemes.darkTheme,
                   routes: Routes.routes,
-                  // initialRoute: Routes.onBoarding,
-                  home: ExploreHotelScreen(),
+                  initialRoute: Routes.onBoarding,
+                
+
+       
+
                 );
               },
             ),

@@ -5,12 +5,15 @@ import 'package:travinia/presentation/shared_widgets/custom_text.dart';
 
 class HotelPreicePerNight extends StatelessWidget {
   final String price;
-  const HotelPreicePerNight({super.key, required this.price});
+  final bool isBooking;
+  const HotelPreicePerNight(
+      {super.key, required this.price, this.isBooking = false});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisAlignment:
+          isBooking ? MainAxisAlignment.start : MainAxisAlignment.end,
       children: [
         Flexible(
           child: LargeHeadText(
@@ -20,7 +23,7 @@ class HotelPreicePerNight extends StatelessWidget {
         ),
         SecondaryText(
           text: '/per night',
-          size: FontSize.s11,
+          size: isBooking ? FontSize.s13 : FontSize.s11,
           isLight: true,
         )
       ],

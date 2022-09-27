@@ -94,8 +94,9 @@ class RepositoryImplementation extends Repository {
         },
       );
       // ['data']
-      return BookingModel.fromJson(response['data']);
+      return BookingModel.fromJson(response);
     }, onPrimaryServerException: (e) async {
+      print("ERROR=======>${e.toString()}");
       return e;
     });
   }

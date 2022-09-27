@@ -32,16 +32,6 @@ totaly new vibes.''',
       description: 'Extraordinary five-star outdoor activities.',
       image: AppStrings.hotel3ImgPath,
     ),
-    const OnBoardingModel(
-      title: "Cairo",
-      description: '''Discover the secrets of the pharo's totally new vibes.''',
-      image: "assets/images/hotel.jpg",
-    ),
-    const OnBoardingModel(
-      title: "New York",
-      description: 'Extraordinary five-star outdoor activities.',
-      image: "assets/images/hotel.jpg",
-    ),
   ];
 
   int _currentIndex = 0;
@@ -53,16 +43,12 @@ totaly new vibes.''',
         _currentIndex++;
         _pageController.animateToPage(
           _currentIndex,
-          duration: Duration(seconds: 2),
+          duration: Duration(seconds: 1),
           curve: Curves.fastOutSlowIn,
         );
       } else {
         _currentIndex = 0;
-        _pageController.animateToPage(
-          _currentIndex,
-          duration: Duration(seconds: 2),
-          curve: Curves.fastOutSlowIn,
-        );
+        _pageController.jumpToPage(_currentIndex);
       }
     });
     // print(_currentIndex);
