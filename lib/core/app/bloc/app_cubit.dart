@@ -141,13 +141,16 @@ class AppCubit extends Cubit<AppStates> {
       bookCount: bookCount,
     );
 
+    debugPrint('response: ${response}');
+    debugPrint('token: ${AuthCubit.get(context).userToken}');
     response.fold(
       (l) {
+        debugPrint(l.error);
         emit(ErrorState(exception: l));
       },
       (r) {
         bookingModel = r;
-
+        debugPrint(r.toString());
         emit(GetBookingSuccessState());
       },
     );

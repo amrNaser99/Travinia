@@ -89,18 +89,20 @@ class RepositoryImplementation extends Repository {
         endPoint: getBookingEndPoint,
         token: token,
         options: Options(
-          headers: {"token": "$token"},
+          headers: {"token": '$token' },
         ),
         data: {
           'type': bookType,
           'count': bookCount,
+          'token': '$token',
         },
       );
-      // ['data']
       return BookingModel.fromJson(response['data']);
-    }, onPrimaryServerException: (e) async {
-      return e;
-    });
+    },
+      onPrimaryServerException: (e) async {
+        return e;
+      },
+    );
   }
 
   @override

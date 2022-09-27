@@ -36,7 +36,6 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
     return BlocBuilder<ExploreCubit, ExploreState>(
       builder: (context, state) {
         return CustomScrollView(
-          controller: BlocProvider.of<ExploreCubit>(context).scrollController,
           clipBehavior: Clip.antiAliasWithSaveLayer,
           physics: const BouncingScrollPhysics(),
           shrinkWrap: true,
@@ -51,15 +50,15 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                 onPressed: () {
                   context.pop;
                 },
-                icon: Icon(FontAwesomeIcons.arrowLeftLong),
+                icon: Icon(
+                  FontAwesomeIcons.arrowLeftLong,
+                ),
               ),
               actions: [
                 IconButton(
                   icon: Icon(
                     FontAwesomeIcons.mapLocation,
                   ),
-
-                  ///TODO: Add Map
                   onPressed: () {
                     cubit.changeBMapClicked();
                   },
@@ -88,13 +87,10 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                           Row(
                             children: [
                               Expanded(
-                                flex: 2,
-                                child: Text(
-                                  '${widget.hotelData.length} Hotel Found',
-                                  style: getSemiBoldStyle(
-                                      fontColor: AppColors.white),
-                                ),
-                              ),
+                                  flex: 2,
+                                  child: LargeHeadText(
+                                      text:
+                                          '${widget.hotelData.length} Hotel Found')),
                               Spacer(),
                               Expanded(
                                 child: IconButton(
@@ -103,7 +99,9 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        Text('Filter'),
+                                        SmallHeadText(
+                                          text: 'Filter',
+                                        ),
                                         SizedBox(
                                           width: 4,
                                         ),
@@ -172,7 +170,9 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                                     color: Colors.grey,
                                     size: AppSize.s22,
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    cubit.searchHotels();
+                                  },
                                 ),
                               ),
                             ],
@@ -197,20 +197,17 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        'Choose Date',
-                                        style: getSemiBoldStyle(
-                                          fontColor: AppColors.secondGrey,
-                                          fontSize: AppSize.s16,
-                                        ),
+                                      LargeHeadText(
+                                        text: 'Number of Room',
+                                        size: AppSize.s16,
                                       ),
-                                      Text(
-                                        '${DateFormat.MMMd().format(DateTime.now())} - ${DateFormat.MMMd().format(DateTime.now().add(Duration(days: 3)))}',
-                                        style: getRegularStyle(
-                                          fontColor: AppColors.white,
-                                          fontSize: AppSize.s15,
+                                      SmallHeadText(
+                                          text:
+                                              '${DateFormat.MMMd().format(DateTime.now())} - ${DateFormat.MMMd().format(
+                                        DateTime.now().add(
+                                          Duration(days: 3),
                                         ),
-                                      ),
+                                      )}'),
                                     ],
                                   ),
                                 ),
@@ -234,7 +231,10 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      LargeHeadText(text: 'Number of Room',size: AppSize.s16,),
+                                      LargeHeadText(
+                                        text: 'Number of Room',
+                                        size: AppSize.s16,
+                                      ),
                                       SmallHeadText(text: '2 Room, 1 People'),
                                     ],
                                   ),
@@ -249,10 +249,15 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                 ),
               ),
             ),
-            if (cubit.isBMapClicked == true)
-              ExploreOnMap()
+            if (cubit.isBMapClicked)
+              SliverToBoxAdapter(child: ExploreOnMap())
+            else if(cubit.hotelResults.isNotEmpty && widget.hotelData.isNotEmpty)
+              SliverToBoxAdapter()
             else
-              buildHotelsImage(hotelData: widget.hotelData),
+              SliverToBoxAdapter(
+                child: ExploreHotelAppBar(hotelData: widget.hotelData),
+              )
+            ,
           ],
         );
       },
