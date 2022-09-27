@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_core/theme.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:travinia/core/utils/app_fonts.dart';
 import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/presentation/shared_widgets/custom_text.dart';
@@ -13,7 +15,8 @@ class priceRangeSession extends StatefulWidget {
 }
 
 class _priceRangeSessionState extends State<priceRangeSession> {
-  RangeValues _currentRangeValues = const RangeValues(50, 5000);
+  RangeValues _currentRangeValues = const RangeValues(200, 4000);
+  SfRangeValues _values = SfRangeValues(200, 4000);
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -29,32 +32,55 @@ class _priceRangeSessionState extends State<priceRangeSession> {
             size: FontSize.s18,
           ),
         ),
-        SizedBox(
-          height: AppHeight.h20,
-        ),
-        SliderTheme(
-          data: SliderTheme.of(context).copyWith(
-            showValueIndicator: ShowValueIndicator.always,
-            valueIndicatorColor: Colors.transparent,
-            // valueIndicatorTextStyle: ,
-            inactiveTickMarkColor: Colors.transparent,
-            activeTickMarkColor: Colors.transparent,
+        SfRangeSliderTheme(
+          data: SfRangeSliderThemeData(
+            tooltipBackgroundColor: Colors.transparent,
+            inactiveTrackColor: Colors.transparent,
+            activeTrackColor: Colors.transparent,
+            thumbColor: Colors.transparent,
+            thumbRadius: 28,
           ),
-          child: RangeSlider(
-            inactiveColor: Theme.of(context).dividerColor,
-            max: 5000,
+          child: SfRangeSlider(
             min: 40,
-            divisions: 10,
-            values: _currentRangeValues,
-            labels: RangeLabels(_currentRangeValues.start.toStringAsFixed(1),
-                _currentRangeValues.end.toStringAsFixed(0)),
-            onChanged: (RangeValues values) {
+            max: 5000,
+            values: _values,
+            interval: 20,
+            showTicks: false,
+            showLabels: false,
+            enableTooltip: false,
+            shouldAlwaysShowTooltip: false,
+            minorTicksPerInterval: 1,
+            startThumbIcon: Container(
+                child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Text('\$${_values.start.round().toString()}'))),
+            endThumbIcon: Container(
+                child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Text('\$${_values.end.round().toString()}'))),
+            onChanged: (SfRangeValues values) {
               setState(() {
-                _currentRangeValues = values;
-                print(_currentRangeValues);
+                _values = values;
               });
             },
           ),
+        ),
+        SfRangeSlider(
+          min: 40,
+          max: 5000,
+          values: _values,
+          interval: 20,
+          showTicks: false,
+          showLabels: false,
+          enableTooltip: false,
+          shouldAlwaysShowTooltip: false,
+          inactiveColor: Theme.of(context).dividerColor,
+          minorTicksPerInterval: 1,
+          onChanged: (SfRangeValues values) {
+            setState(() {
+              _values = values;
+            });
+          },
         ),
       ],
     );

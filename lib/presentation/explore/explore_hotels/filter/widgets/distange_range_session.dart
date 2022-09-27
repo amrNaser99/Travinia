@@ -30,23 +30,33 @@ class _DistanceRangeSessionState extends State<DistanceRangeSession> {
           ),
         ),
         SizedBox(
-          height: AppHeight.h20,
+          height: AppHeight.h10,
         ),
-        Slider(
-          inactiveColor: Theme.of(context).dividerColor,
-          max: 10,
-          min: 0,
-          divisions: 5,
-          value: _value,
-          label: _value.toString(),
-          //  RangeLabels(_currentRangeValues.start.toStringAsFixed(1),
-          //     _currentRangeValues.end.toStringAsFixed(0)),
-          onChanged: (newValue) {
-            setState(() {
-              _value = newValue;
-              print(newValue);
-            });
-          },
+        Center(
+          child: SmallHeadText(
+            text: 'less than $_value Km',
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+          child: Container(
+            width: double.infinity,
+            child: Slider(
+              inactiveColor: Theme.of(context).dividerColor,
+              max: 10,
+              min: 0,
+              divisions: 5,
+              value: _value,
+              //  RangeLabels(_currentRangeValues.start.toStringAsFixed(1),
+              //     _currentRangeValues.end.toStringAsFixed(0)),
+              onChanged: (newValue) {
+                setState(() {
+                  _value = newValue;
+                  print(newValue);
+                });
+              },
+            ),
+          ),
         ),
       ],
     );

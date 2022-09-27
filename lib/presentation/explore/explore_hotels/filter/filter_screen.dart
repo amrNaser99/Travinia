@@ -23,7 +23,6 @@ class _FilterState extends State<Filter> {
     return Scaffold(
       body: Drawer(
         width: double.infinity,
-        //To Do: make it right slide
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         child: SingleChildScrollView(
           child: Column(
@@ -35,6 +34,7 @@ class _FilterState extends State<Filter> {
                   onPressed: (() => Navigator.pop(context)),
                   icon: Icon(Icons.close),
                   iconSize: AppSize.s26,
+                  color: Theme.of(context).focusColor,
                 ),
               ),
               Padding(
