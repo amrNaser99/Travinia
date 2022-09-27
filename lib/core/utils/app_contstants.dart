@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:math' show cos, sqrt, asin;
 
 class AppConst {
   static const String appName = 'Travinia';
