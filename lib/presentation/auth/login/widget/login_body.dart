@@ -57,14 +57,15 @@ class LoginBody extends StatelessWidget {
                   TextFieldWithTitle(
                     controller: cubit.emailController,
                     title: "Email",
-                    hint: "Enter first name",
+                    hint: "Enter Email",
                     inputType: TextInputType.emailAddress,
                   ),
                   AppSpaces.vSpace20,
                   TextFieldWithTitle(
                     controller: cubit.passwordController,
                     title: "Password",
-                    hint: "Enter first name",
+                    obscure: true,
+                    hint: "Enter Password",
                     inputType: TextInputType.visiblePassword,
                   ),
                   AppSpaces.vSpace20,
@@ -97,8 +98,6 @@ class LoginBody extends StatelessWidget {
                             email: cubit.emailController.text,
                             password: cubit.passwordController.text,
                           );
-                          cubit.emailController.clear();
-                          cubit.passwordController.clear();
                         }
                       },
                     ),
@@ -131,8 +130,7 @@ class LoginBody extends StatelessWidget {
                               context, Routes.register);
                         },
                         child: TealText(
-                          text: 'Sign Up',                          // isButton: true,
-
+                          text: 'Sign Up',
                         ),
                       ),
                     ],

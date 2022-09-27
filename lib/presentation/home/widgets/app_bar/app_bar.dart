@@ -11,7 +11,7 @@ class HomeAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
         pinned: true,
-        expandedHeight: AppHeight.h320,
+        expandedHeight: AppHeight.h350,
         collapsedHeight: AppHeight.h150,
         title: CustomTextField(
           hintText: "where are you going?",

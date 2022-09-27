@@ -9,8 +9,14 @@ import '../../bloc/explore_cubit.dart';
 
 class FlexableSpaceBarWidget extends StatelessWidget {
   final ExploreCubit hotelDetailsCubit;
-  const FlexableSpaceBarWidget({Key? key, required this.hotelDetailsCubit})
-      : super(key: key);
+  final HotelModel hotelModel;
+  final hotelDetailsScreenContext;
+  const FlexableSpaceBarWidget({
+    Key? key,
+    required this.hotelDetailsCubit,
+    required this.hotelModel,
+    required this.hotelDetailsScreenContext,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,19 +38,8 @@ class FlexableSpaceBarWidget extends StatelessWidget {
             ),
             child: BluredHotelDataContainer(
               hotelDetailsCubit: hotelDetailsCubit,
-              hotelModel: HotelModel(
-                id: 1,
-                name: 'Grand Royal Hotel',
-                rate: "4.5",
-                address: "ASSA",
-                hotel_images: [],
-                updated_at: "",
-                created_at: "",
-                latitude: "1",
-                longitude: "5",
-                price: "544",
-                description: 'ABSC',
-              ),
+              hotelDetailsScreenContext: hotelDetailsScreenContext,
+              hotelModel: hotelModel,
             ),
           ),
         ),
