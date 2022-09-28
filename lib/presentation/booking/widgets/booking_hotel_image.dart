@@ -3,11 +3,13 @@ import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/presentation/booking/widgets/pop_up_menu.dart';
 
 class BookingHotelImage extends StatelessWidget {
-  const BookingHotelImage({super.key});
+  final int bookingId;
+  final int index;
+  const BookingHotelImage(
+      {super.key, required this.bookingId, required this.index});
 
   @override
   Widget build(BuildContext context) {
-    List<String> list = ["1", "2", "3"];
     return ClipRRect(
       borderRadius: BorderRadius.only(
         topLeft: Radius.circular(AppSize.s16),
@@ -21,7 +23,10 @@ class BookingHotelImage extends StatelessWidget {
             width: double.infinity,
             fit: BoxFit.fill,
           ),
-          BookingPopupMenu()
+          BookingPopupMenu(
+            bookingId: bookingId,
+            index: index,
+          )
         ],
       ),
     );

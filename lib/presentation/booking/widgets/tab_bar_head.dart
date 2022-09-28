@@ -35,9 +35,8 @@ class TabBarHead extends StatelessWidget {
           ),
           isScrollable: true,
           onTap: (index) {
-            // cubit.changeTabBar(index);
-            cubit.createBooking();
-            debugPrint("a7a");
+            cubit.changeTabBar(index);
+            // cubit.createBooking();
           },
           tabs: cubit.bookings
               .map((element) => Tab(
