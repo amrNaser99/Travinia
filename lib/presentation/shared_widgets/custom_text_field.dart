@@ -14,6 +14,7 @@ class CustomTextField extends StatelessWidget {
   final String? validatorText;
   final IconData? prefixIcon;
   final ValueChanged<String>? onChange;
+  final ValueChanged<String>? onFeildSubmitted;
   final TextEditingController controller;
   final TextInputType inputType;
 
@@ -27,6 +28,7 @@ class CustomTextField extends StatelessWidget {
     required this.validatorText,
     required this.controller,
     this.onChange,
+    this.onFeildSubmitted,
     required this.inputType,
     this.prefixIcon,
   }) : super(key: key);
@@ -61,6 +63,7 @@ class CustomTextField extends StatelessWidget {
         return null;
       },
       onChanged: onChange,
+      onFieldSubmitted: onFeildSubmitted,
       decoration: InputDecoration(
           hintText: hintText,
           prefixIcon: prefixIcon != null

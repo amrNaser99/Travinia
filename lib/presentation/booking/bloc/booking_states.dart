@@ -1,4 +1,3 @@
-import 'package:travinia/core/error/exceptions.dart';
 
 abstract class BookingState {}
 

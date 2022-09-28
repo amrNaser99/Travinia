@@ -1,10 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:travinia/core/utils/app_color.dart';
 import 'package:travinia/core/utils/app_fonts.dart';
-import 'package:travinia/core/utils/app_themes.dart';
 import 'package:travinia/core/utils/app_values.dart';
 
 class Switcher extends StatefulWidget {

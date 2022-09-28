@@ -36,10 +36,7 @@ class BookingDataModel {
     return BookingDataModel(
       currentPage: json["current_page"],
       data: List<BookingDetailsModel>.from(
-        json["data"].map(
-          (x) => BookingDetailsModel.fromJson(x),
-        ),
-      ),
+          json["data"].map((x) => BookingDetailsModel.fromJson(x))),
       firstPageUrl: json["first_page_url"],
       from: json["from"],
       lastPage: json["last_page"],

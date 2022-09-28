@@ -38,7 +38,7 @@ abstract class Repository {
   ///Implement All Facilities Functions Here
   Future<Either<PrimaryServerException, FacilitiesModel>> getFacilities();
 
-  ///Implement All Booking Functions Here
+  ///Implement All Booking Functions Here: upcomming - cancelled - completed
   Future<Either<PrimaryServerException, BookingModel>> getBooking({
     String bookType,
     int bookCount,
@@ -54,10 +54,6 @@ abstract class Repository {
   Future<Either<PrimaryServerException, HotelsModel>> searchHotels({
     String? name,
     String? address,
-    int? min_price,
-    int? max_price,
-    int? count,
-    int? page,
   });
 
 

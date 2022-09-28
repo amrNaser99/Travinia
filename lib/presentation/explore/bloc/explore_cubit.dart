@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:travinia/presentation/explore/bloc/explore_state.dart';
+import 'package:travinia/presentation/shared_widgets/show_toast.dart';
 import 'package:travinia/services/repositories/repository.dart';
 
 import '../../../models/hotel_model.dart';
@@ -20,13 +21,21 @@ class ExploreCubit extends Cubit<ExploreState> {
   //For Search hotels
   List<HotelModel> hotelResults = [];
 
-  void searchHotels() async {
+  void searchHotels({
+    required String text,
+  }) async {
     emit(SearchHotelsLoadingState());
-    final response = await repository.searchHotels(name: searchController.text);
-
+    final response = await repository.searchHotels(
+      name: text,
+    );
     response.fold((l) {
+
+      searchController.clear();
+      showToast(message: l.message);
       emit(ErrorState(exception: l));
     }, (r) {
+      debugPrint('Search Results: ${r.data!.data}');
+      debugPrint('Search Results: ${r.data!.data.length}');
       hotelResults = r.data!.data;
       emit(SearchHotelsSuccessState());
     });
@@ -71,8 +80,9 @@ class ExploreCubit extends Cubit<ExploreState> {
 
   // create Data Range function
   void changeDateRange() {
-    CrCalendar(
+     CrCalendar(
       controller: calendarController,
+
       initialDate: DateTime.now(),
     );
   }
