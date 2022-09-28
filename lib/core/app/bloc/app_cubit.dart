@@ -136,7 +136,6 @@ class AppCubit extends Cubit<AppStates> {
     emit(GetBookingLoadingState());
     final response = await repository.getBooking(
       token: AuthCubit.get(context).userToken,
-      // 'DnkaEA2eU1DNZmKIpx5I7u6ptaKeEGAA1nq4bFkClgBsYsWLyTMNsJD7O06u',
 
       bookType: bookType,
       bookCount: bookCount,

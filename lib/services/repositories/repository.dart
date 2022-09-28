@@ -54,10 +54,6 @@ abstract class Repository {
   Future<Either<PrimaryServerException, HotelsModel>> searchHotels({
     String? name,
     String? address,
-    int? min_price,
-    int? max_price,
-    int? count,
-    int? page,
   });
 
 

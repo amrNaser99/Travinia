@@ -7,7 +7,6 @@ import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/core/utils/font_styles.dart';
 import 'package:travinia/core/utils/routes.dart';
 import 'package:travinia/models/user_model.dart';
-import 'package:travinia/presentation/explore/bloc/explore_cubit.dart';
 import 'package:travinia/presentation/shared_widgets/custom_text.dart';
 
 class ProfileBody extends StatelessWidget {

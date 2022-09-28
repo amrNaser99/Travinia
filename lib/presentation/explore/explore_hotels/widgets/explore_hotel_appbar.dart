@@ -1,3 +1,4 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -8,13 +9,15 @@ import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/core/utils/extensions/navigation_ext.dart';
 import 'package:travinia/core/utils/font_styles.dart';
 import 'package:travinia/models/hotel_model.dart';
-import 'package:travinia/presentation/explore/explore_hotels/filter/filter_screen.dart';
 import 'package:travinia/presentation/explore/bloc/explore_state.dart';
 import 'package:travinia/presentation/explore/explore_hotels/widgets/build_hotels_image.dart';
+import 'package:travinia/presentation/explore/explore_hotels/widgets/build_search_image.dart';
 import 'package:travinia/presentation/explore/explore_on_map/explore_map_screen.dart';
 import 'package:travinia/presentation/shared_widgets/custom_text.dart';
 import 'package:travinia/presentation/shared_widgets/custom_text_field.dart';
 
+import '../../../../core/utils/app_fonts.dart';
+import '../../../../core/utils/routes.dart';
 import '../../bloc/explore_cubit.dart';
 
 class ExploreHotelAppBar extends StatefulWidget {
@@ -37,6 +40,7 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
     return BlocBuilder<ExploreCubit, ExploreState>(
       builder: (context, state) {
         return CustomScrollView(
+          controller: BlocProvider.of<ExploreCubit>(context).scrollController,
           clipBehavior: Clip.antiAliasWithSaveLayer,
           physics: const BouncingScrollPhysics(),
           shrinkWrap: true,
@@ -51,9 +55,7 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                 onPressed: () {
                   context.pop;
                 },
-                icon: Icon(
-                  FontAwesomeIcons.arrowLeftLong,
-                ),
+                icon: Icon(FontAwesomeIcons.arrowLeftLong),
               ),
               actions: [
                 IconButton(
@@ -61,7 +63,12 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                     FontAwesomeIcons.mapLocation,
                   ),
                   onPressed: () {
-                    cubit.changeBMapClicked();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ExploreOnMap(),
+                      ),
+                    );
                   },
                 ),
                 AppSpaces.hSpace10,
@@ -87,28 +94,39 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                         children: [
                           Row(
                             children: [
-                              Expanded(
-                                  flex: 2,
-                                  child: LargeHeadText(
+                              if (cubit.hotelResults.isNotEmpty)
+                                ConditionalBuilder(
+                                  condition: cubit.hotelResults.isNotEmpty,
+                                  builder: (context) => Expanded(
+                                    flex: 2,
+                                    child: SmallHeadText(
                                       text:
-                                          '${widget.hotelData.length} Hotel Found')),
+                                          '${cubit.hotelResults.length} Hotel Found',
+                                      size: FontSize.s16,
+                                    ),
+                                  ),
+                                  fallback: (BuildContext context) => Expanded(
+                                    flex: 2,
+                                    child: SmallHeadText(
+                                      text:
+                                          '${widget.hotelData.length} Hotel Found',
+                                      size: FontSize.s16,
+                                    ),
+                                  ),
+                                ),
                               Spacer(),
                               Expanded(
                                 child: IconButton(
                                     onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Filter()),
-                                      );
+                                      ///TODO: Push to Filter Screen
+                                      // Navigator.pushNamed(context, Routes.filter);
                                     },
                                     icon: Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         SmallHeadText(
-                                          text: 'Filter',
-                                        ),
+                                            text: 'Filter', size: FontSize.s14),
                                         SizedBox(
                                           width: 4,
                                         ),
@@ -160,6 +178,9 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                                         BlocProvider.of<ExploreCubit>(context)
                                             .searchController,
                                     inputType: TextInputType.text,
+                                    onFeildSubmitted: (value) {
+                                      cubit.searchHotels(text: value);
+                                    },
                                   ),
                                 ),
                               ),
@@ -168,7 +189,7 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                                 height: 50,
                                 width: 50,
                                 decoration: BoxDecoration(
-                                  color: AppColors.lightGrey,
+                                  color: Theme.of(context).cardColor,
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: IconButton(
@@ -178,7 +199,8 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                                     size: AppSize.s22,
                                   ),
                                   onPressed: () {
-                                    cubit.searchHotels();
+                                    cubit.searchHotels(
+                                        text: cubit.searchController.text);
                                   },
                                 ),
                               ),
@@ -205,16 +227,14 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       LargeHeadText(
-                                        text: 'Number of Room',
-                                        size: AppSize.s16,
+                                        text: 'Choose Date',
+                                        size: FontSize.s16,
                                       ),
                                       SmallHeadText(
-                                          text:
-                                              '${DateFormat.MMMd().format(DateTime.now())} - ${DateFormat.MMMd().format(
-                                        DateTime.now().add(
-                                          Duration(days: 3),
-                                        ),
-                                      )}'),
+                                        text:
+                                            '${DateFormat.MMMd().format(DateTime.now())} - ${DateFormat.MMMd().format(DateTime.now().add(Duration(days: 3)))}',
+                                        size: FontSize.s14,
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -240,9 +260,12 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                                     children: [
                                       LargeHeadText(
                                         text: 'Number of Room',
-                                        size: AppSize.s16,
+                                        size: FontSize.s16,
                                       ),
-                                      SmallHeadText(text: '2 Room, 1 People'),
+                                      SmallHeadText(
+                                        text: '2 Room, 1 People',
+                                        size: FontSize.s14,
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -256,15 +279,15 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                 ),
               ),
             ),
-            if (cubit.isBMapClicked)
-              SliverToBoxAdapter(child: ExploreOnMap())
-            else if(cubit.hotelResults.isNotEmpty && widget.hotelData.isNotEmpty)
-              SliverToBoxAdapter()
-            else
-              SliverToBoxAdapter(
-                child: ExploreHotelAppBar(hotelData: widget.hotelData),
-              )
-            ,
+            ConditionalBuilder(
+              condition: cubit.hotelResults.length > 0,
+              builder: (context) {
+                return buildSearchList(hotelResults: cubit.hotelResults);
+              },
+              fallback: (BuildContext context) {
+                return buildHotelsImage(hotelData: widget.hotelData);
+              },
+            ),
           ],
         );
       },
