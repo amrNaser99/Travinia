@@ -21,7 +21,7 @@ class BookingHotelImage extends StatelessWidget {
           Image.asset(
             'assets/images/hotel.jpg',
             width: double.infinity,
-            fit: BoxFit.fill,
+            fit: BoxFit.fitWidth,
           ),
           BookingPopupMenu(
             bookingId: bookingId,

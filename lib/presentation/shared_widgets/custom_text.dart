@@ -16,9 +16,9 @@ class LargeHeadText extends StatelessWidget {
       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
             fontSize: size ?? FontSize.s16,
           ),
+
       ///TODO Need To Fix
       overflow: isEllipsis ? TextOverflow.ellipsis : null,
-
     );
   }
 }
@@ -72,11 +72,13 @@ class PrimaryWithStaticColorText extends StatelessWidget {
   final bool center;
   final double? size;
   final FontWeight? fontWeight;
+  final int? maxLines;
   const PrimaryWithStaticColorText(
       {super.key,
       required this.text,
       this.size,
       this.center = false,
+      this.maxLines = 2,
       this.fontWeight});
 
   @override
@@ -88,6 +90,8 @@ class PrimaryWithStaticColorText extends StatelessWidget {
           color: AppColors.white,
           fontWeight: fontWeight),
       textAlign: center ? TextAlign.center : null,
+      overflow: TextOverflow.fade,
+      maxLines: maxLines,
     );
   }
 }

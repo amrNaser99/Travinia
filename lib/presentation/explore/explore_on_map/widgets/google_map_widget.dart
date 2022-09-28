@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:travinia/core/app/bloc/app_cubit.dart';
-import 'package:travinia/core/utils/app_themes.dart';
 import 'package:travinia/presentation/explore/explore_on_map/bloc/map_cubit.dart';
 import 'package:travinia/presentation/explore/explore_on_map/bloc/map_state.dart';
 
@@ -45,36 +44,37 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
           if (State is LocationLoadingState) {
             return CircularProgressIndicator();
           }
-          return Column(
-            children: [
-              Expanded(
-                child: Stack(
-                  children: [
-                    GoogleMap(
-                      mapType: MapType.normal,
-                      initialCameraPosition:
-                          MapCubit.get(context).mylocationMark!,
-                      markers: MapCubit.get(context).markers.toSet(),
-                      onMapCreated: (GoogleMapController controller) {
-                        MapCubit.get(context)
-                            .controllerGoogleMap
-                            .complete(controller);
-                        MapCubit.get(context).newGoogleMapController =
-                            controller;
+          return BlocBuilder<MapCubit, MapStates>(
+            builder: (context, state) {
+              return Column(
+                children: [
+                  Expanded(
+                    child: Stack(
+                      children: [
+                        GoogleMap(
+                          mapType: MapType.normal,
+                          initialCameraPosition:
+                              MapCubit.get(context).mylocationMark!,
+                          markers: MapCubit.get(context).markers.toSet(),
+                          onMapCreated: (GoogleMapController controller) {
+                            MapCubit.get(context)
+                                .controllerGoogleMap
+                                .complete(controller);
+                            MapCubit.get(context).newGoogleMapController =
+                                controller;
 
-                        if (AppThemes.darkTheme == false) {
-                          MapCubit.get(context).lightThemeGoogleMap();
-                        } else {
-                          MapCubit.get(context).blackThemeGoogleMap();
-                        }
-                      },
-                      padding: EdgeInsets.only(
-                          bottom: MediaQuery.of(context).size.height * 0.70),
+                            MapCubit.get(context).blackThemeGoogleMap();
+                          },
+                          padding: EdgeInsets.only(
+                              bottom:
+                                  MediaQuery.of(context).size.height * 0.70),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
-            ],
+                  ),
+                ],
+              );
+            },
           );
         });
   }

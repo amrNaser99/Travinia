@@ -10,8 +10,6 @@ import 'package:travinia/presentation/shared_widgets/custom_button.dart';
 import '../../../../core/utils/routes.dart';
 import '../../../../services/geo_locator/geo_locator_helper.dart';
 
-import '../../../../core/utils/routes.dart';
-
 class HomeAppBarTextsAndButton extends StatelessWidget {
   final String title;
   final String description;
@@ -45,8 +43,6 @@ class HomeAppBarTextsAndButton extends StatelessWidget {
             child: CustomButton(
               text: "View Hotel",
               onPressed: () async {
-                Navigator.pushNamed(context, Routes.exploreHotels);
-                // await Permission.location.request();
                 if (await Permission.location.isGranted) {
                   GeoLocatorHelper.determinePosition();
                 } else {

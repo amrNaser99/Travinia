@@ -4,10 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:travinia/core/utils/app_color.dart';
+import 'package:travinia/core/utils/app_contstants.dart';
 import 'package:travinia/core/utils/app_spaces.dart';
 import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/core/utils/extensions/navigation_ext.dart';
-import 'package:travinia/core/utils/font_styles.dart';
 import 'package:travinia/models/hotel_model.dart';
 import 'package:travinia/presentation/explore/bloc/explore_state.dart';
 import 'package:travinia/presentation/explore/explore_hotels/widgets/build_hotels_image.dart';
@@ -47,17 +47,31 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
           scrollDirection: Axis.vertical,
           slivers: [
             SliverAppBar(
-              expandedHeight: AppHeight.h200,
+              expandedHeight: AppHeight.h250,
               stretch: true,
               floating: true,
               pinned: true,
-              leading: IconButton(
-                onPressed: () {
-                  context.pop;
-                },
-                icon: Icon(FontAwesomeIcons.arrowLeftLong),
+              leadingWidth: double.infinity,
+              leading: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      context.pop;
+                    },
+                    icon: Icon(Icons.adaptive.arrow_back),
+                  ),
+                  LargeHeadText(text: 'Explore'),
+                ],
               ),
               actions: [
+                IconButton(
+                  icon: Icon(
+                    size: 25.0,
+                    Icons.favorite_border_rounded,
+                  ),
+                  onPressed: () {},
+                ),
                 IconButton(
                   icon: Icon(
                     FontAwesomeIcons.mapLocation,
@@ -78,23 +92,20 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
               bottom: PreferredSize(
                 preferredSize: Size(
                   MediaQuery.of(context).size.width,
-                  AppHeight.h90,
+                  AppHeight.h60,
                 ),
                 child: Column(
                   children: [
-                    Container(
-                      width: double.infinity,
-                      height: 1,
-                      color: AppColors.lightGrey,
-                    ),
+                    Divider(),
                     Container(
                       width: MediaQuery.of(context).size.width,
-                      padding: EdgeInsets.symmetric(horizontal: 16),
                       child: Column(
                         children: [
-                          Row(
-                            children: [
-                              if (cubit.hotelResults.isNotEmpty)
+                          Padding(
+                            padding:
+                                EdgeInsets.symmetric(horizontal: AppSize.s16),
+                            child: Row(
+                              children: [
                                 ConditionalBuilder(
                                   condition: cubit.hotelResults.isNotEmpty,
                                   builder: (context) => Expanded(
@@ -102,7 +113,7 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                                     child: SmallHeadText(
                                       text:
                                           '${cubit.hotelResults.length} Hotel Found',
-                                      size: FontSize.s16,
+                                      size: FontSize.s13,
                                     ),
                                   ),
                                   fallback: (BuildContext context) => Expanded(
@@ -110,34 +121,34 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                                     child: SmallHeadText(
                                       text:
                                           '${widget.hotelData.length} Hotel Found',
-                                      size: FontSize.s16,
+                                      size: FontSize.s13,
                                     ),
                                   ),
                                 ),
-                              Spacer(),
-                              Expanded(
-                                child: IconButton(
+                                Expanded(
+                                  child: RawMaterialButton(
                                     onPressed: () {
-                                      ///TODO: Push to Filter Screen
-                                      // Navigator.pushNamed(context, Routes.filter);
+                                      Navigator.pushNamed(
+                                        context,
+                                        Routes.filter,
+                                      );
                                     },
-                                    icon: Row(
+                                    child: Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
-                                      mainAxisSize: MainAxisSize.min,
                                       children: [
                                         SmallHeadText(
                                             text: 'Filter', size: FontSize.s14),
-                                        SizedBox(
-                                          width: 4,
-                                        ),
+                                        AppSpaces.hSpace10,
                                         Icon(
                                           Icons.filter_list_outlined,
                                           color: AppColors.appColor,
                                         ),
                                       ],
-                                    )),
-                              )
-                            ],
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -160,19 +171,19 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Padding(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: AppSize.s16),
-                          child: Row(
-                            children: [
-                              Expanded(
+                        AppSpaces.vSpace20,
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: EdgeInsets.only(left: AppSize.s16),
                                 child: Container(
                                   height: 50,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
+                                    boxShadow: AppConst.shadow,
                                   ),
                                   child: CustomTextField(
-                                    hintText: 'London',
+                                    hintText: 'London...',
                                     validatorText: 'Please fill the Field',
                                     controller:
                                         BlocProvider.of<ExploreCubit>(context)
@@ -184,34 +195,27 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                                   ),
                                 ),
                               ),
-                              AppSpaces.hSpace10,
-                              Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                  color: Theme.of(context).cardColor,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: IconButton(
-                                  icon: Icon(
-                                    FontAwesomeIcons.magnifyingGlassLocation,
-                                    color: Colors.grey,
-                                    size: AppSize.s22,
-                                  ),
-                                  onPressed: () {
-                                    cubit.searchHotels(
-                                        text: cubit.searchController.text);
-                                  },
+                            ),
+                            SizedBox(
+                              height: 50.0,
+                              child: RawMaterialButton(
+                                onPressed: () {},
+                                elevation: 0.0,
+                                fillColor: AppColors.appColor,
+                                shape: CircleBorder(),
+                                child: Icon(
+                                  color: AppColors.white,
+                                  Icons.search_rounded,
                                 ),
                               ),
-                            ],
-                          ),
+                            )
+                          ],
                         ),
                         SizedBox(
                           height: 10,
                         ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             InkWell(
                               onTap: () {
@@ -226,24 +230,20 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      LargeHeadText(
+                                      PrimaryText(
                                         text: 'Choose Date',
-                                        size: FontSize.s16,
+                                        size: FontSize.s13,
                                       ),
+                                      AppSpaces.vSpace10,
                                       SmallHeadText(
                                         text:
                                             '${DateFormat.MMMd().format(DateTime.now())} - ${DateFormat.MMMd().format(DateTime.now().add(Duration(days: 3)))}',
-                                        size: FontSize.s14,
+                                        size: FontSize.s13,
                                       ),
                                     ],
                                   ),
                                 ),
                               ),
-                            ),
-                            Container(
-                              height: 50,
-                              width: 1,
-                              color: AppColors.grey,
                             ),
                             InkWell(
                               onTap: () {
@@ -254,17 +254,28 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                                 child: Padding(
                                   padding: EdgeInsets.symmetric(
                                       horizontal: AppSize.s16),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                  child: Row(
                                     children: [
-                                      LargeHeadText(
-                                        text: 'Number of Room',
-                                        size: FontSize.s16,
+                                      Container(
+                                        height: 50,
+                                        width: 1,
+                                        color: Theme.of(context).canvasColor,
                                       ),
-                                      SmallHeadText(
-                                        text: '2 Room, 1 People',
-                                        size: FontSize.s14,
+                                      AppSpaces.hSpace20,
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          PrimaryText(
+                                            text: 'Number of Room',
+                                            size: FontSize.s14,
+                                          ),
+                                          AppSpaces.vSpace10,
+                                          SmallHeadText(
+                                            text: '2 Room, 1 People',
+                                            size: FontSize.s14,
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
