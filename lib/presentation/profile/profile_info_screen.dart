@@ -16,7 +16,6 @@ class ProfileInfoScreen extends StatefulWidget {
 }
 
 class _ProfileInfoScreenState extends State<ProfileInfoScreen> {
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit, AuthState>(
@@ -25,11 +24,12 @@ class _ProfileInfoScreenState extends State<ProfileInfoScreen> {
         // final userModel =
         //     ModalRoute.of(context)!.settings.arguments as UserModel;
         UserModel? userModel = AuthCubit.get(context).userModel;
-        return  Scaffold(
-          appBar: AppBar(leading: Text(''),),
+        return Scaffold(
+          appBar: AppBar(
+            leading: Text(''),
+          ),
           body: ConditionalBuilder(
-            condition: state != UserLoginLoadingState() &&
-                userModel != null,
+            condition: state != UserLoginLoadingState() && userModel != null,
             builder: (BuildContext context) {
               return ProfileBody(
                 userModel: userModel!,

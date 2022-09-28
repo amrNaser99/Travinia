@@ -12,7 +12,11 @@ class PopUpInfo {
 }
 
 class BookingPopupMenu extends StatelessWidget {
-  const BookingPopupMenu({Key? key}) : super(key: key);
+  final int bookingId;
+  final int index;
+  const BookingPopupMenu(
+      {Key? key, required this.bookingId, required this.index})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +31,16 @@ class BookingPopupMenu extends StatelessWidget {
             borderSide: BorderSide(
               color: Theme.of(context).scaffoldBackgroundColor,
             )),
-        //color: !cubit.isDarkMode?const Color(0xff010108):Colors.white,
         color: Theme.of(context).scaffoldBackgroundColor,
         elevation: 2,
         enabled: true,
         onSelected: (PopUpInfo value) {
-          debugPrint(value.toString());
-          //cubit.deletePost(index: index);
+          // cubit.updateBooking(
+          //   booking_id: bookingId,
+          //   type: value.text.toLowerCase(),
+          //   index: index,
+          // );
+          debugPrint(value.text.toLowerCase());
         },
         itemBuilder: (context) {
           return items.map((PopUpInfo choice) {

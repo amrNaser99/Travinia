@@ -10,20 +10,27 @@ class HotelNameLocation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        LargeHeadText(
-          text: name,
-          size: FontSize.s15,
-        ),
-        SecondaryText(
-          text: location,
-          size: FontSize.s12,
-          isLight: true,
-        ),
-      ],
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Flexible(
+            child: LargeHeadText(
+              text: name,
+              size: FontSize.s15,
+            ),
+          ),
+          Flexible(
+            child: SecondaryText(
+              text: location,
+              size: FontSize.s12,
+              isLight: true,
+              maxLines: 2,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

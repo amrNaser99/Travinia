@@ -5,7 +5,6 @@ abstract class AuthState {}
 
 class AuthInitial extends AuthState {}
 
-
 class UserLoginLoadingState extends AuthState {}
 
 class UserLoginSuccessState extends AuthState {
@@ -13,6 +12,7 @@ class UserLoginSuccessState extends AuthState {
 
   UserLoginSuccessState(this.userModel);
 }
+
 class UserLoginErrorState extends AuthState {
   final String error;
 
@@ -22,17 +22,16 @@ class UserLoginErrorState extends AuthState {
 class UserRegisterLoadingState extends AuthState {}
 
 class UserRegisterSuccessState extends AuthState {}
+
 class UserRegisterErrorState extends AuthState {
   final String error;
 
   UserRegisterErrorState(this.error);
 }
 
-
 class UserProfileLoadingState extends AuthState {}
 
 class UserProfileSuccessState extends AuthState {}
-
 
 class ErrorState extends AuthState {
   final PrimaryServerException exception;
@@ -43,8 +42,3 @@ class ErrorState extends AuthState {
 }
 
 class AuthPasswordVisibilityState extends AuthState {}
-
-
-
-
-
