@@ -10,7 +10,7 @@ import 'package:travinia/core/utils/routes.dart';
 import 'package:travinia/presentation/auth/bloc/auth_cubit.dart';
 import 'package:travinia/presentation/booking/bloc/booking_cubit.dart';
 import 'package:travinia/presentation/explore/bloc/explore_cubit.dart';
-import 'package:travinia/presentation/main/main_screen.dart';
+
 import '../../presentation/explore/explore_on_map/bloc/map_cubit.dart';
 
 class TraviniaApp extends StatelessWidget {
@@ -47,11 +47,10 @@ class TraviniaApp extends StatelessWidget {
                 return MaterialApp(
                   title: AppStrings.appName,
                   debugShowCheckedModeBanner: false,
-                  // theme: AppThemes.lightTheme,
-                  theme: AppThemes.darkTheme,
+                  theme: AppThemes.lightTheme,
+                  // theme: AppThemes.darkTheme,
                   routes: Routes.routes,
-                  home: MainScreen(),
-                  // initialRoute: Routes.onBoarding,
+                  initialRoute: Routes.onBoarding,
                 );
               },
             ),

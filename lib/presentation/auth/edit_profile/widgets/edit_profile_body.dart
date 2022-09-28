@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:travinia/core/utils/app_contstants.dart';
 import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/core/utils/font_styles.dart';
+import 'package:travinia/presentation/shared_widgets/custom_text.dart';
 
 import '../../../../core/utils/app_color.dart';
 import '../../../../core/utils/app_spaces.dart';
@@ -25,12 +26,9 @@ class EditProfileBody extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(
-                'Edit Profile',
-                style: getBoldStyle(
-                  fontColor: AppColors.white,
-                  fontSize: 30,
-                ),
+              LargeHeadText(
+                text: 'Edit Profile',
+                size: AppSize.s20,
               ),
             ],
           ),
@@ -106,24 +104,21 @@ Widget ProfileInfoItem({
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(
-                child: Text(
-                  itemText,
-                  style: getMediumStyle(
-                    fontColor: AppColors.grey,
-                    fontSize: AppSize.s15,
-                  ),
+                child: PrimaryText(
+                  text: itemText,
+                  size: AppSize.s15,
+
                 ),
                 flex: 1,
               ),
               Expanded(
                 flex: 2,
-                child: Text(
-                  textAlign: TextAlign.end,
-                  Data,
-                  style: getSemiBoldStyle(
-                    fontColor: AppColors.white,
-                  ),
-                ),
+                child: Align(
+                    alignment: AlignmentDirectional.centerEnd,
+                    child: LargeHeadText(
+                      text: Data,
+                      size: AppSize.s15,
+                    )),
               ),
             ],
           ),

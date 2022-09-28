@@ -1,3 +1,4 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -10,9 +11,13 @@ import 'package:travinia/core/utils/font_styles.dart';
 import 'package:travinia/models/hotel_model.dart';
 import 'package:travinia/presentation/explore/bloc/explore_state.dart';
 import 'package:travinia/presentation/explore/explore_hotels/widgets/build_hotels_image.dart';
+import 'package:travinia/presentation/explore/explore_hotels/widgets/build_search_image.dart';
 import 'package:travinia/presentation/explore/explore_on_map/explore_map_screen.dart';
+import 'package:travinia/presentation/shared_widgets/custom_text.dart';
 import 'package:travinia/presentation/shared_widgets/custom_text_field.dart';
 
+import '../../../../core/utils/app_fonts.dart';
+import '../../../../core/utils/routes.dart';
 import '../../bloc/explore_cubit.dart';
 
 class ExploreHotelAppBar extends StatefulWidget {
@@ -57,10 +62,13 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                   icon: Icon(
                     FontAwesomeIcons.mapLocation,
                   ),
-
-                  ///TODO: Add Map
                   onPressed: () {
-                    cubit.changeBMapClicked();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ExploreOnMap(),
+                      ),
+                    );
                   },
                 ),
                 AppSpaces.hSpace10,
@@ -86,23 +94,39 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                         children: [
                           Row(
                             children: [
-                              Expanded(
-                                flex: 2,
-                                child: Text(
-                                  '${widget.hotelData.length} Hotel Found',
-                                  style: getSemiBoldStyle(
-                                      fontColor: AppColors.white),
+                              if (cubit.hotelResults.isNotEmpty)
+                                ConditionalBuilder(
+                                  condition: cubit.hotelResults.isNotEmpty,
+                                  builder: (context) => Expanded(
+                                    flex: 2,
+                                    child: SmallHeadText(
+                                      text:
+                                          '${cubit.hotelResults.length} Hotel Found',
+                                      size: FontSize.s16,
+                                    ),
+                                  ),
+                                  fallback: (BuildContext context) => Expanded(
+                                    flex: 2,
+                                    child: SmallHeadText(
+                                      text:
+                                          '${widget.hotelData.length} Hotel Found',
+                                      size: FontSize.s16,
+                                    ),
+                                  ),
                                 ),
-                              ),
                               Spacer(),
                               Expanded(
                                 child: IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      ///TODO: Push to Filter Screen
+                                      // Navigator.pushNamed(context, Routes.filter);
+                                    },
                                     icon: Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        Text('Filter'),
+                                        SmallHeadText(
+                                            text: 'Filter', size: FontSize.s14),
                                         SizedBox(
                                           width: 4,
                                         ),
@@ -154,6 +178,9 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                                         BlocProvider.of<ExploreCubit>(context)
                                             .searchController,
                                     inputType: TextInputType.text,
+                                    onFeildSubmitted: (value) {
+                                      cubit.searchHotels(text: value);
+                                    },
                                   ),
                                 ),
                               ),
@@ -162,7 +189,7 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                                 height: 50,
                                 width: 50,
                                 decoration: BoxDecoration(
-                                  color: AppColors.lightGrey,
+                                  color: Theme.of(context).cardColor,
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: IconButton(
@@ -171,7 +198,10 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                                     color: Colors.grey,
                                     size: AppSize.s22,
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    cubit.searchHotels(
+                                        text: cubit.searchController.text);
+                                  },
                                 ),
                               ),
                             ],
@@ -196,19 +226,14 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        'Choose Date',
-                                        style: getSemiBoldStyle(
-                                          fontColor: AppColors.secondGrey,
-                                          fontSize: AppSize.s16,
-                                        ),
+                                      LargeHeadText(
+                                        text: 'Choose Date',
+                                        size: FontSize.s16,
                                       ),
-                                      Text(
-                                        '${DateFormat.MMMd().format(DateTime.now())} - ${DateFormat.MMMd().format(DateTime.now().add(Duration(days: 3)))}',
-                                        style: getRegularStyle(
-                                          fontColor: AppColors.white,
-                                          fontSize: AppSize.s15,
-                                        ),
+                                      SmallHeadText(
+                                        text:
+                                            '${DateFormat.MMMd().format(DateTime.now())} - ${DateFormat.MMMd().format(DateTime.now().add(Duration(days: 3)))}',
+                                        size: FontSize.s14,
                                       ),
                                     ],
                                   ),
@@ -233,19 +258,13 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        'Number of Room',
-                                        style: getSemiBoldStyle(
-                                          fontColor: AppColors.secondGrey,
-                                          fontSize: AppSize.s16,
-                                        ),
+                                      LargeHeadText(
+                                        text: 'Number of Room',
+                                        size: FontSize.s16,
                                       ),
-                                      Text(
-                                        '2 Room, 1 People',
-                                        style: getRegularStyle(
-                                          fontColor: AppColors.white,
-                                          fontSize: AppSize.s15,
-                                        ),
+                                      SmallHeadText(
+                                        text: '2 Room, 1 People',
+                                        size: FontSize.s14,
                                       ),
                                     ],
                                   ),
@@ -260,10 +279,15 @@ class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
                 ),
               ),
             ),
-            if (cubit.isBMapClicked == true)
-              ExploreOnMap()
-            else
-              buildHotelsImage(hotelData: widget.hotelData),
+            ConditionalBuilder(
+              condition: cubit.hotelResults.length > 0,
+              builder: (context) {
+                return buildSearchList(hotelResults: cubit.hotelResults);
+              },
+              fallback: (BuildContext context) {
+                return buildHotelsImage(hotelData: widget.hotelData);
+              },
+            ),
           ],
         );
       },

@@ -39,7 +39,7 @@ class AppThemes {
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
       elevation: 0,
-      foregroundColor: AppColors.teal,
+      // foregroundColor: AppColors.teal,
       textStyle: getMediumStyle(
         fontColor: AppColors.white,
         fontSize: FontSize.s15,

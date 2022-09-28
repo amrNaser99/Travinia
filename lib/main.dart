@@ -11,7 +11,9 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   init();
   DioTest.init();
+
   Position position = await GeoLocatorHelper.determinePosition();
   Bloc.observer = MyBlocObserver();
+
   runApp(const TraviniaApp());
 }

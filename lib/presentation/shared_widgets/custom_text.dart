@@ -16,8 +16,9 @@ class LargeHeadText extends StatelessWidget {
       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
             fontSize: size ?? FontSize.s16,
           ),
-      // /TODO Need To Fix
+      ///TODO Need To Fix
       overflow: isEllipsis ? TextOverflow.ellipsis : null,
+
     );
   }
 }

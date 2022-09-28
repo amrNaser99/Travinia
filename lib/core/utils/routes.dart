@@ -20,6 +20,7 @@ class Routes {
   static const String exploreHotels = '/exploreHotels';
   static const String exploreOnMap = '/exploreOnMap';
   static const String editProfile = '/edit_profile';
+  // static const String filter = '/filter';
 
   static Map<String, WidgetBuilder> get routes {
     return {
@@ -30,6 +31,7 @@ class Routes {
       exploreHotels: (context) => const ExploreHotelScreen(),
       exploreOnMap: (context) => ExploreOnMap(),
       hotelDetailsScreen: (context) => const HotelDetailsScreen(),
+      // filter: (context) => const FilterScreen(),
       editProfile: (context) => EditProfile(
             userModel: BlocProvider.of<AuthCubit>(context).userModel!,
           ),

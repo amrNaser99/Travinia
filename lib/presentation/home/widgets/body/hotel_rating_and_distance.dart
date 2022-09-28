@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:travinia/core/utils/app_color.dart';
 import 'package:travinia/core/utils/app_fonts.dart';
 import 'package:travinia/core/utils/app_values.dart';

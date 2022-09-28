@@ -73,7 +73,8 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   UserModel? userModel;
-  String? token;
+
+  // String? token;
 
   void userLogin({
     required String email,
@@ -96,8 +97,8 @@ class AuthCubit extends Cubit<AuthState> {
       (r) async {
         loginModel = r;
         userModel = r.data;
-        token = r.data?.token;
-        debugPrint('token: ${token}');
+        userToken = r.data!.token!;
+        debugPrint('token: ${userToken}');
         emit(UserLoginSuccessState(r.data!));
       },
     );

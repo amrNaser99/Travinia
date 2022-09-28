@@ -7,6 +7,7 @@ import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/core/utils/font_styles.dart';
 import 'package:travinia/core/utils/routes.dart';
 import 'package:travinia/models/user_model.dart';
+import 'package:travinia/presentation/shared_widgets/custom_text.dart';
 
 class ProfileBody extends StatelessWidget {
   final UserModel userModel;
@@ -41,14 +42,7 @@ class ProfileBody extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        // 'Amanda',
-                        userModel.name!,
-                        style: getBoldStyle(
-                          fontColor: AppColors.white,
-                          fontSize: 25,
-                        ),
-                      ),
+                      LargeHeadText(text: userModel.name!,size: AppSize.s20,),
                       AppSpaces.vSpace5,
                       Text(
                         'View and Edit Profile',
@@ -94,7 +88,10 @@ class ProfileBody extends StatelessWidget {
                 itemText: 'Permissions',
                 icon: FontAwesomeIcons.personMilitaryPointing,
                 onTap: () {
-                  cubit.changeAppThemeColor();
+                  AppCubit.get(context).getBooking(
+                    context: context,
+                    bookType: BookingType.upcomming,
+                    bookCount: 10,);
                 },
               ),
               ProfileItem(
@@ -163,13 +160,7 @@ Widget ProfileItem({
               children: [
                 Expanded(
                   flex: 6,
-                  child: Text(
-                    itemText,
-                    style: getMediumStyle(
-                      fontColor: AppColors.offWhite,
-                      fontSize: 20,
-                    ),
-                  ),
+                  child: LargeHeadText(text: itemText,),
                 ),
                 Expanded(
                   flex: 1,

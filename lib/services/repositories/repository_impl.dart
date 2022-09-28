@@ -90,12 +90,15 @@ class RepositoryImplementation extends Repository {
       final response = await dioHelper.get(
         endPoint: getBookingEndPoint,
         token: token,
+        options: Options(
+          headers: {"token": '$token'},
+        ),
         data: {
           'type': bookType,
           'count': bookCount,
+          'token': '$token',
         },
       );
-      // ['data']
       return BookingModel.fromJson(response);
     }, onPrimaryServerException: (e) async {
       print("ERROR=======>${e.toString()}");
@@ -195,6 +198,23 @@ class RepositoryImplementation extends Repository {
     }, onPrimaryServerException: (e) async {
       return e;
     });
+    // {
+    //   return handlingRequestResult(
+    //       onSuccess: () async {
+    //     final response =  await dioHelper.get(
+    //       endPoint: searchHotelsEndPoint,
+    //       data: {
+    //         'name': name,
+    //       },
+    //     );
+
+    //     return  HotelsModel.fromJson(response);
+    //   },
+    //       onPrimaryServerException: (e) async {
+
+    //     return e;
+    //   });
+    // }
   }
 
   @override
