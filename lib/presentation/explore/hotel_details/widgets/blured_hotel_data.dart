@@ -1,7 +1,7 @@
 import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:travinia/presentation/explore/bloc/explore_cubit.dart';
+import 'package:travinia/presentation/explore/hotel_details/cubit/hotel_details_page_cubit.dart';
 import 'package:travinia/presentation/explore/hotel_details/widgets/confirm_booking_modal_sheet.dart';
 
 import '../../../../core/utils/app_color.dart';
@@ -13,7 +13,7 @@ import '../../../shared_widgets/custom_text.dart';
 import 'more_details_button.dart';
 
 class BluredHotelDataContainer extends StatelessWidget {
-  final ExploreCubit hotelDetailsCubit;
+  final HotelDetailsPageCubit hotelDetailsCubit;
   final HotelModel hotelModel;
   final BuildContext hotelDetailsScreenContext;
   const BluredHotelDataContainer({
@@ -38,11 +38,11 @@ class BluredHotelDataContainer extends StatelessWidget {
                   borderRadius: BorderRadius.circular(25.0),
                   blurColor: Colors.transparent,
                   child: Container(
-                    height: AppHeight.h170,
+                    height: AppHeight.h190,
                   ),
                 ),
                 Container(
-                  height: AppHeight.h170,
+                  height: AppHeight.h190,
                   padding: EdgeInsetsDirectional.all(25.0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(25.0),
@@ -54,10 +54,12 @@ class BluredHotelDataContainer extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          PrimaryWithStaticColorText(
-                            text: hotelModel.name,
-                            size: AppSize.s15,
-                            fontWeight: FontWeight.bold,
+                          Expanded(
+                            child: PrimaryWithStaticColorText(
+                              text: hotelModel.name,
+                              size: AppSize.s15,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,21 +77,27 @@ class BluredHotelDataContainer extends StatelessWidget {
                           )
                         ],
                       ),
-                      Row(
-                        children: [
-                          PrimaryWithStaticColorText(
-                            text: '${hotelModel.address}',
-                            size: AppSize.s12,
-                          ),
-                          Icon(
-                            Icons.location_on,
-                            color: AppColors.appColor,
-                          ),
-                          PrimaryWithStaticColorText(
-                            text: '2.0 Km to city',
-                            size: AppSize.s12,
-                          ),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: PrimaryWithStaticColorText(
+                                text: '${hotelModel.address}',
+                                size: AppSize.s12,
+                              ),
+                            ),
+                            Icon(
+                              Icons.location_on,
+                              color: AppColors.appColor,
+                            ),
+                            PrimaryWithStaticColorText(
+                              text: '2.0 Km to city',
+                              size: AppSize.s12,
+                            ),
+                          ],
+                        ),
                       ),
                       Rating(rate: hotelModel.rate),
                       AppSpaces.vSpace10,

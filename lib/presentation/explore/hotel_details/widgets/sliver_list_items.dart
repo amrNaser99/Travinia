@@ -28,16 +28,34 @@ class SliverListItems extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        LargeHeadText(text: hotelModel.name, isEllipsis: false),
+                        AppSpaces.vSpace10,
+                        SecondaryText(
+                          isEllipsis: false,
+                          maxLines: 10,
+                          text: hotelModel.address,
+                          size: AppSize.s10,
+                        ),
+                      ],
+                    ),
+                  ),
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      LargeHeadText(text: hotelModel.name),
+                      LargeHeadText(text: '\$${hotelModel.price}'),
+                      Padding(
+                        padding: EdgeInsets.only(top: AppHeight.h5),
+                        child: SecondaryText(
+                          text: '/per night',
+                          size: AppSize.s10,
+                        ),
+                      ),
                       Row(
                         children: [
-                          SecondaryText(
-                            text: hotelModel.address,
-                            size: AppSize.s10,
-                          ),
                           Icon(
                             Icons.location_on,
                             color: AppColors.appColor,
@@ -47,17 +65,6 @@ class SliverListItems extends StatelessWidget {
                             size: AppSize.s10,
                           ),
                         ],
-                      ),
-                    ],
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      LargeHeadText(text: '\$${hotelModel.price}'),
-                      Padding(
-                        padding: EdgeInsets.only(top: AppHeight.h5),
-                        child: SecondaryText(
-                            text: '/per night', size: AppSize.s10),
                       )
                     ],
                   ),

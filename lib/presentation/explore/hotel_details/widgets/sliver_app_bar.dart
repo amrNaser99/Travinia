@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/core/utils/extensions/height_ext.dart';
 import 'package:travinia/core/utils/extensions/navigation_ext.dart';
-import 'package:travinia/presentation/explore/bloc/explore_cubit.dart';
+import 'package:travinia/presentation/explore/hotel_details/cubit/hotel_details_page_cubit.dart';
 import 'package:travinia/presentation/explore/hotel_details/widgets/flexable_space_bar.dart';
 
 import '../../../../core/utils/app_color.dart';
@@ -11,7 +11,7 @@ import '../../../../core/utils/app_values.dart';
 import '../../../../models/hotel_model.dart';
 
 class SliverAppBarWidget extends StatelessWidget {
-  final ExploreCubit hotelDetailsCubit;
+  final HotelDetailsPageCubit hotelDetailsCubit;
   final HotelModel hotelModel;
   final BuildContext hotelDetailsScreenContext;
   const SliverAppBarWidget({

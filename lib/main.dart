@@ -12,8 +12,8 @@ Future<void> main() async {
   init();
   DioTest.init();
 
-  Position position = await GeoLocatorHelper.determinePosition();
   Bloc.observer = MyBlocObserver();
 
   runApp(const TraviniaApp());
+  Position position = await GeoLocatorHelper.determinePosition();
 }

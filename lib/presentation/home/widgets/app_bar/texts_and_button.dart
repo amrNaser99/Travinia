@@ -43,8 +43,6 @@ class HomeAppBarTextsAndButton extends StatelessWidget {
             child: CustomButton(
               text: "View Hotel",
               onPressed: () async {
-                Navigator.pushNamed(context, Routes.exploreHotels);
-                // await Permission.location.request();
                 if (await Permission.location.isGranted) {
                   GeoLocatorHelper.determinePosition();
                 } else {
