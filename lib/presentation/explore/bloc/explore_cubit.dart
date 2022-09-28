@@ -29,7 +29,6 @@ class ExploreCubit extends Cubit<ExploreState> {
       name: text,
     );
     response.fold((l) {
-
       searchController.clear();
       showToast(message: l.message);
       emit(ErrorState(exception: l));
@@ -46,6 +45,7 @@ class ExploreCubit extends Cubit<ExploreState> {
   double opacityValue = 1.0;
 
   void changeOpacityValue() {
+    opacityValue = 1.0;
     scrollController.addListener(() {
       setOpacityValue();
       emit(ChangeOpacityState());
@@ -80,9 +80,8 @@ class ExploreCubit extends Cubit<ExploreState> {
 
   // create Data Range function
   void changeDateRange() {
-     CrCalendar(
+    CrCalendar(
       controller: calendarController,
-
       initialDate: DateTime.now(),
     );
   }

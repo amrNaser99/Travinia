@@ -15,21 +15,27 @@ class _CheckBoxLabelState extends State<CheckBoxLabel> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Row(
-        children: [
-          Checkbox(
-            side: BorderSide(color: Theme.of(context).dividerColor),
-            value: isChecked,
-            onChanged: ((value) {
-              setState(() => isChecked = value!);
-            }),
-          ),
-          Text(
-            widget.text,
-            style: TextStyle(
-                fontSize: FontSize.s16, fontWeight: FontWeightManager.medium),
-          )
-        ],
+      child: Expanded(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Checkbox(
+              side: BorderSide(color: Theme.of(context).dividerColor),
+              value: isChecked,
+              onChanged: ((value) {
+                setState(() => isChecked = value!);
+              }),
+            ),
+            Expanded(
+              child: Text(
+                widget.text,
+                style: TextStyle(
+                    fontSize: FontSize.s16,
+                    fontWeight: FontWeightManager.medium),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
