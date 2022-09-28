@@ -7,7 +7,6 @@ import 'package:travinia/presentation/shared_widgets/custom_text.dart';
 
 import '../../../../core/utils/app_color.dart';
 
-
 class MoreDetailsButton extends StatelessWidget {
   final ExploreCubit hotelScreenCubit;
   const MoreDetailsButton({Key? key, required this.hotelScreenCubit})

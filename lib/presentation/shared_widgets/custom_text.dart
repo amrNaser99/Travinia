@@ -98,6 +98,7 @@ class SecondaryText extends StatelessWidget {
   final bool isLight;
   final bool isButton;
   final bool isEllipsis;
+  final int maxLines;
   const SecondaryText({
     super.key,
     required this.text,
@@ -106,6 +107,7 @@ class SecondaryText extends StatelessWidget {
     this.isLight = false,
     this.isButton = false,
     this.isEllipsis = true,
+    this.maxLines = 1,
   });
 
   @override
@@ -120,6 +122,7 @@ class SecondaryText extends StatelessWidget {
               : null),
       textAlign: center ? TextAlign.center : null,
       overflow: isEllipsis ? TextOverflow.ellipsis : null,
+      maxLines: maxLines,
     );
   }
 }

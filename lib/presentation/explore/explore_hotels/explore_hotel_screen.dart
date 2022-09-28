@@ -13,10 +13,8 @@ class ExploreHotelScreen extends StatefulWidget {
   State<ExploreHotelScreen> createState() => _ExploreHotelScreenState();
 }
 
-
 class _ExploreHotelScreenState extends State<ExploreHotelScreen> {
   @override
-
   initState() {
     super.initState();
     BlocProvider.of<AppCubit>(context).getHotels();

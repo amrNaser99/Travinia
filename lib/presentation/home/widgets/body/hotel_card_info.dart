@@ -63,7 +63,6 @@ class _HotelCardInfoState extends State<HotelCardInfo> {
                               location: widget.hotel.address,
                               name: widget.hotel.name,
                             ),
-                            Spacer(),
                             HotelDistanceAndRating(
                               distance: GeoLocatorHelper.myLocation != null
                                   ? GeoLocatorHelper.getDistanceFrom(location)

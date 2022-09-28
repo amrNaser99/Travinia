@@ -17,9 +17,9 @@ class DioTest {
     );
   }
 
-  static Future<Response> getBooking() {
+  static Future<Response> getBooking({required String type}) {
     return dio!.get("get-bookings", queryParameters: {
-      "type": "completed",
+      "type": type,
     });
   }
 

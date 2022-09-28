@@ -22,7 +22,8 @@ class buildSearchBar extends StatelessWidget {
               child: CustomTextField(
                 hintText: 'London',
                 validatorText: 'Please fill the Field',
-                controller: BlocProvider.of<ExploreCubit>(context).searchController,
+                controller:
+                    BlocProvider.of<ExploreCubit>(context).searchController,
                 inputType: TextInputType.text,
               ),
             ),

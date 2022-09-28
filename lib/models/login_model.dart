@@ -1,4 +1,3 @@
-
 import 'package:travinia/models/status_model.dart';
 import 'package:travinia/models/user_model.dart';
 

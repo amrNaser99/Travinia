@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travinia/models/booking_model.dart';
 import 'package:travinia/models/booking_screen_info.dart';
+import 'package:travinia/models/status_model.dart';
+import 'package:travinia/models/update_booking_model/update_booking_model.dart';
 import 'package:travinia/presentation/booking/bloc/booking_states.dart';
 import 'package:travinia/presentation/booking/widgets/pop_up_menu.dart';
 import 'package:travinia/presentation/main/dio_test.dart';
@@ -17,52 +20,55 @@ class BookingCubit extends Cubit<BookingState> {
     BookingScreenInfo(
       title: "Completed",
       bookingList: [],
+      loadingList: [],
     ),
     BookingScreenInfo(
       title: "Upcomming",
       bookingList: [],
+      loadingList: [],
     ),
     BookingScreenInfo(
       title: "Cancelled",
       bookingList: [],
+      loadingList: [],
     ),
   ];
   // TabController? controller;
   List<List<PopUpInfo>> popUpList = [
     [
       PopUpInfo(
-        text: "Upcomming",
-        icon: Icons.alarm,
-        color: Colors.green,
+        text: "Upcoming",
+        icon: Icons.upcoming,
+        color: Colors.amber,
       ),
       PopUpInfo(
-        text: "Cancel",
-        icon: Icons.library_add,
-        color: Colors.pink,
-      ),
-    ],
-    [
-      PopUpInfo(
-        text: "Completed",
-        icon: Icons.alarm,
-        color: Colors.green,
-      ),
-      PopUpInfo(
-        text: "Cancel",
-        icon: Icons.library_add,
-        color: Colors.pink,
+        text: "Cancelled",
+        icon: Icons.cancel_outlined,
+        color: Colors.red,
       ),
     ],
     [
       PopUpInfo(
         text: "Completed",
-        icon: Icons.alarm,
+        icon: Icons.done_all_outlined,
         color: Colors.green,
       ),
       PopUpInfo(
-        text: "Upcomming",
-        icon: Icons.library_add,
-        color: Colors.pink,
+        text: "Cancelled",
+        icon: Icons.cancel_outlined,
+        color: Colors.red,
+      ),
+    ],
+    [
+      PopUpInfo(
+        text: "Completed",
+        icon: Icons.done_all_outlined,
+        color: Colors.green,
+      ),
+      PopUpInfo(
+        text: "Upcoming",
+        icon: Icons.upcoming,
+        color: Colors.amber,
       ),
     ],
   ];
@@ -73,87 +79,84 @@ class BookingCubit extends Cubit<BookingState> {
   int tabBarIndex = 0;
   void changeTabBar(int index) {
     tabBarIndex = index;
+    // if (index == 0) {}
     emit(ChangeTabBar());
+  }
+
+  void updateBooking({
+    required int booking_id,
+    required String type,
+    required int index,
+  }) async {
+    emit(UpdateBookingsLoading());
+    bookings[tabBarIndex].loadingList.add(index);
+    final response = await repository.updateBooking(
+      booking_id: booking_id,
+      type: type,
+    );
+
+    response.fold(
+      (exception) {
+        bookings[tabBarIndex].loadingList.remove(index);
+        emit(ErrorState());
+      },
+      (updateBookingModel) {
+        bookings[tabBarIndex].loadingList.remove(index);
+        getAllBookings(isUpdate: true, updateBookingModel: updateBookingModel);
+        // print("UPDATED =====> ${statusModel.}");
+        // emit(UpdateBookingsSuccess());
+      },
+    );
   }
 
   void getCompletedBookings() {
     emit(CompletedBookingsLoading());
-    DioTest.getBooking().then((value) {
+    DioTest.getBooking(type: 'completed').then((value) {
+      BookingModel bookingModel = BookingModel.fromJson(value.data);
+      bookings[0].bookingList = bookingModel.Data!.data!;
       print("DONE ===> ${value}");
       emit(CompletedBookingsSuccess());
     }).catchError((error) {
       print("ERROR");
       emit(ErrorState());
     });
-
-    // final response = await repository.getBooking(
-    //   bookType: "completed",
-    //   token: token,
-    //   bookCount: 10,
-    // );
-    // response.fold(
-    //   (l) => emit(ErrorState()),
-    //   (r) {
-    //     bookings[0].bookingList = r.Data!.data!;
-    //     emit(CompletedBookingsSuccess());
-    //   },
-    // );
   }
 
-  void createBooking() async {
-    final response = await repository.create_Booking(
-      token: token,
-      user_id: 300,
-      hotel_id: 9,
-    );
-
-    response.fold(
-      (l) => emit(ErrorState()),
-      (r) {
-        print("DONE ===> ${r.status.messageEn}");
-        // bookings[0].bookingList = r.Data!.data!;
-        emit(CompletedBookingsSuccess());
-      },
-    );
+  void getUpcommingBookings({UpdateBookingModel? updateBookingModel}) {
+    DioTest.getBooking(type: 'upcomming').then((value) {
+      BookingModel bookingModel = BookingModel.fromJson(value.data);
+      bookings[1].bookingList = bookingModel.Data!.data!;
+      getCancelledBookings(updateBookingModel: updateBookingModel);
+    }).catchError((error) {
+      print("ERROR IN GET UPCOMMING");
+      emit(ErrorState());
+    });
   }
 
-  void getUpcommingBookings() async {
-    emit(UpcommingBookingsLoading());
-    final response = await repository.getBooking(
-      bookType: "upcomming",
-      token: token,
-    );
-
-    response.fold(
-      (l) {
-        print("ERROR IN getUpcommingBookings");
-        emit(ErrorState());
-      },
-      (r) {
-        print("DONE");
-        bookings[1].bookingList = r.Data!.data!;
-        emit(UpcommingBookingsSuccess());
-      },
-    );
+  void getCancelledBookings({UpdateBookingModel? updateBookingModel}) {
+    DioTest.getBooking(type: "cancelled").then((value) {
+      BookingModel bookingModel = BookingModel.fromJson(value.data);
+      bookings[2].bookingList = bookingModel.Data!.data!;
+      print("DONE ===> ${value}");
+      emit(AllBookingsSuccess(updateBookingModel: updateBookingModel));
+    }).catchError((error) {
+      print("ERROR IN GET CANCELLED");
+      emit(ErrorState());
+    });
   }
 
-  void getCancelledBookings() async {
-    emit(CancelledBookingsLoading());
-    final response = await repository.getBooking(
-      bookType: "cancelled",
-      token: token,
-    );
-
-    response.fold(
-      (l) {
-        print("ERROR IN getUpcommingBookings");
-        emit(ErrorState());
-      },
-      (r) {
-        print("DONE");
-        bookings[2].bookingList = r.Data!.data!;
-        emit(CancelledBookingsSuccess());
-      },
-    );
+  void getAllBookings(
+      {bool? isUpdate, UpdateBookingModel? updateBookingModel}) {
+    if (isUpdate != true) {
+      emit(AllBookingsLoading());
+    }
+    DioTest.getBooking(type: 'completed').then((value) {
+      BookingModel bookingModel = BookingModel.fromJson(value.data);
+      bookings[0].bookingList = bookingModel.Data!.data!;
+      getUpcommingBookings(updateBookingModel: updateBookingModel);
+    }).catchError((error) {
+      print("ERROR IN GET COMPLETED");
+      emit(ErrorState());
+    });
   }
 }
