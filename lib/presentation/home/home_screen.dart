@@ -7,7 +7,6 @@ import 'package:travinia/presentation/home/widgets/app_bar/app_bar.dart';
 import 'package:travinia/presentation/home/widgets/body/best_deals_head.dart';
 import 'package:travinia/presentation/home/widgets/body/hotel_card_info.dart';
 
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -26,23 +25,19 @@ class _HomeScreenState extends State<HomeScreen> {
         150 collapsedHeight + 20 sizedbox
       */
       if (_scrollController.position.pixels >=
-          MediaQuery
-              .of(context)
-              .size
-              .height - AppHeight.h490) {
+          MediaQuery.of(context).size.height - AppHeight.h490) {
         _textVisibilty.value = false;
       } else {
         _textVisibilty.value = true;
       }
-      print(_textVisibilty.value);
-    }    }
+    }
+  }
+
   @override
   void initState() {
     setState(() {});
     super.initState();
     AppCubit.get(context).getMyLocation();
-
-    AppCubit.get(context).getHotels();
   }
 
   @override
@@ -54,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
         if (state is HotelsLoadingState) {
           return Center(child: CircularProgressIndicator());
         } else if (state is ErrorState) {
-          return Center(child: Text("ERROR"));
+          return Center(child: Text("Check Internet Connection !"));
         } else {
           return ValueListenableBuilder(
             valueListenable: _textVisibilty,
@@ -102,4 +97,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-

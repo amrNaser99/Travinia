@@ -9,7 +9,14 @@ class ChangeOpacityState extends ExploreState {}
 class ChangeBMapClickedState extends ExploreState {}
 
 class SearchHotelsLoadingState extends ExploreState {}
+
 class SearchHotelsSuccessState extends ExploreState {}
+
+class BookingCreatedSuccessState extends ExploreState {}
+
+class CreateBookingLoadingState extends ExploreState {}
+
+class CreateBookingErrorState extends ExploreState {}
 
 class ErrorState extends ExploreState {
   final PrimaryServerException exception;

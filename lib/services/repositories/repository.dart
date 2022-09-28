@@ -6,6 +6,8 @@ import 'package:travinia/models/create_booking_model.dart';
 import 'package:travinia/models/hotels_model.dart';
 import 'package:travinia/models/login_model.dart';
 import 'package:travinia/models/profile_model.dart';
+import 'package:travinia/models/status_model.dart';
+import 'package:travinia/models/update_booking_model/update_booking_model.dart';
 
 import '../../models/facilities_model.dart';
 
@@ -38,7 +40,7 @@ abstract class Repository {
   ///Implement All Facilities Functions Here
   Future<Either<PrimaryServerException, FacilitiesModel>> getFacilities();
 
-  ///Implement All Booking Functions Here
+  ///Implement All Booking Functions Here: upcomming - cancelled - completed
   Future<Either<PrimaryServerException, BookingModel>> getBooking({
     String bookType,
     int bookCount,
@@ -51,16 +53,16 @@ abstract class Repository {
     required int user_id,
     required int hotel_id,
   });
+
+  Future<Either<PrimaryServerException, UpdateBookingModel>> updateBooking({
+    required int booking_id,
+    required String type,
+  });
+
   Future<Either<PrimaryServerException, HotelsModel>> searchHotels({
     String? name,
     String? address,
-    int? min_price,
-    int? max_price,
-    int? count,
-    int? page,
   });
-
-
 }
 
 extension HandlingRequestResultFunction on Repository {

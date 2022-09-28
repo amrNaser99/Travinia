@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:travinia/core/utils/app_strings.dart';
 import 'package:travinia/presentation/home/widgets/app_bar/page_indicator.dart';
 import 'package:travinia/presentation/home/widgets/app_bar/texts_and_button.dart';
 
@@ -17,19 +18,19 @@ class _HomeImageSliderState extends State<HomeImageSlider> {
       title: "Cape Town",
       description: '''Extraordinary five-star 
 outdoor activites.''',
-      image: "assets/images/hotel.jpg",
+      image: AppStrings.hotelImgPath,
     ),
     const OnBoardingModel(
       title: "Cairo",
       description: '''Discover the secrets of the pharos 
 totaly new vibes.''',
-      image: "assets/images/hotel.jpg",
+      image: AppStrings.hotel2ImgPath,
     ),
     const OnBoardingModel(
       title: "New York",
       description: '''Extraordinary five-star 
 outdoor activites.''',
-      image: "assets/images/hotel.jpg",
+      image: AppStrings.hotel3ImgPath,
     ),
   ];
 
@@ -42,15 +43,15 @@ outdoor activites.''',
         _currentIndex++;
         _pageController.animateToPage(
           _currentIndex,
-          duration: Duration(milliseconds: 400),
-          curve: Curves.bounceIn,
+          duration: Duration(seconds: 1),
+          curve: Curves.fastOutSlowIn,
         );
       } else {
         _currentIndex = 0;
         _pageController.animateToPage(
           _currentIndex,
-          duration: Duration(milliseconds: 100),
-          curve: Curves.bounceIn,
+          duration: Duration(seconds: 1),
+          curve: Curves.fastOutSlowIn,
         );
       }
     });
@@ -88,8 +89,8 @@ outdoor activites.''',
           itemCount: _onBoardingData.length,
           itemBuilder: (context, index) {
             return Image.asset(
-              "assets/images/hotel.jpg",
-              fit: BoxFit.fill,
+              _onBoardingData[index].image,
+              fit: BoxFit.cover,
             );
           },
         ),

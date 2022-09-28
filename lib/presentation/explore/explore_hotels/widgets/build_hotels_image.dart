@@ -5,6 +5,8 @@ import 'package:travinia/core/app/bloc/app_state.dart';
 import 'package:travinia/core/utils/app_spaces.dart';
 import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/models/hotel_model.dart';
+import 'package:travinia/presentation/explore/bloc/explore_cubit.dart';
+import 'package:travinia/presentation/explore/bloc/explore_state.dart';
 
 import '../../../home/body/hotel_card_info.dart';
 
@@ -18,13 +20,15 @@ class buildHotelsImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AppCubit, AppStates>(
+    return BlocBuilder<ExploreCubit, ExploreState>(
       builder: (context, state) {
         return SliverToBoxAdapter(
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: AppSize.s10),
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppSize.s10,
+                ),
                 child: ListView.separated(
                   shrinkWrap: true,
                   primary: false,

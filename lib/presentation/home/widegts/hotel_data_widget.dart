@@ -10,7 +10,6 @@ import 'package:travinia/core/utils/app_fonts.dart';
 import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/presentation/explore/explore_on_map/explore_map_screen.dart';
 import 'package:travinia/presentation/shared_widgets/custom_text.dart';
-import 'package:travinia/services/api_service/end_points.dart';
 
 class HotelDataWidget extends StatelessWidget {
   const HotelDataWidget(
@@ -19,7 +18,7 @@ class HotelDataWidget extends StatelessWidget {
       required this.hotelAdress,
       required this.distance,
       required this.hotelRating,
-      required this.hotelPrice,
+      this.hotelPrice = '',
       this.width = double.infinity});
 
   final String hotelName;
@@ -134,22 +133,22 @@ class HotelDataWidget extends StatelessWidget {
                             // SizedBox(
                             //   width: AppWidth.w20,
                             // ),
-                            Padding(
-                              padding: EdgeInsets.only(bottom: AppWidth.w8),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  LargeHeadText(
-                                    text: '\$${hotelPrice.toString()}',
-                                    size: FontSize.s20,
-                                  ),
-                                  SecondaryText(
-                                    text: '/per night',
-                                    size: FontSize.s11,
-                                  )
-                                ],
-                              ),
-                            )
+                            // Padding(
+                            //   padding: EdgeInsets.only(bottom: AppWidth.w8),
+                            //   child: Column(
+                            //     crossAxisAlignment: CrossAxisAlignment.end,
+                            //     children: [
+                            //       LargeHeadText(
+                            //         text: '\$${hotelPrice.toString()}',
+                            //         size: FontSize.s20,
+                            //       ),
+                            //       SecondaryText(
+                            //         text: '/per night',
+                            //         size: FontSize.s11,
+                            //       )
+                            //     ],
+                            //   ),
+                            // )
                           ],
                         )
                       ],

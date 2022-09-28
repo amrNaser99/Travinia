@@ -14,14 +14,13 @@ class HotelDetailsScreen extends StatefulWidget {
 }
 
 class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
-
   initState() {
     super.initState();
     BlocProvider.of<ExploreCubit>(context).changeOpacityValue();
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext hotelDetailsScreenContext) {
     final hotelModel = ModalRoute.of(context)!.settings.arguments as HotelModel;
     return Scaffold(
       body: BlocBuilder<ExploreCubit, ExploreState>(
@@ -32,7 +31,11 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
             controller: hotelDetailsCubit.scrollController,
             physics: BouncingScrollPhysics(),
             slivers: [
-              SliverAppBarWidget(hotelDetailsCubit: hotelDetailsCubit),
+              SliverAppBarWidget(
+                hotelDetailsCubit: hotelDetailsCubit,
+                hotelModel: hotelModel,
+                hotelDetailsScreenContext: hotelDetailsScreenContext,
+              ),
               SliverList(
                 delegate: SliverChildListDelegate(
                   [

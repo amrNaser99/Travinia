@@ -2,6 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:travinia/models/booking_model.dart';
 import 'package:travinia/models/create_booking_model.dart';
+import 'package:travinia/models/status_model.dart';
+import 'package:travinia/models/update_booking_model/update_booking_model.dart';
 import 'package:travinia/services/repositories/repository.dart';
 
 import '../../core/error/exceptions.dart';
@@ -88,14 +90,18 @@ class RepositoryImplementation extends Repository {
       final response = await dioHelper.get(
         endPoint: getBookingEndPoint,
         token: token,
+        options: Options(
+          headers: {"token": '$token'},
+        ),
         data: {
           'type': bookType,
           'count': bookCount,
+          'token': '$token',
         },
       );
-      // ['data']
-      return BookingModel.fromJson(response['data']);
+      return BookingModel.fromJson(response);
     }, onPrimaryServerException: (e) async {
+      print("ERROR=======>${e.toString()}");
       return e;
     });
   }
@@ -172,13 +178,14 @@ class RepositoryImplementation extends Repository {
   }
 
   @override
-  Future<Either<PrimaryServerException, HotelsModel>> searchHotels(
-      { String? name,
-       String? address,
-       int? min_price,
-       int? max_price,
-       int? count,
-       int? page,}) {
+  Future<Either<PrimaryServerException, HotelsModel>> searchHotels({
+    String? name,
+    String? address,
+    int? min_price,
+    int? max_price,
+    int? count,
+    int? page,
+  }) {
     return handlingRequestResult(onSuccess: () async {
       return await dioHelper.get(endPoint: searchHotelsEndPoint, query: {
         'name': name,
@@ -191,5 +198,42 @@ class RepositoryImplementation extends Repository {
     }, onPrimaryServerException: (e) async {
       return e;
     });
+    // {
+    //   return handlingRequestResult(
+    //       onSuccess: () async {
+    //     final response =  await dioHelper.get(
+    //       endPoint: searchHotelsEndPoint,
+    //       data: {
+    //         'name': name,
+    //       },
+    //     );
+
+    //     return  HotelsModel.fromJson(response);
+    //   },
+    //       onPrimaryServerException: (e) async {
+
+    //     return e;
+    //   });
+    // }
+  }
+
+  @override
+  Future<Either<PrimaryServerException, UpdateBookingModel>> updateBooking(
+      {required int booking_id, required String type}) {
+    return handlingRequestResult<UpdateBookingModel>(
+      onSuccess: () async {
+        final response = await dioHelper.post(
+          endPoint: updateBookingEndPoint,
+          data: {
+            'booking_id': booking_id,
+            'type': type,
+          },
+        );
+        return UpdateBookingModel.fromJson(response);
+      },
+      onPrimaryServerException: (e) async {
+        return e;
+      },
+    );
   }
 }

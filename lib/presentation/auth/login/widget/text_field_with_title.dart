@@ -15,7 +15,7 @@ class TextFieldWithTitle extends StatelessWidget {
     required this.controller,
     required this.title,
     required this.hint,
-    this.validateText = "ERROR",
+    this.validateText = "This Field is required",
     required this.inputType,
     this.obscure = false,
   });
