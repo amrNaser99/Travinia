@@ -47,7 +47,7 @@ class TraviniaApp extends StatelessWidget {
                   debugShowCheckedModeBanner: false,
                   theme: BlocProvider.of<AppCubit>(context).currentAppTheme,
                   routes: Routes.routes,
-                  initialRoute: Routes.main,
+                  initialRoute: Routes.onBoarding,
                 );
               },
             ),
