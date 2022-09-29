@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:travinia/core/utils/routes.dart';
 import 'package:travinia/presentation/explore/bloc/explore_cubit.dart';
 import 'package:travinia/presentation/explore/bloc/explore_state.dart';
 import 'package:travinia/presentation/explore/explore_hotels/widgets/explore_hotel_view_or_map.dart';
@@ -8,7 +9,6 @@ import 'package:travinia/presentation/explore/explore_hotels/widgets/explore_hot
 import '../../../../core/utils/app_spaces.dart';
 import '../../../../models/hotel_model.dart';
 import '../../../shared_widgets/custom_text.dart';
-import '../../explore_on_map/explore_map_screen.dart';
 
 class ExploreHotelAppBar extends StatelessWidget {
   final List<HotelModel> hotelData;
@@ -40,8 +40,7 @@ class ExploreHotelAppBar extends StatelessWidget {
                 ),
                 onPressed: () {
                   debugPrint("in mapLocation icon");
-
-                  cubit.changeBMapClicked;
+                  Navigator.pushReplacementNamed(context,Routes.exploreOnMap );
                 },
               ),
               AppSpaces.hSpace10,

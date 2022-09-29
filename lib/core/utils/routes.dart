@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:travinia/core/app/bloc/app_cubit.dart';
 import 'package:travinia/presentation/auth/bloc/auth_cubit.dart';
 import 'package:travinia/presentation/auth/edit_profile/edit_profile_screen.dart';
 import 'package:travinia/presentation/auth/login/login_screen.dart';
 import 'package:travinia/presentation/auth/register/register_screen.dart';
+import 'package:travinia/presentation/explore/bloc/explore_cubit.dart';
 import 'package:travinia/presentation/explore/explore_hotels/explore_hotel_screen.dart';
+import 'package:travinia/presentation/explore/explore_hotels/filter/filter_screen.dart';
+import 'package:travinia/presentation/explore/explore_hotels/widgets/explore_on_map/explore_map_screen.dart';
 import 'package:travinia/presentation/explore/hotel_details/hotel_details_screen.dart';
 import 'package:travinia/presentation/main/main_screen.dart';
 import 'package:travinia/presentation/onboarding/on_boarding_screen.dart';
 import 'package:travinia/presentation/splash/splash_screen.dart';
 
-import '../../presentation/explore/explore_hotels/filter/filter_screen.dart';
-import '../../presentation/explore/explore_on_map/explore_map_screen.dart';
 
 class Routes {
   static const String splash = '/splash';
@@ -34,7 +36,7 @@ class Routes {
       register: (context) => const RegisterScreen(),
       main: (context) => const MainScreen(),
       exploreHotels: (context) => const ExploreHotelScreen(),
-      exploreOnMap: (context) => ExploreOnMap(),
+      exploreOnMap: (context) => ExploreOnMap(hotelData: BlocProvider.of<AppCubit>(context).hotels,),
       hotelDetailsScreen: (context) => const HotelDetailsScreen(),
       filter: (context) => Filter(),
       editProfile: (context) => EditProfile(

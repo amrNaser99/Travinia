@@ -4,7 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:travinia/presentation/explore/bloc/explore_cubit.dart';
 import 'package:travinia/presentation/explore/bloc/explore_state.dart';
+import 'package:travinia/presentation/explore/explore_hotels/widgets/build_hotels_image.dart';
 import 'package:travinia/presentation/explore/explore_hotels/widgets/build_search_image.dart';
+import 'package:travinia/presentation/explore/explore_hotels/widgets/explore_on_map/explore_map_screen.dart';
 import '../../../../core/utils/app_color.dart';
 import '../../../../core/utils/app_contstants.dart';
 import '../../../../core/utils/app_fonts.dart';
@@ -17,9 +19,6 @@ import '../../../shared_widgets/custom_text.dart';
 import '../../../shared_widgets/custom_text_field.dart';
 import 'dart:math' as math;
 
-import '../../explore_on_map/bloc/map_cubit.dart';
-import '../../explore_on_map/widgets/google_map_widget.dart';
-import 'build_hotels_image.dart';
 
 class ExploreHotelViewAndMap extends StatefulWidget {
   final List<HotelModel> hotelData;
@@ -222,85 +221,20 @@ class _ExploreHotelViewAndMapState extends State<ExploreHotelViewAndMap> {
                 ),
               ),
             ),
-            ConditionalBuilder(
-              condition: state is! ChangeBMapClickedState,
-              builder: (context) => SliverList(
-                delegate: SliverChildListDelegate(
-                  [
-                    ConditionalBuilder(
-                      condition: cubit.hotelResults.length > 0,
-                      builder: (context) {
-                        return buildSearchList(
-                            hotelResults: cubit.hotelResults);
-                      },
-                      fallback: (BuildContext context) {
-                        return buildHotelsImage(hotelData: widget.hotelData);
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              fallback: (context) => SliverList(
-                delegate: SliverChildListDelegate(
-                  [
-                    Stack(
-                      children: [
-                        GoogleMapWidget(),
-                        Column(
-                          children: [
-                            AppSpaces.expandedSpace,
-                            Container(
-                              height: AppHeight.h200,
-                              child: PageView.builder(
-                                onPageChanged: (value) {
-                                  MapCubit.get(context).onScroll(context);
-                                },
-                                controller:
-                                    MapCubit.get(context).pageController,
-                                itemCount: widget.hotelData.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return AnimatedBuilder(
-                                    animation:
-                                        MapCubit.get(context).pageController,
-                                    builder:
-                                        (BuildContext context, Widget? widget) {
-                                      double value = 1;
-                                      if (MapCubit.get(context)
-                                          .pageController
-                                          .position
-                                          .haveDimensions) {
-                                        value = MapCubit.get(context)
-                                                .pageController
-                                                .page! -
-                                            index;
-                                        value = (1 - (value.abs() * 0.3) + 0.06)
-                                            .clamp(0.0, 1.0);
-                                      }
-                                      return Center(
-                                        child: SizedBox(
-                                          height: Curves.easeInOut
-                                                  .transform(value) *
-                                              150.0,
-                                          width: Curves.easeInOut
-                                                  .transform(value) *
-                                              400.0,
-                                          child: widget,
-                                        ),
-                                      );
-                                    },
-                                    child: HotelCardInfo(
-                                      hotel: widget.hotelData[index],
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  ConditionalBuilder(
+                    condition: cubit.hotelResults.length > 0,
+                    builder: (context) {
+                      return buildSearchList(
+                          hotelResults: cubit.hotelResults);
+                    },
+                    fallback: (BuildContext context) {
+                      return buildHotelsImage(hotelData: widget.hotelData);
+                    },
+                  ),
+                ],
               ),
             ),
           ],
