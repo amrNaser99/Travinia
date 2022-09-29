@@ -52,6 +52,7 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
                     child: Stack(
                       children: [
                         GoogleMap(
+                          zoomControlsEnabled: false,
                           mapType: MapType.normal,
                           initialCameraPosition:
                               MapCubit.get(context).mylocationMark!,
