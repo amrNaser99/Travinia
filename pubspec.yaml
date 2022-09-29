@@ -40,6 +40,7 @@ dependencies:
   cr_calendar:
   syncfusion_flutter_sliders: ^20.2.50
   syncfusion_flutter_core: ^20.2.50
+  flutter_inappwebview: ^5.4.3+7
 
 dev_dependencies:
   flutter_launcher_icons:

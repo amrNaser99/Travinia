@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:travinia/core/app/bloc/app_cubit.dart';
+import 'package:travinia/core/utils/app_color.dart';
+import 'package:travinia/core/utils/app_themes.dart';
 import 'package:travinia/presentation/explore_on_map/bloc/map_cubit.dart';
 import 'package:travinia/presentation/explore_on_map/bloc/map_state.dart';
 
@@ -52,6 +54,7 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
                     child: Stack(
                       children: [
                         GoogleMap(
+                          zoomControlsEnabled: false,
                           mapType: MapType.normal,
                           initialCameraPosition:
                               MapCubit.get(context).mylocationMark!,
@@ -62,8 +65,12 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
                                 .complete(controller);
                             MapCubit.get(context).newGoogleMapController =
                                 controller;
-
-                            MapCubit.get(context).blackThemeGoogleMap();
+                            if (Theme.of(context).hintColor ==
+                                AppColors.white) {
+                              MapCubit.get(context).lightThemeGoogleMap();
+                            } else {
+                              MapCubit.get(context).blackThemeGoogleMap();
+                            }
                           },
                           padding: EdgeInsets.only(
                               bottom:

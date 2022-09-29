@@ -11,7 +11,6 @@ import 'package:travinia/presentation/booking/bloc/booking_cubit.dart';
 import 'package:travinia/presentation/explore/bloc/explore_cubit.dart';
 import 'package:travinia/presentation/explore_on_map/bloc/map_cubit.dart';
 
-
 class TraviniaApp extends StatelessWidget {
   const TraviniaApp({Key? key}) : super(key: key);
 
