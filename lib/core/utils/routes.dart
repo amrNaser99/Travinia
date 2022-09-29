@@ -11,7 +11,6 @@ import 'package:travinia/presentation/explore/hotel_details/hotel_details_screen
 import 'package:travinia/presentation/explore_on_map/explore_map_screen.dart';
 import 'package:travinia/presentation/main/main_screen.dart';
 import 'package:travinia/presentation/onboarding/on_boarding_screen.dart';
-import 'package:travinia/presentation/splash/splash_screen.dart';
 
 
 class Routes {
