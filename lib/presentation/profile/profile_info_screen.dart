@@ -24,22 +24,26 @@ class _ProfileInfoScreenState extends State<ProfileInfoScreen> {
         // final userModel =
         //     ModalRoute.of(context)!.settings.arguments as UserModel;
         UserModel? userModel = AuthCubit.get(context).userModel;
-        return Scaffold(
-          appBar: AppBar(
-            leading: Text(''),
-          ),
-          body: ConditionalBuilder(
-            condition: state != UserLoginLoadingState() && userModel != null,
-            builder: (BuildContext context) {
-              return ProfileBody(
-                userModel: userModel!,
-              );
-            },
-            fallback: (BuildContext context) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            },
+        return SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: SafeArea(
+            child: Column(
+              children: [
+                ConditionalBuilder(
+                  condition: state != UserLoginLoadingState() && userModel != null,
+                  builder: (BuildContext context) {
+                    return ProfileBody(
+                      userModel: userModel!,
+                    );
+                  },
+                  fallback: (BuildContext context) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         );
       },

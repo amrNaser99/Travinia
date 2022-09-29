@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:travinia/core/utils/app_contstants.dart';
 import 'package:travinia/core/utils/app_values.dart';
-import 'package:travinia/core/utils/font_styles.dart';
 import 'package:travinia/presentation/shared_widgets/custom_text.dart';
-
 import '../../../../core/utils/app_color.dart';
 import '../../../../core/utils/app_spaces.dart';
 
@@ -118,7 +116,7 @@ Widget ProfileInfoItem({
                     child: LargeHeadText(
                       text: Data,
                       size: AppSize.s15,
-                    )),
+                    ),),
               ),
             ],
           ),

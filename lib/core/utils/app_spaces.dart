@@ -19,5 +19,8 @@ class AppSpaces {
   static SizedBox vSpace20 = SizedBox(
     height: 20.0,
   );
+  static SizedBox vSpace16 = SizedBox(
+    height: 16.0,
+  );
   static Expanded expandedSpace = Expanded(child: SizedBox());
 }

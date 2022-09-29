@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travinia/core/app/bloc/app_cubit.dart';
 import 'package:travinia/core/app/bloc/app_state.dart';
 import 'package:travinia/models/hotel_model.dart';
-import 'package:travinia/presentation/explore/explore_hotels/widgets/explore_hotel_appbar.dart';
+import 'package:travinia/presentation/explore/explore_hotels/widgets/explore_app_bar_widget.dart';
 
 class ExploreHotelScreen extends StatefulWidget {
   const ExploreHotelScreen({Key? key}) : super(key: key);

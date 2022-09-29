@@ -1,3 +1,5 @@
+import 'package:travinia/core/error/exceptions.dart';
+import 'package:travinia/models/status_model.dart';
 import 'package:travinia/models/update_booking_model/update_booking_model.dart';
 
 abstract class BookingState {}
