@@ -1,4 +1,3 @@
-// import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +8,6 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:travinia/core/utils/app_fonts.dart';
 import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/core/utils/routes.dart';
-import 'package:travinia/presentation/explore/explore_hotels/widgets/explore_on_map/explore_map_screen.dart';
 import 'package:travinia/presentation/shared_widgets/custom_text.dart';
 
 class HotelDataWidget extends StatelessWidget {

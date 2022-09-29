@@ -6,7 +6,6 @@ import 'package:travinia/presentation/explore/bloc/explore_cubit.dart';
 import 'package:travinia/presentation/explore/bloc/explore_state.dart';
 import 'package:travinia/presentation/explore/explore_hotels/widgets/build_hotels_image.dart';
 import 'package:travinia/presentation/explore/explore_hotels/widgets/build_search_image.dart';
-import 'package:travinia/presentation/explore/explore_hotels/widgets/explore_on_map/explore_map_screen.dart';
 import '../../../../core/utils/app_color.dart';
 import '../../../../core/utils/app_contstants.dart';
 import '../../../../core/utils/app_fonts.dart';
@@ -14,7 +13,6 @@ import '../../../../core/utils/app_spaces.dart';
 import '../../../../core/utils/app_values.dart';
 import '../../../../core/utils/routes.dart';
 import '../../../../models/hotel_model.dart';
-import '../../../home/body/hotel_card_info.dart';
 import '../../../shared_widgets/custom_text.dart';
 import '../../../shared_widgets/custom_text_field.dart';
 import 'dart:math' as math;
@@ -264,7 +262,7 @@ class SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    final progress = shrinkOffset / maxExtent;
+    // final progress = shrinkOffset / maxExtent;
 
 // debugPrint('progress => $progress');
 
