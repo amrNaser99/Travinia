@@ -4,7 +4,6 @@ import 'package:travinia/models/booking_model.dart';
 import 'package:travinia/models/create_booking_model.dart';
 import 'package:travinia/models/update_booking_model/update_booking_model.dart';
 import 'package:travinia/services/repositories/repository.dart';
-
 import '../../core/error/exceptions.dart';
 import '../../models/facilities_model.dart';
 import '../../models/hotels_model.dart';
