@@ -198,6 +198,43 @@ class RepositoryImplementation extends Repository {
     }, onPrimaryServerException: (e) async {
       return e;
     });
+    // {
+    //   return handlingRequestResult(
+    //       onSuccess: () async {
+    //     final response =  await dioHelper.get(
+    //       endPoint: searchHotelsEndPoint,
+    //       data: {
+    //         'name': name,
+    //       },
+    //     );
+
+    //     return  HotelsModel.fromJson(response);
+    //   },
+    //       onPrimaryServerException: (e) async {
+
+    //     return e;
+    //   });
+    // }
+  }
+
+  @override
+  Future<Either<PrimaryServerException, UpdateBookingModel>> updateBooking(
+      {required int booking_id, required String type}) {
+    return handlingRequestResult<UpdateBookingModel>(
+      onSuccess: () async {
+        final response = await dioHelper.post(
+          endPoint: updateBookingEndPoint,
+          data: {
+            'booking_id': booking_id,
+            'type': type,
+          },
+        );
+        return UpdateBookingModel.fromJson(response);
+      },
+      onPrimaryServerException: (e) async {
+        return e;
+      },
+    );
   }
 
   @override

@@ -21,6 +21,7 @@ class LargeHeadText extends StatelessWidget {
             fontSize: size ?? FontSize.s16,
           ),
       overflow: isEllipsis ? TextOverflow.ellipsis : null,
+
     );
   }
 }
@@ -77,7 +78,6 @@ class PrimaryWithStaticColorText extends StatelessWidget {
   final double? size;
   final FontWeight? fontWeight;
   final int? maxLines;
-
   const PrimaryWithStaticColorText(
       {super.key,
       required this.text,

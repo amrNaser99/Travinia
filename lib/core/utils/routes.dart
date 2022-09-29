@@ -15,7 +15,6 @@ import 'package:travinia/presentation/splash/splash_screen.dart';
 
 
 class Routes {
-  static const String splash = '/splash';
   static const String main = '/main';
   static const String onBoarding = '/onBoarding';
   static const String hotelDetailsScreen = '/hotelDetailsScreen';
@@ -28,7 +27,6 @@ class Routes {
 
   static Map<String, WidgetBuilder> get routes {
     return {
-      splash: (context) => SplashScreen(),
       onBoarding: (context) => OnBoardingScreen(),
       login: (context) => const LoginScreen(),
       register: (context) => const RegisterScreen(),
