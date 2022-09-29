@@ -6,8 +6,12 @@ class LargeHeadText extends StatelessWidget {
   final String text;
   final double? size;
   final bool isEllipsis;
+
   const LargeHeadText(
-      {super.key, required this.text, this.size, this.isEllipsis = true});
+      {super.key,
+      required this.text,
+      this.size,
+      this.isEllipsis = true});
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +20,6 @@ class LargeHeadText extends StatelessWidget {
       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
             fontSize: size ?? FontSize.s16,
           ),
-
-      ///TODO Need To Fix
       overflow: isEllipsis ? TextOverflow.ellipsis : null,
     );
   }
@@ -27,6 +29,7 @@ class SmallHeadText extends StatelessWidget {
   final String text;
   final double? size;
   final bool isEllipsis;
+
   const SmallHeadText(
       {super.key, required this.text, this.size, this.isEllipsis = true});
 
@@ -47,6 +50,7 @@ class PrimaryText extends StatelessWidget {
   final bool center;
   final double? size;
   final bool isEllipsis;
+
   const PrimaryText(
       {super.key,
       required this.text,
@@ -73,6 +77,7 @@ class PrimaryWithStaticColorText extends StatelessWidget {
   final double? size;
   final FontWeight? fontWeight;
   final int? maxLines;
+
   const PrimaryWithStaticColorText(
       {super.key,
       required this.text,
@@ -104,6 +109,7 @@ class SecondaryText extends StatelessWidget {
   final bool isButton;
   final bool isEllipsis;
   final int maxLines;
+
   const SecondaryText({
     super.key,
     required this.text,
@@ -137,6 +143,7 @@ class TealText extends StatelessWidget {
   final bool center;
   final double? size;
   final bool isEllipsis;
+
   const TealText(
       {super.key,
       required this.text,

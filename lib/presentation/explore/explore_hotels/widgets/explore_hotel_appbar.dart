@@ -20,19 +20,19 @@ import '../../../../core/utils/app_fonts.dart';
 import '../../../../core/utils/routes.dart';
 import '../../bloc/explore_cubit.dart';
 
-class ExploreHotelAppBar extends StatefulWidget {
+class ExploreHotelAppBarw extends StatefulWidget {
   final List<HotelModel> hotelData;
 
-  const ExploreHotelAppBar({
+  const ExploreHotelAppBarw({
     Key? key,
     required this.hotelData,
   }) : super(key: key);
 
   @override
-  State<ExploreHotelAppBar> createState() => _ExploreHotelAppBarState();
+  State<ExploreHotelAppBarw> createState() => _ExploreHotelAppBarwState();
 }
 
-class _ExploreHotelAppBarState extends State<ExploreHotelAppBar> {
+class _ExploreHotelAppBarwState extends State<ExploreHotelAppBarw> {
   @override
   Widget build(BuildContext context) {
     ExploreCubit cubit = BlocProvider.of<ExploreCubit>(context);

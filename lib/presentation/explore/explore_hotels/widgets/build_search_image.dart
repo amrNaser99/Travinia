@@ -17,25 +17,23 @@ class buildSearchList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ExploreCubit, ExploreState>(
       builder: (context, state) {
-        return SliverToBoxAdapter(
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: AppSize.s10,
-                ),
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  primary: false,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) =>
-                      HotelCardInfo(hotel: hotelResults[index]),
-                  separatorBuilder: (context, index) => AppSpaces.vSpace10,
-                  itemCount: hotelResults.length,
-                ),
+        return Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: AppSize.s10,
               ),
-            ],
-          ),
+              child: ListView.separated(
+                shrinkWrap: true,
+                primary: false,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) =>
+                    HotelCardInfo(hotel: hotelResults[index]),
+                separatorBuilder: (context, index) => AppSpaces.vSpace10,
+                itemCount: hotelResults.length,
+              ),
+            ),
+          ],
         );
       },
     );
