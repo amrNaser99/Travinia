@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:travinia/core/utils/app_color.dart';
+import 'package:travinia/core/utils/extensions/navigation_ext.dart';
 import 'package:travinia/core/utils/font_styles.dart';
+import 'package:travinia/presentation/explore/bloc/explore_cubit.dart';
 
 class FooterButton extends StatelessWidget {
-  const FooterButton({super.key});
+  final dynamic maxPrice;
+  final dynamic minPrice;
+  final ExploreCubit cubit;
+  const FooterButton({
+    super.key,
+    required this.maxPrice,
+    required this.minPrice,
+    required this.cubit,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +28,13 @@ class FooterButton extends StatelessWidget {
               height: 45,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(),
-                onPressed: () {},
+                onPressed: () {
+                  cubit.filterOnPricesRangeHotels(
+                    maxPrice: maxPrice,
+                    minPrice: minPrice,
+                  );
+                  context.pop;
+                },
                 child: Text(
                   'Apply',
                   style: getMediumStyle(

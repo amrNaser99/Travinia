@@ -185,7 +185,8 @@ class RepositoryImplementation extends Repository {
     int? page,
   }) {
     return handlingRequestResult(onSuccess: () async {
-      final response =  await dioHelper.get(endPoint: searchHotelsEndPoint, query: {
+      final response =
+          await dioHelper.get(endPoint: searchHotelsEndPoint, query: {
         'name': name,
         // 'address': address,
         // 'min_price': min_price,
@@ -194,7 +195,7 @@ class RepositoryImplementation extends Repository {
         // 'page': page,
       });
 
-      return  HotelsModel.fromJson(response);
+      return HotelsModel.fromJson(response);
     }, onPrimaryServerException: (e) async {
       return e;
     });
@@ -220,4 +221,19 @@ class RepositoryImplementation extends Repository {
     );
   }
 
+  @override
+  Future<Either<PrimaryServerException, HotelsModel>> filterOnPricesRangeHotels(
+      {dynamic minPrice, dynamic maxPrice}) {
+    return handlingRequestResult(onSuccess: () async {
+      final response =
+          await dioHelper.get(endPoint: searchHotelsEndPoint, query: {
+        'min_price': minPrice,
+        'max_price': maxPrice,
+      });
+
+      return HotelsModel.fromJson(response);
+    }, onPrimaryServerException: (e) async {
+      return e;
+    });
+  }
 }

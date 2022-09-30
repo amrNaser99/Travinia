@@ -44,18 +44,17 @@ class _ExploreHotelViewAndMapState extends State<ExploreHotelViewAndMap> {
             SliverPersistentHeader(
               pinned: false,
               delegate: SliverAppBarDelegate(
-                minHeight: AppHeight.h55,
-                maxHeight: AppHeight.h55,
+                minHeight: AppHeight.h80,
+                maxHeight: AppHeight.h80,
                 child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: AppSize.s10,
-                    horizontal: AppSize.s10,
+                  padding: EdgeInsets.only(
+                    left: AppSize.s20,
+                    top: AppSize.s15,
                   ),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                        flex: 4,
                         child: Container(
                           decoration: BoxDecoration(
                             boxShadow: AppConst.shadow,
@@ -72,23 +71,19 @@ class _ExploreHotelViewAndMapState extends State<ExploreHotelViewAndMap> {
                           ),
                         ),
                       ),
-                      Expanded(
-                        flex: 1,
-                        child: Container(
-                          height: 50,
-                          alignment: AlignmentDirectional.centerEnd,
-                          child: RawMaterialButton(
-                            onPressed: () {
-                              cubit.searchHotels(
-                                  text: cubit.searchController.text);
-                            },
-                            elevation: 0.0,
-                            fillColor: AppColors.appColor,
-                            shape: CircleBorder(),
-                            child: Icon(
-                              color: AppColors.white,
-                              Icons.search_rounded,
-                            ),
+                      SizedBox(
+                        height: 50,
+                        child: RawMaterialButton(
+                          onPressed: () {
+                            cubit.searchHotels(
+                                text: cubit.searchController.text);
+                          },
+                          elevation: 0.0,
+                          fillColor: AppColors.appColor,
+                          shape: CircleBorder(),
+                          child: Icon(
+                            color: AppColors.white,
+                            Icons.search_rounded,
                           ),
                         ),
                       ),
@@ -99,12 +94,12 @@ class _ExploreHotelViewAndMapState extends State<ExploreHotelViewAndMap> {
             ),
             SliverPersistentHeader(
               delegate: SliverAppBarDelegate(
-                minHeight: AppHeight.h55,
-                maxHeight: AppHeight.h55,
+                minHeight: AppHeight.h60,
+                maxHeight: AppHeight.h60,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       InkWell(
                         onTap: () {
@@ -115,6 +110,7 @@ class _ExploreHotelViewAndMapState extends State<ExploreHotelViewAndMap> {
                               EdgeInsets.symmetric(horizontal: AppWidth.w20),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SmallHeadText(
                                 text: 'Choose Date',
@@ -130,23 +126,22 @@ class _ExploreHotelViewAndMapState extends State<ExploreHotelViewAndMap> {
                           ),
                         ),
                       ),
-                      Container(
-                        height: double.infinity,
-                        width: 1,
-                        color: Theme.of(context).canvasColor,
-                      ),
                       InkWell(
                         onTap: () {
                           // cubit.changeGuest();
                         },
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            Container(
+                              height: double.infinity,
+                              width: 1,
+                              color: Theme.of(context).canvasColor,
+                            ),
                             Container(
                               padding: EdgeInsets.symmetric(
                                   horizontal: AppWidth.w20),
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   SmallHeadText(
@@ -197,10 +192,8 @@ class _ExploreHotelViewAndMapState extends State<ExploreHotelViewAndMap> {
                       Expanded(
                         child: RawMaterialButton(
                           onPressed: () {
-                            Navigator.pushNamed(
-                              context,
-                              Routes.filter,
-                            );
+                            Navigator.pushNamed(context, Routes.filter,
+                                arguments: cubit);
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
@@ -220,7 +213,6 @@ class _ExploreHotelViewAndMapState extends State<ExploreHotelViewAndMap> {
                 ),
               ),
             ),
-
             BlocBuilder<ExploreCubit, ExploreState>(
               builder: (context, state) {
                 if (state is HotelsLoadingState ||

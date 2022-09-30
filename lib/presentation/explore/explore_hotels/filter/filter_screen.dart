@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travinia/core/utils/app_fonts.dart';
 import 'package:travinia/core/utils/app_values.dart';
+import 'package:travinia/presentation/explore/bloc/explore_cubit.dart';
 import 'package:travinia/presentation/explore/explore_hotels/filter/widgets/Accommodation.dart';
 import 'package:travinia/presentation/explore/explore_hotels/filter/widgets/custom_didvider.dart';
 import 'package:travinia/presentation/explore/explore_hotels/filter/widgets/distange_range_session.dart';
@@ -19,6 +20,8 @@ class Filter extends StatefulWidget {
 class _FilterState extends State<Filter> {
   @override
   Widget build(BuildContext context) {
+    final exploreCubit =
+        ModalRoute.of(context)!.settings.arguments as ExploreCubit;
     return Scaffold(
       body: Drawer(
         width: double.infinity,
@@ -45,7 +48,7 @@ class _FilterState extends State<Filter> {
                   size: FontSize.s26,
                 ),
               ),
-              priceRangeSession(),
+              priceRangeSession(exploreCubit: exploreCubit),
               cDivider(horpading: AppWidth.w18),
               PopularFilter(),
               cDivider(horpading: AppWidth.w18),
@@ -56,8 +59,11 @@ class _FilterState extends State<Filter> {
           ),
         ),
       ),
-      bottomNavigationBar: const FooterButton(),
+      bottomNavigationBar: FooterButton(
+        maxPrice: exploreCubit.maxPrice,
+        minPrice: exploreCubit.minPrice,
+        cubit: exploreCubit,
+      ),
     );
   }
 }
-

@@ -33,125 +33,125 @@ class _ExploreOnMapState extends State<ExploreOnMap> {
   @override
   void initState() {
     super.initState();
-    MapCubit.get(context).initPagecontroler(context);
   }
 
   @override
   Widget build(BuildContext context) {
     ExploreCubit cubit = BlocProvider.of<ExploreCubit>(context);
 
-    return BlocBuilder<MapCubit, MapStates>(
-      builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            title: LargeHeadText(text: 'Explore'),
-            actions: [
-              IconButton(
-                icon: Icon(
-                  size: 25.0,
-                  Icons.favorite_border_rounded,
-                ),
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: Icon(
-                  Icons.view_agenda_outlined,
-                ),
-                onPressed: () {
-                  debugPrint("in mapLocation icon");
-                  Navigator.pushReplacementNamed(context, Routes.exploreHotels);
-                },
-              ),
-              AppSpaces.hSpace10,
-            ],
-          ),
-          body: Stack(
-            children: [
-              GoogleMapWidget(),
-              Column(
-                children: [
-                  AppSpaces.expandedSpace,
-                  Container(
-                    height: AppHeight.h200,
-                    child: PageView.builder(
-                      onPageChanged: (value) {
-                        MapCubit.get(context).onScroll(context);
-                      },
-                      controller: MapCubit.get(context).pageController,
-                      itemCount: widget.hotelData.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return AnimatedBuilder(
-                          animation: MapCubit.get(context).pageController,
-                          builder: (BuildContext context, Widget? widget) {
-                            double value = 1;
-                            if (MapCubit.get(context)
-                                .pageController
-                                .position
-                                .haveDimensions) {
-                              value =
-                                  MapCubit.get(context).pageController.page! -
-                                      index;
-                              value = (1 - (value.abs() * 0.3) + 0.06)
-                                  .clamp(0.0, 1.0);
-                            }
-                            return Center(
-                              child: SizedBox(
-                                height:
-                                    Curves.easeInOut.transform(value) * 150.0,
-                                width:
-                                    Curves.easeInOut.transform(value) * 400.0,
-                                child: widget,
-                              ),
-                            );
-                          },
-                          child: HotelCardInfo(
-                            hotel: widget.hotelData[index],
-                          ),
-                        );
-                      },
-                    ),
+    return BlocProvider(
+      create: (context) => MapCubit()..initPagecontroler(context),
+      child: BlocBuilder<MapCubit, MapStates>(
+        builder: (context, state) {
+          return Scaffold(
+            appBar: AppBar(
+              title: LargeHeadText(text: 'Explore'),
+              actions: [
+                IconButton(
+                  icon: Icon(
+                    size: 25.0,
+                    Icons.favorite_border_rounded,
                   ),
-                ],
-              ),
-              Column(
-                children: [
-                  Container(
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                    height: AppHeight.h55,
-                    padding: EdgeInsets.symmetric(
-                      vertical: AppSize.s10,
-                      horizontal: AppSize.s10,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          flex: 4,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              boxShadow: AppConst.shadow,
+                  onPressed: () {},
+                ),
+                IconButton(
+                  icon: Icon(
+                    Icons.view_agenda_outlined,
+                  ),
+                  onPressed: () {
+                    debugPrint("in mapLocation icon");
+                    Navigator.pushReplacementNamed(
+                        context, Routes.exploreHotels);
+                  },
+                ),
+                AppSpaces.hSpace10,
+              ],
+            ),
+            body: Stack(
+              children: [
+                GoogleMapWidget(),
+                Column(
+                  children: [
+                    AppSpaces.expandedSpace,
+                    Container(
+                      height: AppHeight.h200,
+                      child: PageView.builder(
+                        onPageChanged: (value) {
+                          MapCubit.get(context).onScroll(context);
+                        },
+                        controller: MapCubit.get(context).pageController,
+                        itemCount: cubit.hotelResults.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return AnimatedBuilder(
+                            animation: MapCubit.get(context).pageController,
+                            builder: (BuildContext context, Widget? widget) {
+                              double value = 1;
+                              if (MapCubit.get(context)
+                                  .pageController
+                                  .position
+                                  .haveDimensions) {
+                                value =
+                                    MapCubit.get(context).pageController.page! -
+                                        index;
+                                value = (1 - (value.abs() * 0.3) + 0.06)
+                                    .clamp(0.0, 1.0);
+                              }
+                              return Center(
+                                child: SizedBox(
+                                  height:
+                                      Curves.easeInOut.transform(value) * 150.0,
+                                  width:
+                                      Curves.easeInOut.transform(value) * 400.0,
+                                  child: widget,
+                                ),
+                              );
+                            },
+                            child: HotelCardInfo(
+                              hotel: cubit.hotelResults[index],
                             ),
-                            child: CustomTextField(
-                              hintText: 'London...',
-                              validatorText: 'Please fill the Field',
-                              controller: BlocProvider.of<ExploreCubit>(context)
-                                  .searchController,
-                              inputType: TextInputType.text,
-                              onFeildSubmitted: (value) {
-                                cubit.searchHotels(text: value.trim());
-                              },
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Container(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                      height: AppHeight.h80,
+                      padding: EdgeInsets.only(
+                        left: AppSize.s20,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                boxShadow: AppConst.shadow,
+                              ),
+                              child: CustomTextField(
+                                hintText: 'London...',
+                                validatorText: 'Please fill the Field',
+                                controller:
+                                    BlocProvider.of<ExploreCubit>(context)
+                                        .searchController,
+                                inputType: TextInputType.text,
+                                onFeildSubmitted: (value) {
+                                  cubit.searchHotels(text: value.trim());
+                                  MapCubit.get(context).onScroll(context);
+                                },
+                              ),
                             ),
                           ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Container(
+                          SizedBox(
                             height: 50,
-                            alignment: AlignmentDirectional.centerEnd,
                             child: RawMaterialButton(
                               onPressed: () {
                                 cubit.searchHotels(
                                     text: cubit.searchController.text);
+                                MapCubit.get(context).onScroll(context);
                               },
                               elevation: 0.0,
                               fillColor: AppColors.appColor,
@@ -162,84 +162,85 @@ class _ExploreOnMapState extends State<ExploreOnMap> {
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  Container(
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                    height: AppHeight.h55,
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            cubit.changeDateRange();
-                          },
-                          child: Container(
-                            padding:
-                                EdgeInsets.symmetric(horizontal: AppWidth.w20),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                    Container(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                      height: AppHeight.h60,
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              cubit.changeDateRange();
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: AppWidth.w20),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SmallHeadText(
+                                    text: 'Choose Date',
+                                    size: FontSize.s13,
+                                  ),
+                                  AppSpaces.vSpace10,
+                                  SecondaryText(
+                                    text:
+                                        '${DateFormat.MMMd().format(DateTime.now())} - ${DateFormat.MMMd().format(DateTime.now().add(Duration(days: 3)))}',
+                                    size: FontSize.s13,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              // cubit.changeGuest();
+                            },
+                            child: Row(
                               children: [
-                                SmallHeadText(
-                                  text: 'Choose Date',
-                                  size: FontSize.s13,
+                                Container(
+                                  height: double.infinity,
+                                  width: 1,
+                                  color: Theme.of(context).canvasColor,
                                 ),
-                                AppSpaces.vSpace10,
-                                SecondaryText(
-                                  text:
-                                      '${DateFormat.MMMd().format(DateTime.now())} - ${DateFormat.MMMd().format(DateTime.now().add(Duration(days: 3)))}',
-                                  size: FontSize.s13,
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: AppWidth.w20),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SmallHeadText(
+                                        text: 'Number of Room',
+                                        size: FontSize.s14,
+                                      ),
+                                      AppSpaces.vSpace10,
+                                      SecondaryText(
+                                        text: '2 Room, 1 People',
+                                        size: FontSize.s14,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
-                          ),
-                        ),
-                        Container(
-                          height: double.infinity,
-                          width: 1,
-                          color: Theme.of(context).canvasColor,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            // cubit.changeGuest();
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: AppWidth.w20),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SmallHeadText(
-                                      text: 'Number of Room',
-                                      size: FontSize.s14,
-                                    ),
-                                    AppSpaces.vSpace10,
-                                    SecondaryText(
-                                      text: '2 Room, 1 People',
-                                      size: FontSize.s14,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
-      },
+                  ],
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }

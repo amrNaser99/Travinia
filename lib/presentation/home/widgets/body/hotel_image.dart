@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:travinia/core/utils/app_strings.dart';
 import 'package:travinia/core/utils/app_values.dart';
 
 class HotelImage extends StatelessWidget {
-  const HotelImage({super.key});
+  final String imagePath;
+  const HotelImage({super.key, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +17,9 @@ class HotelImage extends StatelessWidget {
             topLeft: Radius.circular(AppSize.s16),
             bottomLeft: Radius.circular(AppSize.s16),
           ),
-          child: Image.asset(
-            'assets/images/hotel.jpg',
-            fit: BoxFit.fill,
+          child: Image.network(
+            AppStrings.networkImgPath + imagePath,
+            fit: BoxFit.cover,
           ),
         ),
       ),

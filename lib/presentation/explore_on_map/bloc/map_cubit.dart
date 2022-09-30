@@ -8,14 +8,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:travinia/core/app/bloc/app_cubit.dart';
 import 'package:travinia/presentation/explore_on_map/bloc/map_state.dart';
-import 'package:travinia/services/repositories/repository.dart';
 
 class MapCubit extends Cubit<MapStates> {
-  final Repository repository;
-
-  MapCubit({
-    required this.repository,
-  }) : super(MapInitialState());
+  MapCubit() : super(MapInitialState());
 
   static MapCubit get(context) => BlocProvider.of<MapCubit>(context);
 
