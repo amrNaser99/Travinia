@@ -43,7 +43,7 @@ class _HotelCardInfoState extends State<HotelCardInfo> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              HotelImage(),
+              HotelImage(imagePath: widget.hotel.hotel_images[0].image),
               Expanded(
                 flex: 2,
                 child: Padding(

@@ -6,7 +6,6 @@ import 'package:travinia/models/create_booking_model.dart';
 import 'package:travinia/models/hotels_model.dart';
 import 'package:travinia/models/login_model.dart';
 import 'package:travinia/models/profile_model.dart';
-import 'package:travinia/models/status_model.dart';
 import 'package:travinia/models/update_booking_model/update_booking_model.dart';
 
 import '../../models/facilities_model.dart';
@@ -62,6 +61,12 @@ abstract class Repository {
   Future<Either<PrimaryServerException, HotelsModel>> searchHotels({
     String? name,
     String? address,
+  });
+
+  Future<Either<PrimaryServerException, HotelsModel>>
+      filterOnPricesRangeHotels({
+    dynamic minPrice,
+    dynamic maxPrice,
   });
 }
 

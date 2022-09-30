@@ -5,9 +5,13 @@ import 'package:travinia/core/utils/app_fonts.dart';
 import 'package:travinia/core/utils/app_values.dart';
 import 'package:travinia/presentation/shared_widgets/custom_text.dart';
 
+import '../../../bloc/explore_cubit.dart';
+
 class priceRangeSession extends StatefulWidget {
+  final ExploreCubit exploreCubit;
   const priceRangeSession({
     Key? key,
+    required this.exploreCubit,
   }) : super(key: key);
 
   @override
@@ -15,8 +19,8 @@ class priceRangeSession extends StatefulWidget {
 }
 
 class _priceRangeSessionState extends State<priceRangeSession> {
-  RangeValues _currentRangeValues = const RangeValues(200, 4000);
-  SfRangeValues _values = SfRangeValues(200, 4000);
+  RangeValues _currentRangeValues = const RangeValues(50, 4000);
+  SfRangeValues _values = SfRangeValues(50, 4000);
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -41,7 +45,7 @@ class _priceRangeSessionState extends State<priceRangeSession> {
             thumbRadius: 28,
           ),
           child: SfRangeSlider(
-            min: 40,
+            min: 30,
             max: 5000,
             values: _values,
             interval: 20,
@@ -61,12 +65,14 @@ class _priceRangeSessionState extends State<priceRangeSession> {
             onChanged: (SfRangeValues values) {
               setState(() {
                 _values = values;
+                widget.exploreCubit.maxPrice = _values.end;
+                widget.exploreCubit.minPrice = _values.start;
               });
             },
           ),
         ),
         SfRangeSlider(
-          min: 40,
+          min: 30,
           max: 5000,
           values: _values,
           interval: 20,
@@ -79,6 +85,8 @@ class _priceRangeSessionState extends State<priceRangeSession> {
           onChanged: (SfRangeValues values) {
             setState(() {
               _values = values;
+              widget.exploreCubit.maxPrice = _values.end;
+              widget.exploreCubit.minPrice = _values.start;
             });
           },
         ),

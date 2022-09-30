@@ -14,7 +14,7 @@ class EditProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: EditProfileBody(/*userModel*/),
+      body: EditProfileBody(userModel: userModel),
     );
   }
 }

@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:travinia/core/utils/app_contstants.dart';
 import 'package:travinia/core/utils/app_values.dart';
+import 'package:travinia/models/user_model.dart';
 import 'package:travinia/presentation/shared_widgets/custom_text.dart';
 import '../../../../core/utils/app_color.dart';
 import '../../../../core/utils/app_spaces.dart';
 
 class EditProfileBody extends StatelessWidget {
+  final UserModel userModel;
   const EditProfileBody({
     Key? key,
-    // required UserModel userModel,
+    required this.userModel,
   }) : super(key: key);
 
   @override
@@ -70,9 +72,9 @@ class EditProfileBody extends StatelessWidget {
             ],
           ),
           AppSpaces.vSpace20,
-          ProfileInfoItem(itemText: 'UserName', Data: 'Amr Naser El-Sayed'),
+          ProfileInfoItem(itemText: 'UserName', Data: userModel.name!),
           AppSpaces.vSpace20,
-          ProfileInfoItem(itemText: 'Email', Data: 'AmrNaserr1@gmail.com'),
+          ProfileInfoItem(itemText: 'Email', Data: userModel.email!),
           AppSpaces.vSpace20,
           ProfileInfoItem(itemText: 'Phone', Data: '+65113684411'),
           AppSpaces.vSpace20,
@@ -105,18 +107,18 @@ Widget ProfileInfoItem({
                 child: PrimaryText(
                   text: itemText,
                   size: AppSize.s15,
-
                 ),
                 flex: 1,
               ),
               Expanded(
                 flex: 2,
                 child: Align(
-                    alignment: AlignmentDirectional.centerEnd,
-                    child: LargeHeadText(
-                      text: Data,
-                      size: AppSize.s15,
-                    ),),
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: LargeHeadText(
+                    text: Data,
+                    size: AppSize.s15,
+                  ),
+                ),
               ),
             ],
           ),

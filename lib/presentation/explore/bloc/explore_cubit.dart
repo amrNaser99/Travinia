@@ -18,6 +18,9 @@ class ExploreCubit extends Cubit<ExploreState> {
 
   TextEditingController searchController = TextEditingController();
 
+  dynamic maxPrice;
+  dynamic minPrice;
+
   //For Search hotels
   List<HotelModel> hotelResults = [];
 
@@ -28,6 +31,27 @@ class ExploreCubit extends Cubit<ExploreState> {
     final response = await repository.searchHotels(
       name: text,
       address: text,
+    );
+    response.fold((l) {
+      searchController.clear();
+      showToast(message: l.message);
+      emit(ErrorState(exception: l));
+    }, (r) {
+      debugPrint('Search Results: ${r.data!.data}');
+      debugPrint('Search Results: ${r.data!.data.length}');
+      hotelResults = r.data!.data;
+      emit(SearchHotelsSuccessState(hotelResults: hotelResults));
+    });
+  }
+
+  void filterOnPricesRangeHotels({
+    required dynamic maxPrice,
+    required dynamic minPrice,
+  }) async {
+    emit(SearchHotelsLoadingState());
+    final response = await repository.filterOnPricesRangeHotels(
+      maxPrice: maxPrice,
+      minPrice: minPrice,
     );
     response.fold((l) {
       searchController.clear();
