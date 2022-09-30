@@ -27,6 +27,7 @@ class ExploreCubit extends Cubit<ExploreState> {
     emit(SearchHotelsLoadingState());
     final response = await repository.searchHotels(
       name: text,
+      address: text,
     );
     response.fold((l) {
       searchController.clear();
@@ -36,7 +37,7 @@ class ExploreCubit extends Cubit<ExploreState> {
       debugPrint('Search Results: ${r.data!.data}');
       debugPrint('Search Results: ${r.data!.data.length}');
       hotelResults = r.data!.data;
-      emit(SearchHotelsSuccessState());
+      emit(SearchHotelsSuccessState(hotelResults: hotelResults));
     });
   }
 

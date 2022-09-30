@@ -138,7 +138,7 @@ class _ExploreOnMapState extends State<ExploreOnMap> {
                                   .searchController,
                               inputType: TextInputType.text,
                               onFeildSubmitted: (value) {
-                                cubit.searchHotels(text: value);
+                                cubit.searchHotels(text: value.trim());
                               },
                             ),
                           ),
