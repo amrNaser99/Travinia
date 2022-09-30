@@ -185,34 +185,19 @@ class RepositoryImplementation extends Repository {
     int? page,
   }) {
     return handlingRequestResult(onSuccess: () async {
-      return await dioHelper.get(endPoint: searchHotelsEndPoint, query: {
+      final response =  await dioHelper.get(endPoint: searchHotelsEndPoint, query: {
         'name': name,
-        'address': address,
-        'min_price': min_price,
-        'max_price': max_price,
-        'count': count,
-        'page': page,
+        // 'address': address,
+        // 'min_price': min_price,
+        // 'max_price': max_price,
+        // 'count': count,
+        // 'page': page,
       });
+
+      return  HotelsModel.fromJson(response);
     }, onPrimaryServerException: (e) async {
       return e;
     });
-    // {
-    //   return handlingRequestResult(
-    //       onSuccess: () async {
-    //     final response =  await dioHelper.get(
-    //       endPoint: searchHotelsEndPoint,
-    //       data: {
-    //         'name': name,
-    //       },
-    //     );
-
-    //     return  HotelsModel.fromJson(response);
-    //   },
-    //       onPrimaryServerException: (e) async {
-
-    //     return e;
-    //   });
-    // }
   }
 
   @override

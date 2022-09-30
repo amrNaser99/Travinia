@@ -2,6 +2,8 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:travinia/core/app/bloc/app_cubit.dart';
+import 'package:travinia/core/app/bloc/app_state.dart';
 import 'package:travinia/presentation/explore/bloc/explore_cubit.dart';
 import 'package:travinia/presentation/explore/bloc/explore_state.dart';
 import 'package:travinia/presentation/explore/explore_hotels/widgets/build_hotels_image.dart';
@@ -16,7 +18,6 @@ import '../../../../models/hotel_model.dart';
 import '../../../shared_widgets/custom_text.dart';
 import '../../../shared_widgets/custom_text_field.dart';
 import 'dart:math' as math;
-
 
 class ExploreHotelViewAndMap extends StatefulWidget {
   final List<HotelModel> hotelData;
@@ -219,21 +220,37 @@ class _ExploreHotelViewAndMapState extends State<ExploreHotelViewAndMap> {
                 ),
               ),
             ),
-            SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  ConditionalBuilder(
-                    condition: cubit.hotelResults.length > 0,
-                    builder: (context) {
-                      return buildSearchList(
-                          hotelResults: cubit.hotelResults);
-                    },
-                    fallback: (BuildContext context) {
-                      return buildHotelsImage(hotelData: widget.hotelData);
-                    },
-                  ),
-                ],
-              ),
+
+            BlocBuilder<ExploreCubit, ExploreState>(
+              builder: (context, state) {
+                if (state is HotelsLoadingState ||
+                    state is SearchHotelsLoadingState)
+                  return SliverPersistentHeader(
+                      delegate: SliverAppBarDelegate(
+                          minHeight: MediaQuery.of(context).size.height * 0.65,
+                          maxHeight: MediaQuery.of(context).size.height * 0.65,
+                          child: Center(child: CircularProgressIndicator())));
+                else if (state is SearchHotelsSuccessState)
+                  return SliverList(
+                    delegate: SliverChildListDelegate(
+                      [
+                        buildSearchList(
+                          hotelResults: cubit.hotelResults,
+                        ),
+                      ],
+                    ),
+                  );
+                else
+                  return SliverList(
+                    delegate: SliverChildListDelegate(
+                      [
+                        buildHotelsImage(
+                          hotelData: AppCubit.get(context).hotels,
+                        ),
+                      ],
+                    ),
+                  );
+              },
             ),
           ],
         );
