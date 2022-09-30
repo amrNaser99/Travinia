@@ -2,15 +2,7 @@
 
 A Booking Flutter project to book hotels.
 
-## Getting Started
+## Screen Record Of The Whole App
 
-This project is a starting point for a Flutter application.
+https://user-images.githubusercontent.com/62621180/193365045-1ec17d63-6662-4db7-ae04-1910f90001a1.mp4
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
